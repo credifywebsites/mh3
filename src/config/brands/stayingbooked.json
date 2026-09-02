@@ -1,0 +1,182 @@
+{
+  "name": "StayingBooked",
+  "domain": "StayingBooked.com",
+  "titleSuffix": "StayingBooked",
+  "metaTitle": "StayingBooked by Credify — Real People Answering Your Phones",
+  "metaDescription": "Real, trained receptionists for behavioral health practices. $1 per call, capped at $8/hour. Never miss another new-client call.",
+  "phoneRaw": "8582277895",
+  "phoneDisplay": "858.227.7895",
+  "phoneLabel": "Sales",
+  "emails": [
+    { "label": "Support", "address": "support@stayingbooked.com" }
+  ],
+  "legalAddress": "10565 Black Opal Rd., San Diego, CA 92127",
+  "hqAddress": "600 West Broadway, Suite 700 San Diego, CA 92101",
+  "offices": [
+    {
+      "city": "San Diego, CA",
+      "address": "600 West Broadway, Suite 700\nSan Diego, CA 92101"
+    },
+    {
+      "city": "Orange County, CA",
+      "address": "1100 Town and Country Rd., Suite 1250\nOrange, CA 92868"
+    }
+  ],
+  "iconPath": "/images/icon.png",
+  "logoPath": "",
+  "navLogoPath": "/images/stayingbooked/logo/logo-navbar.svg",
+  "footerLogoPath": "/images/stayingbooked/logo/logo-footer.svg",
+  "navLinks": [
+    { "label": "Home", "href": "/appointment-engagement", "activePaths": ["/", "/appointment-engagement"] },
+    {
+      "label": "Solutions",
+      "href": "/keep-your-ehr",
+      "activePaths": ["/keep-your-ehr", "/growth-engine", "/front-desk"],
+      "children": [
+        {
+          "label": "Front Desk",
+          "href": "/front-desk",
+          "activePaths": ["/front-desk"]
+        },
+        {
+          "label": "Appointment Engagement",
+          "href": "/appointment-engagement",
+          "activePaths": ["/appointment-engagement"]
+        },
+        {
+          "label": "Client Clinical Engagement",
+          "href": "/client-clinical-engagement",
+          "activePaths": ["/client-clinical-engagement"]
+        },
+        {
+          "label": "Provider Engagement",
+          "href": "/provider-engagement",
+          "activePaths": ["/provider-engagement"]
+        },
+        {
+          "label": "Credentialing",
+          "href": "/credentialing",
+          "activePaths": ["/credentialing"]
+        },
+        {
+          "label": "RCM Services",
+          "href": "/rcm",
+          "activePaths": ["/rcm"]
+        },
+        {
+          "label": "EHR to County",
+          "href": "/ehr-to-county",
+          "activePaths": ["/ehr-to-county"]
+        },
+        {
+          "label": "Mimo AI",
+          "href": "/mimo-ai",
+          "activePaths": ["/mimo-ai"]
+        },
+        {
+          "label": "Websites and Lead Gen",
+          "href": "/websites",
+          "activePaths": ["/websites"]
+        }
+      ]
+    },
+    { "label": "Reporting", "href": "/reporting", "activePaths": ["/reporting"] },
+    {
+      "label": "Pricing",
+      "href": "/pricing",
+      "activePaths": [
+        "/pricing",
+        "/rcm-pricing",
+        "/credentialing-pricing",
+        "/ai-engagement-pricing"
+      ],
+      "children": [
+        {
+          "label": "Everything Pricing",
+          "href": "/pricing",
+          "activePaths": ["/pricing"]
+        },
+        {
+          "label": "RCM Pricing",
+          "href": "/rcm-pricing",
+          "activePaths": ["/rcm-pricing"]
+        },
+        {
+          "label": "Credentialing Pricing",
+          "href": "/credentialing-pricing",
+          "activePaths": ["/credentialing-pricing"]
+        },
+        {
+          "label": "AI Engagement Pricing",
+          "href": "/ai-engagement-pricing",
+          "activePaths": ["/ai-engagement-pricing"]
+        }
+      ]
+    },
+    {
+      "label": "The Collective",
+      "href": "/collective",
+      "activePaths": ["/collective"]
+    },
+    { "label": "About", "href": "/about", "activePaths": ["/about"] },
+    { "label": "Contact", "href": "/contact", "activePaths": ["/contact"] }
+  ],
+  "footerColumns": [
+    {
+      "title": "Quick Links",
+      "links": [
+        { "label": "Home", "href": "/appointment-engagement" },
+        { "label": "Reports", "href": "/reports" },
+        { "label": "About Us", "href": "/about" },
+        {
+          "label": "Contact",
+          "href": "/contact#contact-form",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "title": "Solutions",
+      "links": [
+        { "label": "Front Desk", "href": "/front-desk" },
+        { "label": "Growth Engine", "href": "/growth-engine" },
+        { "label": "Appointment Engagement", "href": "/appointment-engagement" },
+        { "label": "Client Clinical Engagement", "href": "/client-clinical-engagement" },
+        { "label": "Provider Engagement", "href": "/provider-engagement" },
+        { "label": "Credentialing", "href": "/credentialing" },
+        { "label": "RCM Services", "href": "/rcm" },
+        { "label": "EHR to County", "href": "/ehr-to-county" },
+        { "label": "Mimo AI", "href": "/mimo-ai" },
+        { "label": "Websites and Lead Gen", "href": "/websites" }
+      ]
+    },
+    {
+      "title": "Pricing",
+      "links": [
+        { "label": "Everything Pricing", "href": "/pricing" },
+        { "label": "RCM Pricing", "href": "/rcm-pricing" },
+        { "label": "Credentialing Pricing", "href": "/credentialing-pricing" },
+        { "label": "AI Engagement Pricing", "href": "/ai-engagement-pricing" }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        { "label": "Privacy Policy", "href": "/privacy-policy" },
+        { "label": "GDPR Compliance", "href": "/gdpr" },
+        { "label": "Website Disclaimer", "href": "/disclaimer" }
+      ]
+    }
+  ],
+  "footerDescription": "Empowering behavioral health agencies with purpose-built AI, seamless workflows, and expert operational support.",
+  "copyrightName": "StayingBooked",
+  "reportsLabel": "StayingBooked Reports",
+  "ogImage": "https://stayingbooked.com/images/stayingbooked/logo/og-image.png",
+  "fbPixelId": "680192621784799",
+  "msTagId": "97206802",
+  "googleTagId": "AW-17544791170",
+  "adrollAdvId": "7BGJBVS7FRD7TH6SJJBIOM",
+  "adrollPixId": "IK6B747BEZBYFH3BQV6X6R",
+  "zohoWidgetCode": "siq41d479e23565ff2d05faae3e40f884d9e07aade0670082b79dddf3578463a562"
+}

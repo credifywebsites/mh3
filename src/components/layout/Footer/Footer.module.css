@@ -1,0 +1,144 @@
+.footer {
+  background: var(--ink);
+  color: white;
+  padding: 80px 48px 40px;
+}
+
+.footerContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.colTitle {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+/* Custom brand logo image (SVG 680×240 — keepyourehr only) */
+.logoImage {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.footerDesc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 280px;
+}
+
+.footerList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerList a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+.footerList a:hover {
+  color: var(--brand400);
+}
+
+.footerBottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footerCopy {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+}
+
+.poweredBy {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+.poweredBy:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.poweredByLabel {
+  white-space: nowrap;
+}
+
+.poweredBySpacer {
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
+@media (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .footerCol:first-child {
+    grid-column: span 3;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 64px 24px 32px;
+  }
+  .footerContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+  .footerCol:first-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+  }
+  .footerCol:first-child {
+    grid-column: span 1;
+  }
+}

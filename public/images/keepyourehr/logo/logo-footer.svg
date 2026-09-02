@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="240" viewBox="0 0 680 240" role="img" aria-label="Keep Your EHR by Credify">
+  <title>Keep Your EHR by Credify</title>
+  <desc>Keep Your EHR by Credify - Behavioral Health Growth Engine (dark version)</desc>
+  <style>
+    .logo-circle-bg { fill: none; stroke: #22a87e; stroke-width: 4; }
+    .logo-check { fill: none; stroke: #22a87e; stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-pulse { fill: none; stroke: #22a87e; stroke-width: 1.5; opacity: 0.4; }
+    .logo-pulse-2 { fill: none; stroke: #22a87e; stroke-width: 1; opacity: 0.2; }
+    .logo-main-pill { fill: #1a8a66; }
+    .logo-main-text { font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif; font-size: 48px; font-weight: 400; fill: #ffffff; }
+    .logo-by-text { font-family: 'Sora', 'Inter', sans-serif; font-size: 22px; font-weight: 400; fill: #8aaa9a; letter-spacing: 2px; text-transform: uppercase; }
+    .logo-brand-text { font-family: 'Sora', 'Inter', sans-serif; font-size: 24px; font-weight: 600; fill: #3dbd94; letter-spacing: 1.5px; text-transform: uppercase; }
+    .logo-tagline { font-family: 'Sora', 'Inter', sans-serif; font-size: 17px; font-weight: 400; fill: #d4f4e8; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.7; }
+    .divider { stroke: #1a5d4a; stroke-width: 1; }
+  </style>
+  <!-- No background rect — transparent -->
+  <g transform="translate(85, 100)">
+    <circle cx="0" cy="0" r="60" class="logo-pulse-2"/>
+    <circle cx="0" cy="0" r="52" class="logo-pulse"/>
+    <circle cx="0" cy="0" r="44" class="logo-circle-bg"/>
+    <path d="M -19 0 L -6 14 L 21 -14" class="logo-check"/>
+  </g>
+  <rect x="170" y="60" width="440" height="80" rx="40" class="logo-main-pill"/>
+  <text x="390" y="113" class="logo-main-text" text-anchor="middle">Keep Your EHR</text>
+  <line x1="170" y1="170" x2="550" y2="170" class="divider"/>
+  <text x="170" y="200" class="logo-by-text">BY</text>
+  <text x="208" y="200" class="logo-brand-text">CREDIFY</text>
+  <text x="170" y="228" class="logo-tagline">Behavioral Health Growth Engine</text>
+</svg>

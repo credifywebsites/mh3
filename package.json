@@ -1,0 +1,40 @@
+{
+  "name": "credify-fast",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "config:credify": "node scripts/switch-config.js credify",
+    "config:keepyourehr": "node scripts/switch-config.js keepyourehr",
+    "config:stayingbooked": "node scripts/switch-config.js stayingbooked",
+    "dev:credify": "npm run config:credify && next dev",
+    "dev:keepyourehr": "npm run config:keepyourehr && next dev",
+    "dev:stayingbooked": "npm run config:stayingbooked && next dev",
+    "build:credify": "npm run config:credify && next build",
+    "build:keepyourehr": "npm run config:keepyourehr && next build",
+    "build:stayingbooked": "npm run config:stayingbooked && next build",
+    "qa:ehr-site": "node scripts/qa-ehr-site.mjs",
+    "qa:pixel-parity": "node scripts/pixel-parity.mjs"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^8.0.0",
+    "next": "16.3.4",
+    "nodemailer": "9.1.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "playwright": "^1.62.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

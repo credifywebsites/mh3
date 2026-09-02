@@ -1,0 +1,175 @@
+/* Lock screen for /partners — same palette and type as the deck behind it. */
+
+.gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: linear-gradient(145deg, #0a3d2b, #0f5c42 60%, #1a8a66);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-sora), "Sora", system-ui, sans-serif;
+}
+.gate::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -15%;
+  width: 55%;
+  height: 200%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 138, 102, 0.22), transparent 65%);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.watermark {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(237, 250, 244, 0.6);
+  margin-bottom: 28px;
+}
+
+.title {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1.12;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.lede {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(138, 170, 154, 0.9);
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(138, 170, 154, 0.7);
+}
+
+.input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(168, 230, 207, 0.28);
+  background: rgba(6, 26, 19, 0.35);
+  color: #edfaf4;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.passwordField {
+  position: relative;
+}
+
+.passwordField .input {
+  padding-right: 48px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  transform: translateY(-50%);
+  background: transparent;
+  color: rgba(237, 250, 244, 0.68);
+  cursor: pointer;
+}
+
+.passwordToggle:hover {
+  color: #edfaf4;
+  background: rgba(237, 250, 244, 0.1);
+}
+
+.passwordToggle:focus-visible {
+  outline: 2px solid #3dbd94;
+  outline-offset: 1px;
+}
+
+.passwordToggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.input::placeholder {
+  color: rgba(138, 170, 154, 0.45);
+  letter-spacing: normal;
+}
+.input:focus {
+  outline: none;
+  border-color: #3dbd94;
+  background: rgba(6, 26, 19, 0.5);
+}
+
+.submit {
+  margin-top: 4px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 24px;
+  background: #1a8a66;
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26, 138, 102, 0.34);
+  transition: background 0.18s, box-shadow 0.18s;
+}
+.submit:hover:not(:disabled) {
+  background: #157055;
+  box-shadow: 0 6px 22px rgba(26, 138, 102, 0.45);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.error {
+  min-height: 16px;
+  font-size: 11.5px;
+  color: #ffb4a6;
+  text-align: center;
+}
+
+.foot {
+  margin-top: 34px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(138, 170, 154, 0.45);
+}
