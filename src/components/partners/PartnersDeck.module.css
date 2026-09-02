@@ -1,0 +1,894 @@
+/*
+ * Partner overview deck — a 1:1 port of the stylesheet in
+ * CREDIFY_PARTNERS_SITE_08-10-26_0428PM-PDT_V3_SUPPORT.html.
+ * Values are unchanged; only the class names are module-scoped. The two
+ * additions over the source are the deck-download CTAs (.deckDl / .navDl) and
+ * the "live preview coming soon" chip (.soonChip).
+ */
+
+.deck {
+  --p: #1a8a66;
+  --deep: #0a3d2b;
+  --acc: #22a87e;
+  --acc2: #3dbd94;
+  --mint: #edfaf4;
+  --surf: #f4f7f5;
+  --bdr: #dde8e3;
+  --txt: #0d1f18;
+  --mut: #527060;
+  --band: #a8c4b6;
+
+  font-family: var(--font-sora), "Sora", system-ui, sans-serif;
+  color: #0d1f18;
+  background: #f4f7f5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(145deg, #0a3d2b, #0f5c42 60%, #1a8a66);
+  padding: 110px 40px 88px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -15%;
+  width: 55%;
+  height: 200%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 138, 102, 0.22), transparent 65%);
+}
+.heroContent {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.heroWatermark {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(237, 250, 244, 0.6);
+  margin-bottom: 34px;
+}
+.heroTitle {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: clamp(38px, 6.5vw, 68px);
+  font-weight: 400;
+  line-height: 1.12;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.heroLede {
+  font-size: 15px;
+  color: rgba(138, 170, 154, 0.9);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+.heroMeta {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(138, 170, 154, 0.5);
+  text-transform: uppercase;
+}
+
+/* DECK DOWNLOAD — added to the source deck */
+.heroActions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+.deckDl {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  background: rgba(237, 250, 244, 0.08);
+  border: 1px solid rgba(168, 230, 207, 0.35);
+  color: var(--mint);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 12px 22px;
+  border-radius: 26px;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+}
+.deckDl:hover {
+  background: rgba(237, 250, 244, 0.16);
+  border-color: rgba(168, 230, 207, 0.6);
+  transform: translateY(-1px);
+}
+.deckDlIcon {
+  flex-shrink: 0;
+  transition: transform 0.18s;
+}
+.deckDl:hover .deckDlIcon {
+  transform: translateY(2px);
+}
+.deckDlMeta {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(138, 170, 154, 0.75);
+}
+
+/* PROBLEM */
+.problem {
+  background: #fff;
+  border-bottom: 1px solid var(--bdr);
+}
+.problemInner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+@media (max-width: 720px) {
+  .problemInner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.problemItem {
+  padding: 30px 26px;
+  border-right: 1px solid var(--bdr);
+}
+.problemItem:last-child {
+  border-right: none;
+}
+.problemStat {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: 22px;
+  color: var(--p);
+  margin-bottom: 6px;
+}
+.problemDesc {
+  font-size: 11px;
+  color: var(--mut);
+  line-height: 1.55;
+}
+
+/* NAV */
+.stageNav {
+  position: sticky;
+  top: 0;
+  background: var(--deep);
+  z-index: 200;
+  border-bottom: 2px solid var(--p);
+}
+.stageNavInner {
+  display: flex;
+  max-width: 1180px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.stageNavInner::-webkit-scrollbar {
+  display: none;
+}
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 22px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(138, 170, 154, 0.65);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: 0.18s;
+  white-space: nowrap;
+}
+.navLink:hover,
+.navLinkActive {
+  color: var(--mint);
+}
+.navLinkActive {
+  border-bottom-color: var(--acc);
+}
+.navNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--p);
+  font-size: 10px;
+  color: #fff;
+}
+/* Persistent deck download in the sticky bar — desktop only, so the stage
+   links keep the full width of the scroller on small screens. */
+.navDl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 15px 22px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(138, 170, 154, 0.65);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: 0.18s;
+  white-space: nowrap;
+}
+.navDl:hover {
+  color: var(--mint);
+}
+@media (max-width: 900px) {
+  .navDl {
+    display: none;
+  }
+}
+
+/* STAGE HEADER */
+.stageHeader {
+  background: linear-gradient(145deg, #0a3d2b, #0f5c42 70%, #155c42);
+  padding: 60px 40px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.stageHeader::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -12%;
+  width: 48%;
+  height: 220%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26, 138, 102, 0.28), transparent 60%);
+}
+.stageHeaderInner {
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+}
+.stageLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.8px;
+  color: var(--acc2);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.stageTitle {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: clamp(42px, 7vw, 68px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+.stageBlurb {
+  font-size: 14px;
+  color: rgba(138, 170, 154, 0.85);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* CLICKABLE MODULE DIRECTORY */
+.moduleDirectorySentinel {
+  height: 1px;
+  margin-bottom: -1px;
+  pointer-events: none;
+}
+.moduleDirectory {
+  background: #fff;
+  border-bottom: 1px solid var(--bdr);
+}
+.moduleDirectoryInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.moduleDirectoryLabel {
+  flex: 0 0 auto;
+  padding-top: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.moduleDirectoryCallout {
+  flex: 0 0 100%;
+  margin-top: 8px;
+}
+.moduleDirectoryCalloutText {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--mut);
+  letter-spacing: 0.3px;
+  display: block;
+  margin-bottom: 8px;
+}
+.moduleDirectoryLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 0 0 100%;
+}
+.moduleDirectoryLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid var(--bdr);
+  border-radius: 999px;
+  color: var(--deep);
+  background: var(--mint);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
+}
+.moduleDirectoryLink:hover,
+.moduleDirectoryLink:focus-visible {
+  background: var(--p);
+  border-color: var(--p);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.moduleDirectoryFrozen {
+  position: fixed;
+  top: 51px;
+  right: 0;
+  left: 0;
+  z-index: 190;
+  overflow-x: hidden;
+  box-shadow: 0 8px 20px rgba(10, 61, 43, 0.1);
+}
+.moduleDirectoryFrozen .moduleDirectoryInner {
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0;
+  padding: 8px 24px;
+}
+.moduleDirectoryFrozen .moduleDirectoryLabel,
+.moduleDirectoryFrozen .moduleDirectoryCallout {
+  display: none;
+}
+.moduleDirectoryFrozen .moduleDirectoryLinks::-webkit-scrollbar {
+  display: none;
+}
+.moduleDirectoryFrozen .moduleDirectoryLink {
+  flex: 0 0 auto;
+}
+@media (max-width: 640px) {
+  .moduleDirectoryInner {
+    display: block;
+  }
+  .moduleDirectoryLabel {
+    display: block;
+    padding: 0 0 12px;
+  }
+  .moduleDirectoryFrozen .moduleDirectoryInner {
+    display: flex;
+    padding: 7px 16px;
+  }
+}
+
+/* MODULE */
+.module {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+.module:first-of-type {
+  padding-top: 44px;
+}
+.band {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--deep);
+  border-bottom: 3px solid var(--p);
+  padding: 18px 26px;
+  border-radius: 12px 12px 0 0;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--p);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.bandText {
+  flex-shrink: 0;
+}
+.eyebrow {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--acc);
+  margin-bottom: 2px;
+}
+.bandTitle {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: 27px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.1;
+}
+.bandSub {
+  margin-left: auto;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--band);
+  text-align: right;
+  max-width: 46%;
+}
+@media (max-width: 760px) {
+  .band {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .bandSub {
+    margin-left: 0;
+    text-align: left;
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+}
+.moduleBody {
+  background: #fff;
+  border: 1px solid var(--bdr);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 22px;
+}
+
+/* SCREENSHOT BUTTON */
+.shotBtn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--bdr);
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 8px 28px rgba(10, 61, 43, 0.08);
+  transition: 0.22s;
+}
+.shotBtn:hover {
+  box-shadow: 0 14px 42px rgba(10, 61, 43, 0.16);
+  transform: translateY(-2px);
+}
+.shotImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.viewSlide {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: var(--p);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 7px 14px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: 0.22s;
+}
+.shotBtn:hover .viewSlide {
+  opacity: 1;
+}
+
+/* LIVE CTA */
+.moduleActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.liveCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--p);
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 11px 20px;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(26, 138, 102, 0.34);
+  transition: background 0.18s, box-shadow 0.18s;
+}
+.liveCta:hover {
+  background: #157055;
+  box-shadow: 0 6px 22px rgba(26, 138, 102, 0.45);
+}
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7ff0c4;
+  box-shadow: 0 0 0 0 rgba(127, 240, 196, 0.85);
+  animation: pulse 1.9s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(127, 240, 196, 0.8);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(127, 240, 196, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(127, 240, 196, 0);
+  }
+}
+.liveArrow {
+  transition: transform 0.18s;
+}
+.liveCta:hover .liveArrow {
+  transform: translateX(3px);
+}
+
+/* jiggle — runs in bursts so it draws the eye without being obnoxious */
+@keyframes jiggle {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0) scale(1);
+  }
+  89% {
+    transform: rotate(-2.2deg) scale(1.035);
+  }
+  91% {
+    transform: rotate(2.2deg) scale(1.035);
+  }
+  93% {
+    transform: rotate(-1.7deg) scale(1.03);
+  }
+  95% {
+    transform: rotate(1.7deg) scale(1.02);
+  }
+  97% {
+    transform: rotate(-0.8deg) scale(1.01);
+  }
+}
+.jiggle {
+  animation: jiggle 5.5s ease-in-out infinite;
+}
+.jiggle:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .jiggle {
+    animation: none;
+  }
+  .liveDot {
+    animation: none;
+  }
+}
+
+.slideBtn {
+  background: #fff;
+  color: var(--mut);
+  border: 1px solid var(--bdr);
+  border-radius: 24px;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.18s;
+}
+.slideBtn:hover {
+  border-color: var(--p);
+  color: var(--p);
+}
+
+.devChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f7f5;
+  color: #527060;
+  border: 1px dashed #c3d6cd;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 24px;
+}
+.devChip::before {
+  content: "✦";
+  color: var(--p);
+  font-size: 12px;
+}
+
+/* Same chip language, used where the live preview build is still outstanding. */
+.soonChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f7f5;
+  color: #527060;
+  border: 1px dashed #c3d6cd;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 24px;
+}
+.soonChip::before {
+  content: "◷";
+  color: var(--p);
+  font-size: 13px;
+}
+
+/* CAP CARDS */
+.caps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+@media (max-width: 820px) {
+  .caps {
+    grid-template-columns: 1fr;
+  }
+}
+.cap {
+  display: flex;
+  gap: 11px;
+  border: 1px solid var(--bdr);
+  border-radius: 9px;
+  padding: 14px 15px;
+  background: #fff;
+}
+.capNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--p);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.capTitle {
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--txt);
+}
+.capBody {
+  font-size: 11px;
+  color: var(--mut);
+  line-height: 1.5;
+}
+
+/* BUILD ANYTHING GRID */
+.buildGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 820px) {
+  .buildGrid {
+    grid-template-columns: 1fr;
+  }
+}
+.buildCard {
+  display: flex;
+  gap: 11px;
+  border: 1px solid var(--bdr);
+  border-radius: 9px;
+  padding: 15px;
+}
+.buildNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--p);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.buildTitle {
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.buildBody {
+  font-size: 11px;
+  color: var(--mut);
+  line-height: 1.5;
+}
+.slideLink {
+  margin-top: 16px;
+  background: var(--p);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 20px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.18s;
+}
+.slideLink:hover {
+  background: #157055;
+}
+
+/* SUMMARY */
+.summary {
+  background: linear-gradient(145deg, #0a3d2b, #0f5c42 60%, #1a8a66);
+  padding: 96px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.summary::after {
+  content: "";
+  position: absolute;
+  bottom: -40%;
+  right: -10%;
+  width: 50%;
+  height: 160%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 168, 126, 0.15), transparent 60%);
+}
+.summaryContent {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.summaryTitle {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: clamp(34px, 5.5vw, 54px);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.summarySub {
+  font-size: 13px;
+  color: rgba(138, 170, 154, 0.8);
+  margin-bottom: 52px;
+}
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  text-align: left;
+}
+@media (max-width: 640px) {
+  .summaryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.summaryItem {
+  padding: 18px 20px;
+  border: 1px solid rgba(26, 138, 102, 0.4);
+  border-radius: 10px;
+  background: rgba(26, 138, 102, 0.12);
+}
+.summaryNum {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--acc2);
+  margin-bottom: 4px;
+}
+.summaryName {
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+.summaryModules {
+  font-size: 9.5px;
+  color: rgba(138, 170, 154, 0.7);
+}
+.summaryFoot {
+  margin-top: 44px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(138, 170, 154, 0.45);
+  text-transform: uppercase;
+}
+
+/* DECK VIEWER MODAL — embeds the pptx itself instead of a per-slide image */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 26, 19, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+  padding: 36px;
+}
+.deckViewer {
+  width: min(1100px, 92vw);
+  height: 85vh;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+}
+.deckViewerFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.lightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 26px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+}
+.lightboxClose:hover {
+  opacity: 1;
+}
+.lightboxNote {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.lightboxNote a {
+  color: var(--acc2);
+  text-decoration: underline;
+}
+.lightboxNote a:hover {
+  color: var(--mint);
+}
+
+.deckFooter {
+  background: var(--deep);
+  padding: 26px 40px;
+  text-align: center;
+}
+.deckFooterText {
+  font-size: 10px;
+  color: rgba(138, 170, 154, 0.45);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}

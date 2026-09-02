@@ -1,0 +1,271 @@
+{
+  "name": "Keep Your EHR",
+  "domain": "KeepYourEHR.com",
+  "titleSuffix": "Keep Your EHR",
+  "metaTitle": "Keep Your EHR \u2014 Your Behavioral Health Growth Engine",
+  "metaDescription": "Keep Your EHR behavioral health growth, billing, credentialing, and operational support.",
+  "phoneRaw": "8582277895",
+  "phoneDisplay": "858.227.7895",
+  "phoneLabel": "Sales",
+  "emails": [
+    {
+      "label": "Support",
+      "address": "Support@KeepYourEHR.com"
+    }
+  ],
+  "legalAddress": "10565 Black Opal Rd., San Diego, CA 92127",
+  "hqAddress": "600 West Broadway, Suite 700 San Diego, CA 92101",
+  "offices": [
+    {
+      "city": "San Diego, CA",
+      "address": "600 West Broadway, Suite 700\nSan Diego, CA 92101"
+    },
+    {
+      "city": "Orange County, CA",
+      "address": "1100 Town and Country Rd., Suite 1250\nOrange, CA 92868"
+    }
+  ],
+  "iconPath": "/images/icon.png",
+  "logoPath": "",
+  "navLogoPath": "/images/keepyourehr/logo/logo-navbar.svg",
+  "footerLogoPath": "/images/keepyourehr/logo/logo-footer.svg",
+  "navLinks": [
+    {
+      "label": "Home",
+      "href": "/",
+      "activePaths": [
+        "/"
+      ]
+    },
+    {
+      "label": "Solutions",
+      "href": "/solutions",
+      "activePaths": [
+        "/solutions"
+      ],
+      "children": [
+        {
+          "label": "Acquire",
+          "description": "Website, CRM, outreach, AI front desk",
+          "href": "/solutions#acquire",
+          "activePaths": []
+        },
+        {
+          "label": "Intake",
+          "description": "Client portal, forms, consents, signatures",
+          "href": "/solutions#intake",
+          "activePaths": []
+        },
+        {
+          "label": "Schedule",
+          "description": "Calendar and appointment reminders",
+          "href": "/solutions#schedule",
+          "activePaths": []
+        },
+        {
+          "label": "Treat",
+          "description": "EHR, treatment plans, AI notes, messaging",
+          "href": "/solutions#treat",
+          "activePaths": []
+        },
+        {
+          "label": "Get paid",
+          "description": "Revenue cycle, credentialing, county billing",
+          "href": "/solutions#get-paid",
+          "activePaths": []
+        },
+        {
+          "label": "Run the business",
+          "description": "Reports, alerts, compliance, HR, accounting",
+          "href": "/solutions#run-the-business",
+          "activePaths": []
+        }
+      ]
+    },
+    {
+      "label": "Reporting",
+      "href": "/reporting",
+      "activePaths": [
+        "/reporting"
+      ]
+    },
+    {
+      "label": "Pricing",
+      "href": "/pricing",
+      "activePaths": [
+        "/pricing",
+        "/rcm-pricing",
+        "/credentialing-pricing",
+        "/ai-engagement-pricing"
+      ],
+      "children": [
+        {
+          "label": "Everything Pricing",
+          "href": "/pricing",
+          "activePaths": [
+            "/pricing"
+          ]
+        },
+        {
+          "label": "RCM Pricing",
+          "href": "/rcm-pricing",
+          "activePaths": [
+            "/rcm-pricing"
+          ]
+        },
+        {
+          "label": "Credentialing Pricing",
+          "href": "/credentialing-pricing",
+          "activePaths": [
+            "/credentialing-pricing"
+          ]
+        },
+        {
+          "label": "AI Engagement Pricing",
+          "href": "/ai-engagement-pricing",
+          "activePaths": [
+            "/ai-engagement-pricing"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "The Collective",
+      "href": "/collective",
+      "activePaths": [
+        "/collective"
+      ]
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "activePaths": [
+        "/about"
+      ]
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "activePaths": [
+        "/contact"
+      ]
+    }
+  ],
+  "footerColumns": [
+    {
+      "title": "Quick Links",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Reports",
+          "href": "/reports"
+        },
+        {
+          "label": "About Us",
+          "href": "/about"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact#contact-form",
+          "rel": "noopener noreferrer"
+        }
+      ]
+    },
+    {
+      "title": "Solutions",
+      "links": [
+        {
+          "label": "Front Desk",
+          "href": "/front-desk"
+        },
+        {
+          "label": "Growth Engine",
+          "href": "/growth-engine"
+        },
+        {
+          "label": "Appointment Engagement",
+          "href": "/appointment-engagement"
+        },
+        {
+          "label": "Client Clinical Engagement",
+          "href": "/client-clinical-engagement"
+        },
+        {
+          "label": "Provider Engagement",
+          "href": "/provider-engagement"
+        },
+        {
+          "label": "Credentialing",
+          "href": "/credentialing"
+        },
+        {
+          "label": "RCM Services",
+          "href": "/rcm"
+        },
+        {
+          "label": "EHR to County",
+          "href": "/ehr-to-county"
+        },
+        {
+          "label": "Mimo AI",
+          "href": "/mimo-ai"
+        },
+        {
+          "label": "Websites and Lead Gen",
+          "href": "/websites"
+        }
+      ]
+    },
+    {
+      "title": "Pricing",
+      "links": [
+        {
+          "label": "Everything Pricing",
+          "href": "/pricing"
+        },
+        {
+          "label": "RCM Pricing",
+          "href": "/rcm-pricing"
+        },
+        {
+          "label": "Credentialing Pricing",
+          "href": "/credentialing-pricing"
+        },
+        {
+          "label": "AI Engagement Pricing",
+          "href": "/ai-engagement-pricing"
+        }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        {
+          "label": "Privacy Policy",
+          "href": "/privacy-policy"
+        },
+        {
+          "label": "GDPR Compliance",
+          "href": "/gdpr"
+        },
+        {
+          "label": "Website Disclaimer",
+          "href": "/disclaimer"
+        }
+      ]
+    }
+  ],
+  "footerDescription": "Empowering behavioral health agencies with purpose-built AI, seamless workflows, and expert operational support.",
+  "copyrightName": "Credify",
+  "reportsLabel": "Credify Reports",
+  "ogImage": "https://keepyourehr.com/images/keepyourehr/logo/og-image.png",
+  "fbPixelId": "680192621784799",
+  "msTagId": "97206802",
+  "googleTagId": "AW-17544791170",
+  "adrollAdvId": "7BGJBVS7FRD7TH6SJJBIOM",
+  "adrollPixId": "IK6B747BEZBYFH3BQV6X6R",
+  "zohoWidgetCode": "siq41d479e23565ff2d05faae3e40f884d9e07aade0670082b79dddf3578463a562"
+}

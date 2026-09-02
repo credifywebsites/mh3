@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --brand900: #0a3d2b;
+  --brand800: #0a3d2b;
+  --brand700: #0f5540;
+  --brand600: #1a8a66;
+  --brand500: #22a87e;
+  --brand400: #3dbd94;
+  --brand200: #a8e6cf;
+  --brand100: #d4f4e8;
+  --brand50: #edfaf4;
+  --ink: #0d1f18;
+  --ink2: #2a4038;
+  --ink3: #527060;
+  --ink4: #8aaa9a;
+  --smoke: #f4f7f5;
+  --border: #dde8e3;
+  --white: #ffffff;
+  --red: #c0392b;
+  --red-bg: #fff8f6;
+  --red-light: #fde8e4;
+  --amber: #d97706;
+  --amber-light: #fbbf24;
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  --sans: var(--font-sora), system-ui, sans-serif;
+  --t: 0.18s ease;
+}
+
+html {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--white);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--white);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+main {
+  min-height: 100vh;
+}

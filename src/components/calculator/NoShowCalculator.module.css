@@ -1,0 +1,803 @@
+/* ─── CSS Custom Properties (mirrors the HTML template exactly) ── */
+.pageWrapper {
+  font-family: 'Sora', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #0d1f18;
+  background: linear-gradient(180deg, #edfaf4 0%, #f4f7f5 60%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Variables (local to this component) ─────────────────────── */
+.pageWrapper {
+  --brand-900: #0a3d2b;
+  --brand-700: #1a8a66;
+  --brand-600: #22a87e;
+  --brand-500: #3dbd94;
+  --mint-100: #edfaf4;
+  --mint-200: #d4f4e8;
+  --text: #0d1f18;
+  --muted: #527060;
+  --muted-2: #8aaa9a;
+  --surface: #f4f7f5;
+  --border: #dde8e3;
+  --white: #ffffff;
+  --warn: #d97706;
+  --danger: #c0392b;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(10,61,43,.04), 0 1px 3px rgba(10,61,43,.04);
+  --shadow: 0 4px 12px rgba(10,61,43,.06), 0 1px 3px rgba(10,61,43,.04);
+  --shadow-lg: 0 12px 32px rgba(10,61,43,.1), 0 4px 12px rgba(10,61,43,.05);
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 500;
+  background: var(--mint-200);
+  border: 1px solid rgba(34,168,126,.25);
+  color: var(--brand-900);
+  margin-bottom: 14px;
+}
+
+.header h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.header p {
+  color: var(--muted);
+  margin: 0 auto;
+  font-size: 15px;
+  max-width: 600px;
+}
+
+/* ─── Layout grid ─────────────────────────────────────────────── */
+.layout {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 980px) {
+  .layout {
+    grid-template-columns: 440px 1fr;
+    align-items: start;
+  }
+}
+
+/* ─── Card ───────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s var(--ease);
+}
+
+.card:hover { box-shadow: var(--shadow); }
+
+.tableCard {
+  margin-top: 18px;
+}
+
+.cardHead {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cardIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--mint-200), var(--mint-100));
+  border: 1px solid rgba(34,168,126,.2);
+  display: grid;
+  place-items: center;
+  color: var(--brand-700);
+  flex-shrink: 0;
+}
+
+.cardIcon svg { width: 18px; height: 18px; }
+
+.card h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  color: var(--text);
+  margin: 0;
+}
+
+.cardSub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ─── Form fields ─────────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .02em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.val {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  color: var(--brand-700);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Number input ────────────────────────────────────────────── */
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.prefix {
+  position: absolute;
+  left: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.numInput {
+  width: 100%;
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 14px 11px 30px;
+  transition: border-color .15s var(--ease), box-shadow .15s var(--ease);
+  font-variant-numeric: tabular-nums;
+}
+
+.numInput:focus {
+  outline: none;
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 3px rgba(34,168,126,.15);
+}
+
+/* ─── Disabled state ──────────────────────────────────────────── */
+.disabled {
+  opacity: .4;
+  pointer-events: none;
+  transition: opacity .2s var(--ease);
+}
+
+.disabled .numInput {
+  background: var(--surface);
+  color: var(--muted-2);
+  cursor: not-allowed;
+}
+
+.disabled .prefix { color: var(--muted-2); }
+
+/* ─── Slider ──────────────────────────────────────────────────── */
+.sliderWrap {
+  position: relative;
+  padding: 8px 0 4px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    var(--brand-600) 0%,
+    var(--brand-600) var(--pct, 30%),
+    var(--border) var(--pct, 30%),
+    var(--border) 100%
+  );
+  border-radius: 999px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2.5px solid var(--brand-700);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(10,61,43,.15);
+  transition: transform .15s var(--ease);
+}
+
+.slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2.5px solid var(--brand-700);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(10,61,43,.15);
+}
+
+/* ─── Section divider ─────────────────────────────────────────── */
+.sectionDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 14px;
+}
+
+.sectionDivider::before,
+.sectionDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.sectionDivider span {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 500;
+}
+
+/* ─── Payer mix bar ───────────────────────────────────────────── */
+.payerMixBar {
+  display: flex;
+  height: 32px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.barSegment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  transition: flex .3s var(--ease);
+  min-width: 0;
+  padding: 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.barSegment.commercial {
+  background: linear-gradient(135deg, #0a3d2b, #1a8a66);
+}
+
+.barSegment.gov {
+  background: linear-gradient(135deg, #3dbd94, #22a87e);
+}
+
+/* ─── Payer legend ────────────────────────────────────────────── */
+.payerLegend {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.payerLegend .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.legCommercial .dot { background: var(--brand-900); }
+.legGov .dot { background: var(--brand-500); }
+
+/* ─── Payer revenue grid ──────────────────────────────────────── */
+.payerRevenueGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ─── Blended display ─────────────────────────────────────────── */
+.blendedDisplay {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 14px;
+  background: var(--mint-100);
+  border-radius: var(--radius);
+  border: 1px solid rgba(34,168,126,.2);
+  margin-top: 10px;
+}
+
+.blendedLabel {
+  font-size: 11px;
+  color: var(--brand-900);
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.blendedValue {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  color: var(--brand-700);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Formula note ────────────────────────────────────────────── */
+.formulaNote {
+  background: var(--mint-100);
+  border: 1px solid rgba(34,168,126,.2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--brand-900);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 14px;
+}
+
+.formulaNote svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Hero stat ───────────────────────────────────────────────── */
+.heroStat {
+  background: linear-gradient(135deg, var(--brand-900), var(--brand-700));
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroStat::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(61,189,148,.25), transparent 60%);
+  border-radius: 50%;
+}
+
+.heroStatLabel {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  font-weight: 500;
+  margin-bottom: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.heroStatValue {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(40px, 7vw, 64px);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  position: relative;
+  font-variant-numeric: tabular-nums;
+}
+
+.heroStatSub {
+  font-size: 13px;
+  color: rgba(255,255,255,.85);
+  margin-top: 8px;
+  position: relative;
+}
+
+/* ─── Live indicator ──────────────────────────────────────────── */
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brand-500);
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .6; }
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-500);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ─── Pricing callout ─────────────────────────────────────────── */
+.pricingCallout {
+  background: linear-gradient(135deg, var(--mint-200), var(--mint-100));
+  border: 1.5px solid var(--brand-500);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricingCallout::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(34,168,126,.15), transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pcBadge {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--brand-700), var(--brand-900));
+  color: white;
+  display: grid;
+  place-items: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(10,61,43,.15);
+  position: relative;
+}
+
+.pcContent { flex: 1; position: relative; }
+
+.pcTitle {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brand-700);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.pcBody {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.pcBody strong { color: var(--brand-900); font-weight: 600; }
+
+/* ─── Stat grid ───────────────────────────────────────────────── */
+.statGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: all .15s var(--ease);
+}
+
+.stat:hover {
+  border-color: var(--brand-500);
+  transform: translateY(-1px);
+}
+
+.statLabel {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.statValue.positive { color: var(--brand-700); }
+.statValue.fee { color: var(--muted); }
+.statValue.net { color: var(--brand-700); }
+
+.statSub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Payer breakdown cards ───────────────────────────────────── */
+.payerBreakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.payerCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.payerCommercial { border-left: 3px solid var(--brand-900); }
+.payerGov { border-left: 3px solid var(--brand-500); }
+
+.payerCardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.payerCardName {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brand-900);
+}
+
+.payerCardShare {
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.payerCardRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.payerCardRow span:last-child { font-variant-numeric: tabular-nums; }
+
+.payerCardRowTotal {
+  border: none;
+  padding-top: 8px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ─── Breakdown table ─────────────────────────────────────────── */
+.breakdown {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.breakdown table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.breakdown thead {
+  background: var(--mint-100);
+}
+
+.breakdown th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--brand-900);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+
+.right { text-align: right; }
+
+.breakdown td {
+  padding: 11px 14px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums;
+}
+
+.breakdown td.right { font-weight: 500; }
+.breakdown tr:last-child td { border-bottom: none; }
+
+.total { background: var(--mint-100); font-weight: 600; }
+.total td { color: var(--brand-900); border-top: 2px solid var(--brand-600); }
+
+.feeRow td { color: var(--muted); font-style: italic; }
+
+.netRow { background: var(--mint-200); }
+.netRow td { color: var(--brand-900); font-weight: 700; border-top: 2px solid var(--brand-600); }
+
+.targetTag { color: var(--brand-700); font-weight: 600; font-size: .85em; }
+.muted { color: var(--muted); }
+.greenBold { color: var(--brand-700); font-weight: 600; }
+
+/* Scrollable table on mobile */
+.overflowScroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overflowScroll table { min-width: 560px; }
+
+/* ─── Scroll hint (mobile only) ───────────────────────────────── */
+.scrollHint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 500;
+  padding: 8px 4px 0;
+}
+
+@keyframes swipe {
+  0%, 100% { transform: translateX(0); opacity: .5; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.scrollHint svg { animation: swipe 1.8s ease-in-out infinite; }
+
+/* ─── Footer note ─────────────────────────────────────────────── */
+.footerNote {
+  text-align: center;
+  margin-top: 32px;
+  padding: 18px;
+  font-size: 11px;
+  color: var(--muted-2);
+  letter-spacing: .06em;
+}
+
+/* ─── Mobile (< 640px) ────────────────────────────────────────── */
+@media (max-width: 639px) {
+  .container { padding: 18px 14px; }
+  .header { margin-bottom: 20px; }
+  .header h1 { font-size: 30px; line-height: 1.1; }
+  .header p { font-size: 13px; }
+
+  .card { padding: 18px 16px; border-radius: 14px; }
+  .card h2 { font-size: 18px; }
+  .cardSub { font-size: 11px; }
+  .cardIcon { width: 32px; height: 32px; }
+  .cardIcon svg { width: 16px; height: 16px; }
+
+  .numInput { font-size: 16px; padding: 12px 14px 12px 30px; }
+
+  .slider::-webkit-slider-thumb { width: 26px; height: 26px; }
+  .slider::-moz-range-thumb { width: 26px; height: 26px; }
+  .slider { height: 8px; }
+
+  .payerRevenueGrid { grid-template-columns: 1fr; gap: 12px; }
+  .statGrid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat { padding: 12px; }
+  .statValue { font-size: 22px; }
+  .statLabel { font-size: 9px; }
+  .statSub { font-size: 10px; }
+
+  .payerBreakdown { grid-template-columns: 1fr; gap: 10px; }
+  .payerCard { padding: 14px; }
+  .payerCardRow { font-size: 13px; padding: 6px 0; }
+
+  .heroStatValue { font-size: 42px; }
+  .heroStatLabel { font-size: 10px; }
+  .heroStatSub { font-size: 12px; }
+
+  .heroStat { padding: 22px 18px; }
+
+  .breakdown { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .scrollHint { display: flex; }
+
+  .payerMixBar { height: 36px; }
+  .barSegment { font-size: 11px; padding: 0 6px; }
+
+  .payerLegend { flex-direction: column; gap: 6px; font-size: 11px; }
+
+  .blendedDisplay { padding: 9px 12px; }
+  .blendedLabel { font-size: 10px; }
+  .blendedValue { font-size: 18px; }
+
+  .formulaNote { font-size: 11px; padding: 10px 12px; }
+  .sectionDivider { margin: 14px 0 10px; }
+  .field { margin-bottom: 12px; }
+  .label { font-size: 11px; }
+
+  .pricingCallout { padding: 14px 16px; gap: 12px; }
+  .pcBadge { width: 44px; height: 44px; font-size: 18px; border-radius: 10px; }
+  .pcTitle { font-size: 10px; }
+  .pcBody { font-size: 12px; }
+}
+
+/* ─── Tiny phones (< 380px) ───────────────────────────────────── */
+@media (max-width: 379px) {
+  .statGrid { grid-template-columns: 1fr; }
+  .stat { padding: 10px; }
+  .statValue { font-size: 24px; }
+  .heroStatValue { font-size: 36px; }
+  .barSegment { font-size: 10px; }
+}

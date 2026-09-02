@@ -1,0 +1,2634 @@
+<!--
+FILE: THERAPIST MATCH - 07/26 - 7:12 pm NOT MERGED.html
+BUILT FROM: THERAPIST MATCH - 07/26 - 6:57 pm NOT MERGED.html
+ACCOUNT: JAYGMAIL
+DATE: 2026-07-26 19:12 PDT
+MERGED: NO
+CHANGELOG:
+  2026-07-26 19:12 PDT — extended to 10 pages / 85 questions; added pages 8 (H: Mirror Effect — aspirational self, 18 qs), 9 (I: Outcomes & Accountability, 17 qs), 10 (J: Inner Life & Therapeutic Philosophy, 15 qs); new domains H/I/J added to DOMAIN_MAX (total remains 100 via rescaling); admin score panel updated with H/I/J rows; collectProfile updated; page dots updated
+  2026-07-26 18:57 PDT — custom dropdowns on desktop (pointer devices); native <select> on mobile/touch (@media hover:none); all 24 selects converted via initCustomDropdowns(); scoring/collection unchanged — reads native select.value
+  2026-07-26 18:50 PDT — added 7-page pagination (one section per page A–G); completion bar shows page progress; score panel hidden from therapist; admin mode toggle (password button in header) reveals floating score panel and score in submit modal; q-weight-badges hidden from non-admin; fixed stray <option> tag in q41
+  2026-07-26 18:40 PDT — initial build; 48-question therapist profile questionnaire, weighted scoring engine, 100-point scale with 2 decimal places
+PARENTS: THERAPIST MATCH - 07/26 - 6:50 pm NOT MERGED.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credify — Therapist Match Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── CONFIG ────────────────────────────────────────── */
+  :root {
+    --green-deep:  #0C3B2E;
+    --green-mid:   #2FBE8D;
+    --green-mint:  #8FE3C0;
+    --green-pale:  #E8F7F2;
+    --green-light: #F2FBF8;
+    --red:         #C0392B;
+    --amber:       #D97706;
+    --slate:       #64748B;
+    --slate-light: #94A3B8;
+    --border:      #D1E8DF;
+    --white:       #FFFFFF;
+    --text:        #0F2920;
+    --font-display:'Instrument Serif', Georgia, serif;
+    --font-body:   'Sora', system-ui, sans-serif;
+    --radius:      10px;
+    --shadow:      0 2px 12px rgba(12,59,46,.09);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--green-light); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.6; }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  .header {
+    background: var(--green-deep); color: var(--white);
+    padding: 22px 40px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .header-left {}
+  .header-brand { font-family: var(--font-display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--green-mint); margin-bottom: 2px; }
+  .header h1 { font-family: var(--font-display); font-size: 26px; font-style: italic; font-weight: 400; }
+  .header-sub { font-size: 11px; color: var(--green-mint); opacity: .8; margin-top: 1px; }
+
+  /* admin toggle */
+  .btn-admin {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+    color: var(--green-mint); font-family: var(--font-body); font-size: 11px; font-weight: 600;
+    padding: 7px 14px; border-radius: 8px; cursor: pointer; letter-spacing: .05em;
+    transition: all .2s; white-space: nowrap;
+  }
+  .btn-admin:hover { background: rgba(255,255,255,.15); }
+  .btn-admin.active { background: var(--amber); border-color: var(--amber); color: var(--white); }
+
+  /* admin password modal */
+  .pw-overlay { display: none; position: fixed; inset: 0; background: rgba(12,59,46,.65); z-index: 300; align-items: center; justify-content: center; padding: 24px; }
+  .pw-overlay.open { display: flex; }
+  .pw-box { background: var(--white); border-radius: 14px; padding: 32px; max-width: 360px; width: 100%; box-shadow: 0 16px 48px rgba(12,59,46,.25); }
+  .pw-title { font-family: var(--font-display); font-size: 20px; font-style: italic; color: var(--green-deep); margin-bottom: 6px; }
+  .pw-sub { font-size: 12px; color: var(--slate); margin-bottom: 20px; }
+  .pw-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-family: var(--font-body); font-size: 14px; color: var(--text); margin-bottom: 12px; }
+  .pw-input:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(47,190,141,.12); }
+  .pw-err { font-size: 11px; color: var(--red); margin-bottom: 10px; min-height: 16px; }
+  .pw-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .pw-cancel { background: transparent; border: 1px solid var(--border); color: var(--slate); font-family: var(--font-body); font-size: 13px; padding: 8px 18px; border-radius: 8px; cursor: pointer; }
+  .pw-submit { background: var(--green-deep); color: var(--white); font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 8px 22px; border: none; border-radius: 8px; cursor: pointer; }
+
+  /* ── STICKY NAV BAR ──────────────────────────────────── */
+  .nav-bar {
+    background: var(--white); border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky; top: 0; z-index: 50;
+  }
+
+  /* completion bar */
+  .completion-bar-wrap {
+    padding: 10px 0 0;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .completion-label { font-size: 11px; color: var(--slate); white-space: nowrap; }
+  .completion-track { flex: 1; height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .completion-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-mint)); border-radius: 99px; transition: width .4s ease; width: 0%; }
+  .completion-pct { font-size: 11px; font-weight: 700; color: var(--green-deep); min-width: 34px; text-align: right; }
+
+  /* page dots */
+  .page-dots {
+    display: flex; align-items: center; gap: 0;
+    padding: 10px 0;
+    overflow-x: auto;
+  }
+  .page-dot {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 6px 12px; cursor: pointer; position: relative;
+    border-bottom: 3px solid transparent; transition: all .15s;
+    min-width: 70px;
+  }
+  .page-dot:hover .pd-label { color: var(--green-mid); }
+  .page-dot.active { border-bottom-color: var(--green-mid); }
+  .page-dot.active .pd-badge { background: var(--green-deep); }
+  .page-dot.active .pd-label { color: var(--green-deep); font-weight: 700; }
+  .page-dot.done .pd-badge { background: var(--green-mid); }
+  .pd-badge {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--white); transition: background .2s;
+  }
+  .pd-label { font-size: 10px; color: var(--slate-light); white-space: nowrap; text-align: center; line-height: 1.2; transition: color .15s; }
+
+  /* ── LAYOUT ───────────────────────────────────────────── */
+  .container { max-width: 820px; margin: 0 auto; padding: 28px 24px 100px; }
+
+  /* ── PAGE ─────────────────────────────────────────────── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── SECTION ──────────────────────────────────────────── */
+  .section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px; overflow: hidden; }
+  .section-header { background: var(--green-pale); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .section-badge { background: var(--green-deep); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+  .section-title { font-weight: 600; font-size: 13px; color: var(--green-deep); }
+  .section-weight { margin-left: auto; font-size: 11px; color: var(--slate); background: var(--white); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; }
+
+  /* ── QUESTIONS ────────────────────────────────────────── */
+  .questions { padding: 4px 0; }
+  .q-row { display: grid; grid-template-columns: 32px 1fr auto; align-items: start; gap: 10px; padding: 14px 24px; border-bottom: 1px solid var(--green-light); transition: background .15s; }
+  .q-row:last-child { border-bottom: none; }
+  .q-row:hover { background: var(--green-light); }
+  .q-num { font-size: 11px; color: var(--slate-light); font-weight: 600; padding-top: 3px; text-align: right; }
+  .q-body { display: flex; flex-direction: column; gap: 6px; }
+  .q-label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .q-hint { font-size: 11px; color: var(--slate); }
+
+  /* inputs */
+  input[type="number"], input[type="text"], textarea {
+    font-family: var(--font-body); font-size: 13px; border: 1px solid var(--border);
+    border-radius: 7px; padding: 7px 10px; color: var(--text); background: var(--white);
+    transition: border-color .15s, box-shadow .15s; width: 100%;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(47,190,141,.12); }
+  textarea { resize: vertical; min-height: 72px; }
+
+  /* ── CUSTOM DROPDOWN — desktop (pointer) ───────────────── */
+  /* Native <select> hidden on pointer devices; shown on touch */
+  .cdd-wrap { position: relative; width: 100%; }
+
+  /* native select: hidden on desktop, visible on touch */
+  .cdd-wrap select {
+    font-family: var(--font-body); font-size: 13px; border: 1px solid var(--border);
+    border-radius: 7px; padding: 7px 10px; color: var(--text); background: var(--white);
+    width: 100%; transition: border-color .15s, box-shadow .15s;
+  }
+  .cdd-wrap select:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(47,190,141,.12); }
+
+  /* on pointer devices: hide native, show custom */
+  @media (hover: hover) and (pointer: fine) {
+    .cdd-wrap select { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+
+    .cdd-trigger {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; padding: 8px 12px;
+      border: 1px solid var(--border); border-radius: 7px;
+      background: var(--white); cursor: pointer;
+      font-family: var(--font-body); font-size: 13px; color: var(--slate-light);
+      transition: border-color .15s, box-shadow .15s;
+      user-select: none; min-height: 36px;
+    }
+    .cdd-trigger.has-value { color: var(--text); }
+    .cdd-trigger:hover { border-color: var(--green-mid); }
+    .cdd-wrap.open .cdd-trigger { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(47,190,141,.12); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .cdd-trigger-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cdd-arrow { flex-shrink: 0; width: 14px; height: 14px; transition: transform .2s; }
+    .cdd-wrap.open .cdd-arrow { transform: rotate(180deg); }
+
+    .cdd-panel {
+      display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 60;
+      background: var(--white); border: 1px solid var(--green-mid); border-top: none;
+      border-bottom-left-radius: 7px; border-bottom-right-radius: 7px;
+      box-shadow: 0 8px 24px rgba(12,59,46,.12);
+      max-height: 240px; overflow-y: auto;
+    }
+    .cdd-wrap.open .cdd-panel { display: block; }
+
+    .cdd-option {
+      padding: 9px 12px; font-family: var(--font-body); font-size: 13px;
+      color: var(--text); cursor: pointer; transition: background .1s;
+      border-bottom: 1px solid var(--green-light);
+    }
+    .cdd-option:last-child { border-bottom: none; }
+    .cdd-option:hover { background: var(--green-pale); }
+    .cdd-option.selected { background: var(--green-pale); color: var(--green-deep); font-weight: 600; }
+    .cdd-option.placeholder { color: var(--slate-light); }
+  }
+
+  /* touch devices: show native select normally, hide custom chrome */
+  @media (hover: none), (pointer: coarse) {
+    .cdd-trigger, .cdd-panel { display: none !important; }
+    .cdd-wrap select {
+      display: block; opacity: 1; pointer-events: auto;
+      position: static; width: 100%; height: auto;
+      appearance: auto; -webkit-appearance: auto;
+    }
+  }
+
+  .likert-wrap { display: flex; gap: 6px; flex-wrap: wrap; }
+  .likert-wrap label { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+  .likert-wrap input[type="radio"] { display: none; }
+  .likert-btn { width: 38px; height: 38px; border-radius: 8px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--slate); background: var(--white); transition: all .15s; user-select: none; }
+  .likert-wrap input[type="radio"]:checked + .likert-btn { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+  .likert-lbl { font-size: 10px; color: var(--slate-light); max-width: 44px; text-align: center; line-height: 1.2; }
+
+  .multi-check { display: flex; flex-wrap: wrap; gap: 6px; }
+  .multi-check label { display: flex; align-items: center; gap: 6px; cursor: pointer; padding: 5px 10px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--text); transition: all .15s; user-select: none; }
+  .multi-check label:hover { border-color: var(--green-mid); }
+  .multi-check input[type="checkbox"] { display: none; }
+  .multi-check label.checked { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+
+  /* weight badges — hidden by default, shown in admin mode */
+  .q-weight-badge { font-size: 10px; font-weight: 700; color: var(--green-mid); background: var(--green-pale); border: 1px solid var(--green-mint); border-radius: 6px; padding: 2px 7px; white-space: nowrap; margin-top: 2px; align-self: start; display: none; }
+  body.admin-mode .q-weight-badge { display: block; }
+  body.admin-mode .section-weight { display: block; }
+
+  /* ── PAGINATION CONTROLS ──────────────────────────────── */
+  .page-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px; padding: 0 4px;
+    gap: 12px;
+  }
+  .btn-prev, .btn-next {
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    padding: 11px 24px; border-radius: 10px; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-prev { background: transparent; border: 1px solid var(--border); color: var(--slate); }
+  .btn-prev:hover { border-color: var(--green-mid); color: var(--green-deep); }
+  .btn-prev:disabled { opacity: .35; cursor: not-allowed; }
+  .btn-next { background: var(--green-deep); border: none; color: var(--white); }
+  .btn-next:hover { background: #0e4a38; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(12,59,46,.2); }
+  .page-counter { font-size: 12px; color: var(--slate); }
+
+  /* submit page */
+  .submit-wrap { text-align: center; margin-top: 16px; }
+  .btn-submit { background: var(--green-deep); color: var(--white); font-family: var(--font-body); font-size: 14px; font-weight: 600; padding: 14px 40px; border: none; border-radius: 10px; cursor: pointer; letter-spacing: .03em; transition: all .2s; }
+  .btn-submit:hover { background: #0e4a38; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(12,59,46,.2); }
+  .btn-reset { background: transparent; border: 1px solid var(--border); color: var(--slate); font-family: var(--font-body); font-size: 13px; padding: 10px 24px; border-radius: 10px; cursor: pointer; margin-left: 10px; transition: all .2s; }
+  .btn-reset:hover { border-color: var(--red); color: var(--red); }
+
+  /* submitted confirmation */
+  .submitted-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 48px 40px; text-align: center; }
+  .submitted-icon { font-size: 48px; margin-bottom: 16px; }
+  .submitted-title { font-family: var(--font-display); font-size: 28px; font-style: italic; color: var(--green-deep); margin-bottom: 8px; }
+  .submitted-sub { font-size: 13px; color: var(--slate); }
+
+  /* ── ADMIN SCORE PANEL (hidden until admin mode) ───────── */
+  .score-panel {
+    display: none;
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--green-deep); color: var(--white);
+    border-radius: 14px; padding: 16px 22px;
+    box-shadow: 0 8px 32px rgba(12,59,46,.28);
+    min-width: 200px; z-index: 100;
+    border: 2px solid var(--amber);
+  }
+  body.admin-mode .score-panel { display: block; }
+  .score-admin-tag { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+  .score-label { font-size: 11px; color: var(--green-mint); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 2px; }
+  .score-value { font-family: var(--font-display); font-size: 44px; font-style: italic; line-height: 1; color: var(--white); }
+  .score-sub { font-size: 11px; color: var(--green-mint); margin-top: 2px; opacity: .8; }
+  .score-bar-wrap { margin-top: 10px; background: rgba(255,255,255,.15); border-radius: 99px; height: 5px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--green-mint), var(--green-mid)); transition: width .4s ease; }
+  .score-breakdown { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .sbd-row { display: flex; justify-content: space-between; font-size: 10px; color: var(--green-mint); opacity: .8; }
+  .sbd-val { font-weight: 600; }
+
+  /* ── RESULT MODAL ─────────────────────────────────────── */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(12,59,46,.6); z-index: 200; align-items: center; justify-content: center; padding: 24px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 16px; max-width: 520px; width: 100%; overflow: hidden; box-shadow: 0 24px 64px rgba(12,59,46,.3); }
+
+  /* therapist-only confirmation modal (no score) */
+  .modal-confirm-header { background: var(--green-deep); padding: 28px 32px 24px; color: var(--white); }
+  .modal-confirm-icon { font-size: 36px; margin-bottom: 8px; }
+  .modal-confirm-title { font-family: var(--font-display); font-size: 24px; font-style: italic; }
+  .modal-confirm-sub { font-size: 13px; color: var(--green-mint); margin-top: 4px; }
+
+  /* admin score modal header */
+  .modal-score-header { background: var(--green-deep); padding: 28px 32px 24px; color: var(--white); border-top: 4px solid var(--amber); }
+  .modal-admin-tag { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+  .modal-score-lbl { font-size: 12px; color: var(--green-mint); text-transform: uppercase; letter-spacing: .1em; }
+  .modal-score-val { font-family: var(--font-display); font-size: 64px; font-style: italic; line-height: 1; margin: 6px 0 2px; }
+  .modal-score-name { font-size: 14px; color: var(--green-mint); }
+
+  .modal-body { padding: 28px 32px; }
+  .modal-section-scores { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .mss-row { display: flex; align-items: center; gap: 12px; }
+  .mss-label { font-size: 12px; font-weight: 500; color: var(--text); width: 180px; flex-shrink: 0; }
+  .mss-track { flex: 1; height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .mss-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-mint)); border-radius: 99px; }
+  .mss-val { font-size: 11px; font-weight: 700; color: var(--green-deep); width: 36px; text-align: right; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .btn-close { background: var(--green-deep); color: var(--white); font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 10px 24px; border: none; border-radius: 8px; cursor: pointer; }
+  .btn-export { background: transparent; border: 1px solid var(--border); color: var(--slate); font-family: var(--font-body); font-size: 13px; padding: 10px 24px; border-radius: 8px; cursor: pointer; }
+
+  @media (max-width: 600px) {
+    .header { padding: 16px 20px; }
+    .nav-bar { padding: 0 16px; }
+    .container { padding: 16px 12px 100px; }
+    .q-row { padding: 12px 16px; grid-template-columns: 28px 1fr; }
+    .q-weight-badge { display: none !important; }
+    .section-header { padding: 12px 16px; }
+    .score-panel { bottom: 12px; right: 12px; min-width: 160px; padding: 12px 16px; }
+    .score-value { font-size: 36px; }
+    .page-dot { min-width: 50px; padding: 6px 6px; }
+    .pd-label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-brand">Credify</div>
+    <h1>Therapist Match Profile</h1>
+    <div class="header-sub">85 questions · 10 sections · Complete all pages to submit</div>
+  </div>
+  <button class="btn-admin" id="btnAdminToggle">⚙ Admin</button>
+</div>
+
+<!-- ── STICKY NAV ── -->
+<div class="nav-bar">
+  <div class="completion-bar-wrap">
+    <span class="completion-label">Overall completion</span>
+    <div class="completion-track"><div class="completion-fill" id="completionFill"></div></div>
+    <span class="completion-pct" id="completionPct">0%</span>
+  </div>
+  <div class="page-dots" id="pageDots">
+    <div class="page-dot active" data-page="0"><div class="pd-badge">A</div><div class="pd-label">Demographics</div></div>
+    <div class="page-dot" data-page="1"><div class="pd-badge">B</div><div class="pd-label">Clinical</div></div>
+    <div class="page-dot" data-page="2"><div class="pd-badge">C</div><div class="pd-label">Cultural</div></div>
+    <div class="page-dot" data-page="3"><div class="pd-badge">D</div><div class="pd-label">Lived Exp.</div></div>
+    <div class="page-dot" data-page="4"><div class="pd-badge">E</div><div class="pd-label">Style</div></div>
+    <div class="page-dot" data-page="5"><div class="pd-badge">F</div><div class="pd-label">Logistics</div></div>
+    <div class="page-dot" data-page="6"><div class="pd-badge">G</div><div class="pd-label">Self-Assess</div></div>
+    <div class="page-dot" data-page="7"><div class="pd-badge">H</div><div class="pd-label">Mirror Effect</div></div>
+    <div class="page-dot" data-page="8"><div class="pd-badge">I</div><div class="pd-label">Outcomes</div></div>
+    <div class="page-dot" data-page="9"><div class="pd-badge">J</div><div class="pd-label">Inner Life</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══ PAGE 0 — SECTION A ══ -->
+  <div class="page active" id="page-0">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">A</span>
+        <span class="section-title">Demographics</span>
+        <span class="section-weight" style="display:none">Matching variables</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <div class="q-label">Age</div>
+            <div class="q-hint">Your current age in years</div>
+            <input type="number" id="q1" name="age" min="22" max="85" placeholder="e.g. 34" data-domain="A">
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <div class="q-label">Gender identity</div>
+            <select id="q2" name="gender" data-domain="A">
+              <option value="">— select —</option>
+              <option value="woman">Woman</option>
+              <option value="man">Man</option>
+              <option value="nonbinary">Non-binary / gender non-conforming</option>
+              <option value="transwoman">Transgender woman</option>
+              <option value="transman">Transgender man</option>
+              <option value="other">Other / prefer to self-describe</option>
+              <option value="no_disclose">Prefer not to disclose</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <div class="q-label">Racial / ethnic identity</div>
+            <div class="q-hint">Select all that apply</div>
+            <div class="multi-check" id="q3" data-domain="A">
+              <label><input type="checkbox" name="race" value="black"><span>Black / African American</span></label>
+              <label><input type="checkbox" name="race" value="white"><span>White / European American</span></label>
+              <label><input type="checkbox" name="race" value="hispanic"><span>Hispanic / Latino/a/x</span></label>
+              <label><input type="checkbox" name="race" value="asian"><span>Asian / Asian American</span></label>
+              <label><input type="checkbox" name="race" value="aian"><span>American Indian / Alaska Native</span></label>
+              <label><input type="checkbox" name="race" value="nhpi"><span>Native Hawaiian / Pacific Islander</span></label>
+              <label><input type="checkbox" name="race" value="mena"><span>Middle Eastern / North African</span></label>
+              <label><input type="checkbox" name="race" value="multiracial"><span>Multiracial</span></label>
+              <label><input type="checkbox" name="race" value="no_disclose"><span>Prefer not to disclose</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">4</div>
+          <div class="q-body">
+            <div class="q-label">Do you identify as LGBTQ+?</div>
+            <select id="q4" name="lgbtq" data-domain="A">
+              <option value="">— select —</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="no_disclose">Prefer not to disclose</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">5</div>
+          <div class="q-body">
+            <div class="q-label">Languages spoken fluently in clinical practice</div>
+            <div class="multi-check" id="q5" data-domain="A">
+              <label><input type="checkbox" name="lang" value="english"><span>English</span></label>
+              <label><input type="checkbox" name="lang" value="spanish"><span>Spanish</span></label>
+              <label><input type="checkbox" name="lang" value="mandarin"><span>Mandarin</span></label>
+              <label><input type="checkbox" name="lang" value="cantonese"><span>Cantonese</span></label>
+              <label><input type="checkbox" name="lang" value="french"><span>French</span></label>
+              <label><input type="checkbox" name="lang" value="arabic"><span>Arabic</span></label>
+              <label><input type="checkbox" name="lang" value="portuguese"><span>Portuguese</span></label>
+              <label><input type="checkbox" name="lang" value="asl"><span>ASL</span></label>
+              <label><input type="checkbox" name="lang" value="other_lang"><span>Other</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">6</div>
+          <div class="q-body">
+            <div class="q-label">Primary state(s) of licensure</div>
+            <input type="text" id="q6" name="license_states" placeholder="e.g. CA, MS, TX" data-domain="A">
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">7</div>
+          <div class="q-body">
+            <div class="q-label">Faith tradition (if any)</div>
+            <select id="q7" name="faith" data-domain="A">
+              <option value="">— select —</option>
+              <option value="christian">Christian</option>
+              <option value="catholic">Catholic</option>
+              <option value="jewish">Jewish</option>
+              <option value="muslim">Muslim</option>
+              <option value="buddhist">Buddhist</option>
+              <option value="hindu">Hindu</option>
+              <option value="spiritual_noreligion">Spiritual but not religious</option>
+              <option value="secular">Secular / no faith tradition</option>
+              <option value="other_faith">Other</option>
+              <option value="no_disclose">Prefer not to disclose</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">8</div>
+          <div class="q-body">
+            <div class="q-label">Years in clinical practice</div>
+            <select id="q8" name="years_practice" data-domain="A">
+              <option value="">— select —</option>
+              <option value="0">Under 1 year</option>
+              <option value="1">1–2 years</option>
+              <option value="3">3–5 years</option>
+              <option value="6">6–10 years</option>
+              <option value="11">11–20 years</option>
+              <option value="21">20+ years</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">9</div>
+          <div class="q-body">
+            <div class="q-label">Licensure type</div>
+            <div class="multi-check" id="q9" data-domain="A">
+              <label><input type="checkbox" name="license_type" value="lcsw"><span>LCSW</span></label>
+              <label><input type="checkbox" name="license_type" value="lpc"><span>LPC</span></label>
+              <label><input type="checkbox" name="license_type" value="lmft"><span>LMFT</span></label>
+              <label><input type="checkbox" name="license_type" value="lmhc"><span>LMHC</span></label>
+              <label><input type="checkbox" name="license_type" value="psyd"><span>PsyD</span></label>
+              <label><input type="checkbox" name="license_type" value="phd"><span>PhD</span></label>
+              <label><input type="checkbox" name="license_type" value="md"><span>MD / Psychiatrist</span></label>
+              <label><input type="checkbox" name="license_type" value="other_lic"><span>Other</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">10</div>
+          <div class="q-body">
+            <div class="q-label">Geographic region of primary practice</div>
+            <select id="q10" name="region" data-domain="A">
+              <option value="">— select —</option>
+              <option value="rural_south">Rural South</option>
+              <option value="urban_south">Urban South</option>
+              <option value="rural_midwest">Rural Midwest</option>
+              <option value="urban_midwest">Urban Midwest</option>
+              <option value="northeast">Northeast</option>
+              <option value="west">West / Southwest</option>
+              <option value="telehealth_only">Telehealth only (no primary region)</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev" disabled>← Back</button>
+      <span class="page-counter">Page 1 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 1 — SECTION B ══ -->
+  <div class="page" id="page-1">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">B</span>
+        <span class="section-title">Clinical Specialties &amp; Modalities</span>
+        <span class="section-weight">Domain weight: 20 pts</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">11</div>
+          <div class="q-body">
+            <div class="q-label">Primary presenting issue specialties</div>
+            <div class="q-hint">Select all you are trained and competent to treat</div>
+            <div class="multi-check" id="q11" data-domain="B">
+              <label><input type="checkbox" value="trauma"><span>Trauma / PTSD</span></label>
+              <label><input type="checkbox" value="depression"><span>Depression</span></label>
+              <label><input type="checkbox" value="anxiety"><span>Anxiety / Panic</span></label>
+              <label><input type="checkbox" value="substance"><span>Substance Use / SUD</span></label>
+              <label><input type="checkbox" value="grief"><span>Grief / Bereavement</span></label>
+              <label><input type="checkbox" value="adhd"><span>ADHD</span></label>
+              <label><input type="checkbox" value="ocd"><span>OCD</span></label>
+              <label><input type="checkbox" value="eating"><span>Eating Disorders</span></label>
+              <label><input type="checkbox" value="psychosis"><span>Psychosis / Schizophrenia</span></label>
+              <label><input type="checkbox" value="personality"><span>Personality Disorders</span></label>
+              <label><input type="checkbox" value="dv"><span>Domestic Violence</span></label>
+              <label><input type="checkbox" value="parenting"><span>Parenting / Family Stress</span></label>
+              <label><input type="checkbox" value="perinatal"><span>Perinatal / Postpartum</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">12</div>
+          <div class="q-body">
+            <div class="q-label">Evidence-based modalities (certified or trained)</div>
+            <div class="multi-check" id="q12" data-domain="B">
+              <label><input type="checkbox" value="cbt"><span>CBT</span></label>
+              <label><input type="checkbox" value="dbt"><span>DBT</span></label>
+              <label><input type="checkbox" value="emdr"><span>EMDR</span></label>
+              <label><input type="checkbox" value="cpt"><span>CPT</span></label>
+              <label><input type="checkbox" value="act"><span>ACT</span></label>
+              <label><input type="checkbox" value="mi"><span>Motivational Interviewing</span></label>
+              <label><input type="checkbox" value="ifs"><span>IFS</span></label>
+              <label><input type="checkbox" value="somatic"><span>Somatic</span></label>
+              <label><input type="checkbox" value="narrative"><span>Narrative</span></label>
+              <label><input type="checkbox" value="play"><span>Play Therapy</span></label>
+              <label><input type="checkbox" value="tf_cbt"><span>TF-CBT</span></label>
+              <label><input type="checkbox" value="pe"><span>Prolonged Exposure</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">13</div>
+          <div class="q-body">
+            <div class="q-label">Populations you are trained to treat</div>
+            <div class="multi-check" id="q13" data-domain="B">
+              <label><input type="checkbox" value="children"><span>Children (0–12)</span></label>
+              <label><input type="checkbox" value="adolescents"><span>Adolescents (13–17)</span></label>
+              <label><input type="checkbox" value="adults"><span>Adults (18–64)</span></label>
+              <label><input type="checkbox" value="geriatric"><span>Geriatric (65+)</span></label>
+              <label><input type="checkbox" value="couples"><span>Couples</span></label>
+              <label><input type="checkbox" value="families"><span>Families</span></label>
+              <label><input type="checkbox" value="groups"><span>Groups</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">14</div>
+          <div class="q-body">
+            <div class="q-label">Trauma-informed care: formal training completed?</div>
+            <select id="q14" name="trauma_informed" data-domain="B">
+              <option value="">— select —</option>
+              <option value="2">Yes — certified or formally trained</option>
+              <option value="1">Familiar — self-directed learning only</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">15</div>
+          <div class="q-body">
+            <div class="q-label">Co-occurring disorder experience</div>
+            <div class="multi-check" id="q15" data-domain="B">
+              <label><input type="checkbox" value="mh_sud"><span>MH + Substance Use</span></label>
+              <label><input type="checkbox" value="mh_chronic"><span>MH + Chronic Illness</span></label>
+              <label><input type="checkbox" value="mh_idd"><span>MH + IDD</span></label>
+              <label><input type="checkbox" value="mh_homeless"><span>MH + Housing Instability</span></label>
+              <label><input type="checkbox" value="none_cooc"><span>No co-occurring experience</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 2 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 2 — SECTION C ══ -->
+  <div class="page" id="page-2">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">C</span>
+        <span class="section-title">Cultural Competence</span>
+        <span class="section-weight">Domain weight: 25 pts</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">16</div>
+          <div class="q-body">
+            <div class="q-label">Comfort working with clients whose racial/ethnic background differs significantly from your own</div>
+            <div class="q-hint">1 = very uncomfortable · 5 = highly confident</div>
+            <div class="likert-wrap" id="q16" data-domain="C">
+              <label><input type="radio" name="q16" value="1"><div class="likert-btn">1</div><div class="likert-lbl">Very uncomfortable</div></label>
+              <label><input type="radio" name="q16" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q16" value="3"><div class="likert-btn">3</div><div class="likert-lbl">Neutral</div></label>
+              <label><input type="radio" name="q16" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q16" value="5"><div class="likert-btn">5</div><div class="likert-lbl">Highly confident</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">17</div>
+          <div class="q-body">
+            <div class="q-label">Formal training in culturally adapted therapy approaches</div>
+            <select id="q17" name="cult_training" data-domain="C">
+              <option value="">— select —</option>
+              <option value="2">Yes — completed formal coursework or certification</option>
+              <option value="1">Partial — workshops / CEUs only</option>
+              <option value="0">No formal training</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">18</div>
+          <div class="q-body">
+            <div class="q-label">Familiarity with Southern Black cultural norms and values in a clinical context</div>
+            <div class="q-hint">1 = not familiar · 5 = highly familiar</div>
+            <div class="likert-wrap" id="q18" data-domain="C">
+              <label><input type="radio" name="q18" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q18" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q18" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q18" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q18" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">19</div>
+          <div class="q-body">
+            <div class="q-label">Completed training specific to Black women's mental health</div>
+            <select id="q19" name="bwmh_training" data-domain="C">
+              <option value="">— select —</option>
+              <option value="2">Yes</option>
+              <option value="1">In progress</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">20</div>
+          <div class="q-body">
+            <div class="q-label">Anti-racist clinical practice training (cultural humility, DEI-specific)</div>
+            <select id="q20" name="antiracist_training" data-domain="C">
+              <option value="">— select —</option>
+              <option value="2">Yes — formal training</option>
+              <option value="1">Self-directed only</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">21</div>
+          <div class="q-body">
+            <div class="q-label">Received clinical supervision or personal therapy addressing your own cultural biases</div>
+            <select id="q21" name="bias_supervision" data-domain="C">
+              <option value="">— select —</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 3 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 3 — SECTION D ══ -->
+  <div class="page" id="page-3">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">D</span>
+        <span class="section-title">Lived Experience Concordance</span>
+        <span class="section-weight">Domain weight: 20 pts</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">22</div>
+          <div class="q-body">
+            <div class="q-label">Personal lived experience with poverty or economic hardship</div>
+            <select id="q22" name="lived_poverty" data-domain="D">
+              <option value="">— select —</option>
+              <option value="2">Yes — direct personal experience</option>
+              <option value="1">Indirect (family member / close community)</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">4 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">23</div>
+          <div class="q-body">
+            <div class="q-label">Personal lived experience with racism or systemic discrimination</div>
+            <select id="q23" name="lived_racism" data-domain="D">
+              <option value="">— select —</option>
+              <option value="2">Yes — direct personal experience</option>
+              <option value="1">Indirect / witnessed</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">4 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">24</div>
+          <div class="q-body">
+            <div class="q-label">Personal or clinical experience with large family systems (4+ children)</div>
+            <select id="q24" name="large_family_exp" data-domain="D">
+              <option value="">— select —</option>
+              <option value="2">Both personal and clinical</option>
+              <option value="1.5">Clinical experience only</option>
+              <option value="1">Personal experience only</option>
+              <option value="0">No experience</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">4 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">25</div>
+          <div class="q-body">
+            <div class="q-label">Experience serving rural or underserved communities</div>
+            <select id="q25" name="rural_exp" data-domain="D">
+              <option value="">— select —</option>
+              <option value="2">Extensive (2+ years primary focus)</option>
+              <option value="1">Some (rotation, part-time, or volunteer)</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">4 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">26</div>
+          <div class="q-body">
+            <div class="q-label">Personal or clinical experience with single parenthood or primary caregiving</div>
+            <select id="q26" name="single_parent_exp" data-domain="D">
+              <option value="">— select —</option>
+              <option value="2">Both personal and clinical</option>
+              <option value="1.5">Clinical experience only</option>
+              <option value="1">Personal experience only</option>
+              <option value="0">No experience</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">4 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">27</div>
+          <div class="q-body">
+            <div class="q-label">Additional lived experience relevant to matching (select all that apply)</div>
+            <div class="multi-check" id="q27" data-domain="D">
+              <label><input type="checkbox" value="addiction_recovery"><span>Addiction / Recovery</span></label>
+              <label><input type="checkbox" value="incarceration"><span>Incarceration (self or family)</span></label>
+              <label><input type="checkbox" value="immigration"><span>Immigration / refugee experience</span></label>
+              <label><input type="checkbox" value="chronic_illness"><span>Chronic illness</span></label>
+              <label><input type="checkbox" value="food_insecurity"><span>Food insecurity</span></label>
+              <label><input type="checkbox" value="housing_instability"><span>Housing instability</span></label>
+              <label><input type="checkbox" value="foster_care"><span>Foster care system</span></label>
+              <label><input type="checkbox" value="military"><span>Military / veteran</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 4 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 4 — SECTION E ══ -->
+  <div class="page" id="page-4">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">E</span>
+        <span class="section-title">Therapeutic Style &amp; Fit</span>
+        <span class="section-weight">Domain weight: 20 pts</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">28</div>
+          <div class="q-body">
+            <div class="q-label">Comfort integrating faith/spirituality into clinical work</div>
+            <div class="q-hint">1 = not comfortable · 5 = very comfortable</div>
+            <div class="likert-wrap" id="q28" data-domain="E">
+              <label><input type="radio" name="q28" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q28" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q28" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q28" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q28" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">29</div>
+          <div class="q-body">
+            <div class="q-label">Comfort working with clients who express distrust of the mental health system</div>
+            <div class="q-hint">1 = low comfort · 5 = high comfort and experience</div>
+            <div class="likert-wrap" id="q29" data-domain="E">
+              <label><input type="radio" name="q29" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q29" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q29" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q29" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q29" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">30</div>
+          <div class="q-body">
+            <div class="q-label">Approach to involving family/community support systems in treatment</div>
+            <select id="q30" name="family_involvement" data-domain="E">
+              <option value="">— select —</option>
+              <option value="2">Actively encourage and integrate family/community</option>
+              <option value="1">Open to it when client wants it</option>
+              <option value="0">Individual focus only — rarely or never involve family</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">31</div>
+          <div class="q-body">
+            <div class="q-label">Therapeutic style (primary)</div>
+            <select id="q31" name="style_primary" data-domain="E">
+              <option value="">— select —</option>
+              <option value="directive">Directive / structured</option>
+              <option value="collaborative">Collaborative / client-led</option>
+              <option value="exploratory">Exploratory / depth-oriented</option>
+              <option value="skills">Skills-building / psychoeducation-heavy</option>
+              <option value="eclectic">Eclectic / integrative</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">32</div>
+          <div class="q-body">
+            <div class="q-label">Comfort with clients who may not engage in traditional talk-therapy norms</div>
+            <div class="q-hint">e.g. clients who are quiet, skeptical, highly concrete, or action-oriented</div>
+            <div class="likert-wrap" id="q32" data-domain="E">
+              <label><input type="radio" name="q32" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q32" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q32" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q32" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q32" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">33</div>
+          <div class="q-body">
+            <div class="q-label">Confidence working with clients experiencing chronic stress related to poverty</div>
+            <div class="q-hint">1 = low confidence · 10 = very high confidence</div>
+            <input type="number" id="q33" name="poverty_stress_confidence" min="1" max="10" placeholder="1–10" data-domain="E">
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">34</div>
+          <div class="q-body">
+            <div class="q-label">Self-rated confidence in cultural competence working specifically with Black women</div>
+            <div class="q-hint">1 = low confidence · 10 = very high confidence</div>
+            <input type="number" id="q34" name="bw_confidence" min="1" max="10" placeholder="1–10" data-domain="E">
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 5 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 5 — SECTION F ══ -->
+  <div class="page" id="page-5">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">F</span>
+        <span class="section-title">Capacity &amp; Logistics</span>
+        <span class="section-weight">Hard matching variables</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">35</div>
+          <div class="q-body">
+            <div class="q-label">Currently accepting new clients?</div>
+            <select id="q35" name="accepting" data-domain="F">
+              <option value="">— select —</option>
+              <option value="yes">Yes</option>
+              <option value="waitlist">Waitlist (1–2 weeks)</option>
+              <option value="waitlist_long">Waitlist (3–6 weeks)</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Hard block</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">36</div>
+          <div class="q-body">
+            <div class="q-label">Session delivery format</div>
+            <div class="multi-check" id="q36" data-domain="F">
+              <label><input type="checkbox" value="telehealth"><span>Telehealth</span></label>
+              <label><input type="checkbox" value="in_person"><span>In-person</span></label>
+              <label><input type="checkbox" value="hybrid"><span>Hybrid</span></label>
+              <label><input type="checkbox" value="home_based"><span>Home-based</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Hard block</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">37</div>
+          <div class="q-body">
+            <div class="q-label">Insurance / payment accepted</div>
+            <div class="multi-check" id="q37" data-domain="F">
+              <label><input type="checkbox" value="medicaid"><span>Medicaid</span></label>
+              <label><input type="checkbox" value="medicare"><span>Medicare</span></label>
+              <label><input type="checkbox" value="private"><span>Private insurance</span></label>
+              <label><input type="checkbox" value="sliding_scale"><span>Sliding scale</span></label>
+              <label><input type="checkbox" value="pro_bono"><span>Pro bono slots</span></label>
+              <label><input type="checkbox" value="self_pay_only"><span>Self-pay only</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Hard block</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">38</div>
+          <div class="q-body">
+            <div class="q-label">Available appointment windows</div>
+            <div class="multi-check" id="q38" data-domain="F">
+              <label><input type="checkbox" value="morning"><span>Mornings (before noon)</span></label>
+              <label><input type="checkbox" value="afternoon"><span>Afternoons</span></label>
+              <label><input type="checkbox" value="evening"><span>Evenings (after 5pm)</span></label>
+              <label><input type="checkbox" value="weekend"><span>Weekends</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">39</div>
+          <div class="q-body">
+            <div class="q-label">Interpreter services available?</div>
+            <select id="q39" name="interpreter" data-domain="F">
+              <option value="">— select —</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Hard block</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">40</div>
+          <div class="q-body">
+            <div class="q-label">Do you offer sliding scale or reduced fees?</div>
+            <select id="q40" name="sliding" data-domain="F">
+              <option value="">— select —</option>
+              <option value="yes">Yes</option>
+              <option value="limited">Limited slots</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 6 of 7</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 6 — SECTION G ══ -->
+  <div class="page" id="page-6">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">G</span>
+        <span class="section-title">Self-Assessment &amp; Blind Spots</span>
+        <span class="section-weight">Domain weight: 15 pts</span>
+      </div>
+      <div class="questions">
+        <div class="q-row">
+          <div class="q-num">41</div>
+          <div class="q-body">
+            <div class="q-label">What client profiles do you find most challenging? (select all that apply)</div>
+            <div class="multi-check" id="q41" data-domain="G">
+              <label><input type="checkbox" value="chronically_late"><span>Chronically late / inconsistent</span></label>
+              <label><input type="checkbox" value="resistant"><span>Resistant to change</span></label>
+              <label><input type="checkbox" value="mandated"><span>Mandated / court-ordered</span></label>
+              <label><input type="checkbox" value="high_acuity"><span>High acuity / crisis-prone</span></label>
+              <label><input type="checkbox" value="somatic"><span>Somatizing</span></label>
+              <label><input type="checkbox" value="cultural_diff"><span>Significant cultural difference from me</span></label>
+              <label><input type="checkbox" value="poverty_stress"><span>Extreme poverty / chronic stress</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">42</div>
+          <div class="q-body">
+            <div class="q-label">Presenting issues you decline to treat (select all that apply)</div>
+            <div class="multi-check" id="q42" data-domain="G">
+              <label><input type="checkbox" value="psychosis_decline"><span>Active psychosis</span></label>
+              <label><input type="checkbox" value="eating_decline"><span>Active eating disorders</span></label>
+              <label><input type="checkbox" value="sa_decline"><span>Active substance abuse</span></label>
+              <label><input type="checkbox" value="dv_decline"><span>Domestic violence</span></label>
+              <label><input type="checkbox" value="sex_offender"><span>Sex offenders</span></label>
+              <label><input type="checkbox" value="children_decline"><span>Children under 12</span></label>
+              <label><input type="checkbox" value="none_decline"><span>I do not decline any presenting issue</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Hard block</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">43</div>
+          <div class="q-body">
+            <div class="q-label">How confident are you that your own cultural background does NOT create barriers to effective therapy with clients unlike you?</div>
+            <div class="q-hint">1 = concerned I have blind spots · 5 = very confident</div>
+            <div class="likert-wrap" id="q43" data-domain="G">
+              <label><input type="radio" name="q43" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q43" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q43" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q43" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q43" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">44</div>
+          <div class="q-body">
+            <div class="q-label">How often do you seek consultation or supervision when working across cultural difference?</div>
+            <select id="q44" name="cross_cultural_consult" data-domain="G">
+              <option value="">— select —</option>
+              <option value="2">Regularly — it's part of my practice</option>
+              <option value="1">Sometimes — when I notice a challenge</option>
+              <option value="0">Rarely or never</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">45</div>
+          <div class="q-body">
+            <div class="q-label">Do you actively stay current on research related to racial and ethnic minority mental health?</div>
+            <select id="q45" name="research_currency" data-domain="G">
+              <option value="">— select —</option>
+              <option value="2">Yes — ongoing reading, CEUs, or training</option>
+              <option value="1">Occasionally</option>
+              <option value="0">Rarely or no</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">5 pts</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">46</div>
+          <div class="q-body">
+            <div class="q-label">Have you personally experienced a cultural mismatch with a client that impacted treatment?</div>
+            <select id="q46" name="mismatch_exp" data-domain="G">
+              <option value="">— select —</option>
+              <option value="yes_resolved">Yes — recognized it and addressed it successfully</option>
+              <option value="yes_unresolved">Yes — and it was not fully resolved</option>
+              <option value="no">No, not that I'm aware of</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">47</div>
+          <div class="q-body">
+            <div class="q-label">How do you approach a client who expresses strong distrust of therapy or therapists?</div>
+            <select id="q47" name="distrust_approach" data-domain="G">
+              <option value="">— select —</option>
+              <option value="explore">Explore it openly — curiosity first</option>
+              <option value="validate">Validate and normalize, then build alliance</option>
+              <option value="reframe">Educate / reframe therapy as they've known it</option>
+              <option value="refer">Refer out if it seems too significant</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+        <div class="q-row">
+          <div class="q-num">48</div>
+          <div class="q-body">
+            <div class="q-label">Is there anything else clinically relevant about your background that would help match you well with clients? (optional)</div>
+            <textarea id="q48" name="additional_context" placeholder="Open text — used for qualitative screening, not scoring…"></textarea>
+          </div>
+          <div class="q-weight-badge">Qualitative</div>
+        </div>
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 7 of 10</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 7 — SECTION H: THE MIRROR EFFECT ══ -->
+  <div class="page" id="page-7">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">H</span>
+        <span class="section-title">The Mirror Effect — Aspirational Self &amp; Concordance</span>
+        <span class="section-weight">Domain weight: 15 pts</span>
+      </div>
+      <div class="questions">
+
+        <div class="q-row">
+          <div class="q-num">49</div>
+          <div class="q-body">
+            <div class="q-label">Have you personally been a therapy client at any point in your life?</div>
+            <select id="q49" name="been_client" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">Yes — meaningfully so; it shaped my practice</option>
+              <option value="1">Yes — briefly or in training context only</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">3 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">50</div>
+          <div class="q-body">
+            <div class="q-label">How significant was your own hardship in shaping who you are as a therapist?</div>
+            <div class="q-hint">1 = my personal history is largely separate from my clinical identity · 5 = it is foundational to everything I do</div>
+            <div class="likert-wrap" id="q50" data-domain="H">
+              <label><input type="radio" name="q50" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q50" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q50" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q50" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q50" value="5"><div class="likert-btn">5</div><div class="likert-lbl">Foundational</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">51</div>
+          <div class="q-body">
+            <div class="q-label">Have you ever recognized yourself — your former self — in a client?</div>
+            <select id="q51" name="mirror_recognition" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">Yes — frequently; I deliberately use that recognition clinically</option>
+              <option value="1">Yes — occasionally; I'm careful about how I use it</option>
+              <option value="0.5">Rarely — I try to maintain clear separation</option>
+              <option value="0">No — I don't see my clients through that lens</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">52</div>
+          <div class="q-body">
+            <div class="q-label">When you recognize yourself in a client, what is your primary response?</div>
+            <select id="q52" name="mirror_response" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">I lean into it — I use that recognition to build rapport and insight faster</option>
+              <option value="1.5">I note it internally and use it to inform my approach without disclosing</option>
+              <option value="1">I bring it to supervision to manage countertransference</option>
+              <option value="0">I try to set it aside entirely — it can cloud judgment</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">53</div>
+          <div class="q-body">
+            <div class="q-label">Have you ever disclosed something personal to a client because you believed it would meaningfully advance their healing?</div>
+            <select id="q53" name="self_disclosure" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">Yes — strategically and it helped</option>
+              <option value="1.5">Yes — it was complicated but ultimately valuable</option>
+              <option value="1">Yes — and I'm uncertain it was the right call</option>
+              <option value="0.5">No — I believe in strict boundaries around self-disclosure</option>
+              <option value="0">No — I've never disclosed personal information</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">54</div>
+          <div class="q-body">
+            <div class="q-label">How often does your own life story inform what you say in a session — even if you don't mention it?</div>
+            <div class="q-hint">1 = almost never · 5 = it informs nearly everything</div>
+            <div class="likert-wrap" id="q54" data-domain="H">
+              <label><input type="radio" name="q54" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q54" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q54" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q54" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q54" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">55</div>
+          <div class="q-body">
+            <div class="q-label">What do you believe you uniquely give a client that no one else in their life can?</div>
+            <select id="q55" name="unique_gift" data-domain="H">
+              <option value="">— select —</option>
+              <option value="a">Proof that someone like them can get through it — I've been there</option>
+              <option value="b">A space with zero judgment — which most people in their lives cannot offer</option>
+              <option value="c">Clinical tools and structure that turn pain into a workable problem</option>
+              <option value="d">Honest reflection — I'll say what others won't</option>
+              <option value="e">Consistent presence — I show up the same way every time</option>
+              <option value="f">A cultural and experiential fluency that makes them feel truly seen</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">56</div>
+          <div class="q-body">
+            <div class="q-label">How far have you personally come from where you started?</div>
+            <select id="q56" name="personal_distance" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">Very far — my current life would be unrecognizable to my earlier self</option>
+              <option value="1.5">Significant distance — major transformation in at least one domain</option>
+              <option value="1">Moderate — I've grown meaningfully but my trajectory was relatively stable</option>
+              <option value="0.5">Not far — my path has been fairly linear and privileged</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">57</div>
+          <div class="q-body">
+            <div class="q-label">How comfortable are you being seen as a model or example of what's possible — not just a clinician?</div>
+            <div class="q-hint">1 = very uncomfortable · 5 = I embrace this role</div>
+            <div class="likert-wrap" id="q57" data-domain="H">
+              <label><input type="radio" name="q57" value="1"><div class="likert-btn">1</div><div class="likert-lbl">Uncomfortable</div></label>
+              <label><input type="radio" name="q57" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q57" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q57" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q57" value="5"><div class="likert-btn">5</div><div class="likert-lbl">Embrace it</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">58</div>
+          <div class="q-body">
+            <div class="q-label">What does "a hand up, not a handout" mean to you in your clinical work?</div>
+            <select id="q58" name="hand_up_meaning" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">I actively build autonomy and self-efficacy — my goal is to make myself unnecessary</option>
+              <option value="1.5">I balance support with challenge — I push clients toward their own agency</option>
+              <option value="1">I meet clients where they are and let them set the pace of independence</option>
+              <option value="0">I provide support without expectation — they determine what "a hand up" means</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">59</div>
+          <div class="q-body">
+            <div class="q-label">How do you understand the relationship between your own healing and your capacity to facilitate healing in others?</div>
+            <select id="q59" name="own_healing_relation" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">Directly linked — the deeper I've done my own work, the more effective I am</option>
+              <option value="1.5">Related — ongoing personal growth enhances my practice</option>
+              <option value="1">Separate — I maintain professional boundaries between personal and clinical</option>
+              <option value="0.5">I keep them strictly apart — personal history should not enter the clinical space</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">60</div>
+          <div class="q-body">
+            <div class="q-label">When a client aspires to live a life similar to yours, how do you handle that?</div>
+            <select id="q60" name="client_aspiration" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">I use it therapeutically — I help them identify what specifically they're drawn to and why</option>
+              <option value="1.5">I redirect — I affirm their aspiration while keeping focus on their own path</option>
+              <option value="1">I'm careful — idealization can become a dependency</option>
+              <option value="0">I actively discourage it — therapy is not about me</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">61</div>
+          <div class="q-body">
+            <div class="q-label">What would you say to a client who says "I want to be like you someday"?</div>
+            <select id="q61" name="aspiration_response" data-domain="H">
+              <option value="">— select —</option>
+              <option value="a">I'd explore what specifically they admire and connect it to their own values</option>
+              <option value="b">I'd affirm it and say — that's exactly what's possible for you</option>
+              <option value="c">I'd gently redirect — let's focus on who YOU want to be</option>
+              <option value="d">I'd be transparent about my journey while keeping the focus on theirs</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">62</div>
+          <div class="q-body">
+            <div class="q-label">Describe your lowest professional or personal moment and your relationship to it now</div>
+            <select id="q62" name="lowest_moment_relation" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">I've fully integrated it — it's a source of strength and clinical insight</option>
+              <option value="1.5">Mostly processed — it still surfaces but I manage it well</option>
+              <option value="1">Ongoing work — I'm aware of it and actively address it in supervision</option>
+              <option value="0.5">I prefer not to engage with it clinically — it stays personal</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">63</div>
+          <div class="q-body">
+            <div class="q-label">How do you show up differently for a client who reminds you of who you were vs. a client whose life is very different from yours?</div>
+            <select id="q63" name="differential_presence" data-domain="H">
+              <option value="">— select —</option>
+              <option value="2">I'm more instinctively attuned with concordant clients but equally effective with all — I'm aware of the difference</option>
+              <option value="1.5">I have to work harder with clients unlike me — I compensate with more intentional curiosity</option>
+              <option value="1">I try to show up identically — I believe good therapy is good therapy regardless of similarity</option>
+              <option value="0.5">I'm not sure I show up differently — I don't track that distinction</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">64</div>
+          <div class="q-body">
+            <div class="q-label">How important is it to you that your clients know you believe in them — not just clinically, but personally?</div>
+            <div class="q-hint">1 = not important — professional distance matters more · 5 = essential to how I work</div>
+            <div class="likert-wrap" id="q64" data-domain="H">
+              <label><input type="radio" name="q64" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q64" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q64" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q64" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q64" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">65</div>
+          <div class="q-body">
+            <div class="q-label">What is the single most important thing a client needs from a therapist who has lived through something similar to them?</div>
+            <select id="q65" name="concordance_need" data-domain="H">
+              <option value="">— select —</option>
+              <option value="a">Proof of possibility — evidence that the path they're on leads somewhere</option>
+              <option value="b">Permission to be honest — they won't be judged or disbelieved</option>
+              <option value="c">Fluency — no need to translate or explain their world</option>
+              <option value="d">Accountability with love — someone who won't let them off the hook but won't shame them either</option>
+              <option value="e">Presence — someone fully in the room with them, not observing from outside</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">66</div>
+          <div class="q-body">
+            <div class="q-label">Briefly describe one defining experience that made you the therapist you are today (optional)</div>
+            <textarea id="q66" name="defining_experience" placeholder="This is qualitative context — not scored, used for matching narrative…"></textarea>
+          </div>
+          <div class="q-weight-badge">Qualitative</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 8 of 10</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 8 — SECTION I: OUTCOMES & ACCOUNTABILITY ══ -->
+  <div class="page" id="page-8">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">I</span>
+        <span class="section-title">Outcomes &amp; Accountability</span>
+        <span class="section-weight">Domain weight: 10 pts</span>
+      </div>
+      <div class="questions">
+
+        <div class="q-row">
+          <div class="q-num">67</div>
+          <div class="q-body">
+            <div class="q-label">How do you define a successful outcome for a client?</div>
+            <select id="q67" name="outcome_definition" data-domain="I">
+              <option value="">— select —</option>
+              <option value="a">They achieve the specific goals we set at intake</option>
+              <option value="b">They develop the internal capacity to manage without ongoing support</option>
+              <option value="c">They report meaningful improvement in daily functioning and quality of life</option>
+              <option value="d">They are living a life more aligned with their own values — whatever that looks like</option>
+              <option value="e">They no longer need me</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">68</div>
+          <div class="q-body">
+            <div class="q-label">How often do you formally track client progress toward measurable goals?</div>
+            <select id="q68" name="progress_tracking" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">Every session — I use standardized measures consistently</option>
+              <option value="1.5">Monthly or at regular intervals</option>
+              <option value="1">At discharge only</option>
+              <option value="0.5">Informally — I track it clinically but not with formal instruments</option>
+              <option value="0">I don't use formal outcome measurement</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">69</div>
+          <div class="q-body">
+            <div class="q-label">What outcome measures or tools do you use? (select all that apply)</div>
+            <div class="multi-check" id="q69" data-domain="I">
+              <label><input type="checkbox" value="phq9"><span>PHQ-9</span></label>
+              <label><input type="checkbox" value="gad7"><span>GAD-7</span></label>
+              <label><input type="checkbox" value="pcl5"><span>PCL-5</span></label>
+              <label><input type="checkbox" value="ors"><span>ORS / SRS</span></label>
+              <label><input type="checkbox" value="basis24"><span>BASIS-24</span></label>
+              <label><input type="checkbox" value="whoqol"><span>WHOQOL</span></label>
+              <label><input type="checkbox" value="custom"><span>Custom / agency-specific tool</span></label>
+              <label><input type="checkbox" value="none_measure"><span>None currently</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">70</div>
+          <div class="q-body">
+            <div class="q-label">How do you respond when a client is not improving under your care?</div>
+            <select id="q70" name="non_improvement_response" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">I examine my approach first — and adjust before assuming client factors</option>
+              <option value="1.5">I consult with a supervisor or colleague and co-develop a new plan</option>
+              <option value="1">I discuss it openly with the client and collaboratively revise goals</option>
+              <option value="0.5">I consider referral if my modality isn't the right fit</option>
+              <option value="0">I trust the process — some clients improve slowly</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">71</div>
+          <div class="q-body">
+            <div class="q-label">How comfortable are you with your outcomes being tracked, compared, and shared with a clinical team?</div>
+            <div class="q-hint">1 = very uncomfortable · 5 = fully welcome it</div>
+            <div class="likert-wrap" id="q71" data-domain="I">
+              <label><input type="radio" name="q71" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q71" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q71" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q71" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q71" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">72</div>
+          <div class="q-body">
+            <div class="q-label">Have you ever ended a therapeutic relationship because you were not the right fit for a client?</div>
+            <select id="q72" name="ended_for_fit" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">Yes — and I consider this a sign of clinical integrity</option>
+              <option value="1">Yes — it was difficult but the right call</option>
+              <option value="0.5">Not formally — but I've facilitated warm handoffs</option>
+              <option value="0">No — I believe I can work with anyone if given enough time</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">73</div>
+          <div class="q-body">
+            <div class="q-label">What percentage of your clients do you believe achieve clinically meaningful improvement?</div>
+            <select id="q73" name="pct_meaningful_improvement" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">75–100%</option>
+              <option value="1.5">50–74%</option>
+              <option value="1">25–49%</option>
+              <option value="0.5">Under 25%</option>
+              <option value="0">I don't track this / can't estimate</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">74</div>
+          <div class="q-body">
+            <div class="q-label">What do you believe is the biggest barrier to good outcomes for your client population?</div>
+            <select id="q74" name="outcome_barrier" data-domain="I">
+              <option value="">— select —</option>
+              <option value="a">Systemic — poverty, racism, housing, and other structural factors</option>
+              <option value="b">Access — transportation, childcare, cost, time</option>
+              <option value="c">Therapeutic fit — wrong modality or mismatched therapist</option>
+              <option value="d">Readiness — clients who aren't yet ready to change</option>
+              <option value="e">Continuity — clients who disengage before meaningful work is done</option>
+              <option value="f">Co-occurring factors — SUD, medical, housing crises that destabilize progress</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">75</div>
+          <div class="q-body">
+            <div class="q-label">How accountable do you hold yourself when a client disengages or drops out?</div>
+            <div class="q-hint">1 = I view it as a client decision outside my control · 5 = I actively examine my role in every dropout</div>
+            <div class="likert-wrap" id="q75" data-domain="I">
+              <label><input type="radio" name="q75" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q75" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q75" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q75" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q75" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">76</div>
+          <div class="q-body">
+            <div class="q-label">How do you currently measure your own effectiveness as a therapist?</div>
+            <select id="q76" name="self_effectiveness_measure" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">Formal outcome data reviewed regularly</option>
+              <option value="1.5">Client feedback (structured or informal) plus clinical observation</option>
+              <option value="1">Peer consultation and supervision feedback</option>
+              <option value="0.5">Intuition and client retention</option>
+              <option value="0">I don't have a formal method</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">77</div>
+          <div class="q-body">
+            <div class="q-label">If your compensation were tied to client outcomes, how would that change your practice?</div>
+            <select id="q77" name="vbc_response" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">It wouldn't need to — I already practice this way</option>
+              <option value="1.5">It would sharpen my focus on measurable goal-setting from session one</option>
+              <option value="1">It would make me more selective about which clients I accept</option>
+              <option value="0.5">I'd be concerned it would create perverse incentives</option>
+              <option value="0">I oppose tying compensation to outcomes — too many factors are outside my control</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">78</div>
+          <div class="q-body">
+            <div class="q-label">How do you distinguish between a client who isn't ready vs. a therapy relationship that isn't working?</div>
+            <select id="q78" name="readiness_vs_fit" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">I assess both systematically and distinguish them clearly before deciding next steps</option>
+              <option value="1.5">I lean on supervision to help me distinguish — it's often unclear</option>
+              <option value="1">I look at engagement patterns and alliance scores</option>
+              <option value="0.5">I primarily follow the client's lead</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">79</div>
+          <div class="q-body">
+            <div class="q-label">How do you approach long-term clients (2+ years) who may have plateaued?</div>
+            <select id="q79" name="plateau_approach" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">I proactively raise it — I initiate a goals review and discuss whether continued therapy serves them</option>
+              <option value="1.5">I wait for a natural opening and then address it collaboratively</option>
+              <option value="1">I follow the client's lead — they know when they're ready to conclude</option>
+              <option value="0.5">Long-term relationships have inherent value even without measurable progress</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">80</div>
+          <div class="q-body">
+            <div class="q-label">What has been your most significant clinical failure, and what did you take from it?</div>
+            <select id="q80" name="clinical_failure_learning" data-domain="I">
+              <option value="">— select —</option>
+              <option value="2">I can name it specifically — I've done deep work on it and changed my practice because of it</option>
+              <option value="1.5">I'm aware of it and brought it to supervision — it still informs how I work</option>
+              <option value="1">I've had setbacks but I process them through reflection rather than formal review</option>
+              <option value="0.5">I don't frame clinical setbacks as failures — I see them as part of the process</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">81</div>
+          <div class="q-body">
+            <div class="q-label">How do you balance meeting clients where they are vs. challenging them toward growth?</div>
+            <div class="q-hint">1 = I primarily meet clients where they are · 5 = I lean heavily toward challenge</div>
+            <div class="likert-wrap" id="q81" data-domain="I">
+              <label><input type="radio" name="q81" value="1"><div class="likert-btn">1</div><div class="likert-lbl">Meet them</div></label>
+              <label><input type="radio" name="q81" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q81" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q81" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q81" value="5"><div class="likert-btn">5</div><div class="likert-lbl">Challenge</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">82</div>
+          <div class="q-body">
+            <div class="q-label">Describe your philosophy on discharge — when is a client ready to leave therapy?</div>
+            <select id="q82" name="discharge_philosophy" data-domain="I">
+              <option value="">— select —</option>
+              <option value="a">When they've met their stated goals and have the internal resources to maintain gains</option>
+              <option value="b">When they say they're ready — client self-determination guides discharge</option>
+              <option value="c">When I observe they no longer need the relationship to function — regardless of what they say</option>
+              <option value="d">When external factors (insurance, cost, life changes) require it — I work with what I have</option>
+              <option value="e">I don't believe in hard discharge — I prefer open-door ongoing access</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">83</div>
+          <div class="q-body">
+            <div class="q-label">Additional notes on how you approach client outcomes (optional)</div>
+            <textarea id="q83" name="outcomes_notes" placeholder="Any context on your outcomes philosophy or measurement approach…"></textarea>
+          </div>
+          <div class="q-weight-badge">Qualitative</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 9 of 10</span>
+      <button class="btn-next">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 9 — SECTION J: INNER LIFE & THERAPEUTIC PHILOSOPHY ══ -->
+  <div class="page" id="page-9">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-badge">J</span>
+        <span class="section-title">Inner Life &amp; Therapeutic Philosophy</span>
+        <span class="section-weight">Domain weight: 10 pts</span>
+      </div>
+      <div class="questions">
+
+        <div class="q-row">
+          <div class="q-num">84</div>
+          <div class="q-body">
+            <div class="q-label">What do you believe is the single most important factor in therapeutic change?</div>
+            <select id="q84" name="change_factor" data-domain="J">
+              <option value="">— select —</option>
+              <option value="a">The therapeutic alliance — relationship is the intervention</option>
+              <option value="b">The right modality matched to the right presenting problem</option>
+              <option value="c">The client's readiness and motivation — nothing happens without it</option>
+              <option value="d">Hope — the client's belief that change is possible</option>
+              <option value="e">Consistent structure and accountability over time</option>
+              <option value="f">Felt safety — the body has to believe it's safe before the mind can change</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">85</div>
+          <div class="q-body">
+            <div class="q-label">How do you experience compassion fatigue, and what do you do about it?</div>
+            <select id="q85" name="compassion_fatigue" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I recognize it early and have active practices to address it — it rarely reaches crisis</option>
+              <option value="1.5">I experience it periodically — I manage through supervision, self-care, and case consultation</option>
+              <option value="1">I've had significant periods of burnout — I'm aware and working on it</option>
+              <option value="0.5">I don't experience it often — I maintain strong boundaries</option>
+              <option value="0">I'm not sure I've experienced it</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">86</div>
+          <div class="q-body">
+            <div class="q-label">How do you maintain your own psychological health as a practicing therapist?</div>
+            <div class="multi-check" id="q86" data-domain="J">
+              <label><input type="checkbox" value="therapy"><span>Personal therapy (ongoing)</span></label>
+              <label><input type="checkbox" value="supervision"><span>Regular supervision</span></label>
+              <label><input type="checkbox" value="peer_consult"><span>Peer consultation group</span></label>
+              <label><input type="checkbox" value="exercise"><span>Regular physical practice</span></label>
+              <label><input type="checkbox" value="spiritual"><span>Spiritual / contemplative practice</span></label>
+              <label><input type="checkbox" value="creative"><span>Creative practice</span></label>
+              <label><input type="checkbox" value="community"><span>Community / relational grounding</span></label>
+              <label><input type="checkbox" value="caseload_limits"><span>Deliberate caseload limits</span></label>
+              <label><input type="checkbox" value="no_formal"><span>No formal practice currently</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">87</div>
+          <div class="q-body">
+            <div class="q-label">What is your relationship to hope in the clinical setting?</div>
+            <select id="q87" name="hope_relationship" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I actively cultivate and hold hope for clients who cannot hold it for themselves — it's a core part of my role</option>
+              <option value="1.5">I believe hope should be realistic — I work with what's actually possible for each client</option>
+              <option value="1">Hope is the client's domain — I try not to project it onto them</option>
+              <option value="0.5">I'm cautious with hope — it can set clients up for disappointment</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">88</div>
+          <div class="q-body">
+            <div class="q-label">How do you sit with a client who has given up — on themselves, on therapy, on change?</div>
+            <select id="q88" name="given_up_client" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I stay — I meet them in the hopelessness without rushing to fix it; my presence is the intervention</option>
+              <option value="1.5">I gently challenge — I find the smallest possible opening and work from there</option>
+              <option value="1">I validate the feeling fully before shifting toward any action</option>
+              <option value="0.5">I try to reframe — I look for evidence they haven't fully given up</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">89</div>
+          <div class="q-body">
+            <div class="q-label">How do you hold the line between empathy and enmeshment?</div>
+            <div class="q-hint">1 = strong professional distance is my default · 5 = I go deep and trust my ability to return</div>
+            <div class="likert-wrap" id="q89" data-domain="J">
+              <label><input type="radio" name="q89" value="1"><div class="likert-btn">1</div><div class="likert-lbl">Distance</div></label>
+              <label><input type="radio" name="q89" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q89" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q89" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q89" value="5"><div class="likert-btn">5</div><div class="likert-lbl">Go deep</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">90</div>
+          <div class="q-body">
+            <div class="q-label">What's the hardest truth you've ever had to deliver to a client — and how did you do it?</div>
+            <select id="q90" name="hard_truth_delivery" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I've delivered very hard truths — with love, directness, and full accountability for the relationship after</option>
+              <option value="1.5">I've done it — carefully, with significant preparation and follow-through</option>
+              <option value="1">I tend to soften hard truths — I prioritize the alliance over directness</option>
+              <option value="0.5">I rarely deliver hard truths unprompted — I wait until the client arrives at it themselves</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">91</div>
+          <div class="q-body">
+            <div class="q-label">How do you understand the role of systemic injustice in your client's mental health presentation?</div>
+            <select id="q91" name="systemic_view" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">It's central — I hold both individual and systemic causes simultaneously in every case</option>
+              <option value="1.5">It's important context — I acknowledge it and work within what I can actually address</option>
+              <option value="1">I attend to it as clients raise it — I follow their lead on its relevance</option>
+              <option value="0.5">I focus primarily on the individual — systems change is outside clinical scope</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">92</div>
+          <div class="q-body">
+            <div class="q-label">What does "fully present" mean to you in a session?</div>
+            <select id="q92" name="full_presence" data-domain="J">
+              <option value="">— select —</option>
+              <option value="a">My attention is undivided — phone away, no parallel processing</option>
+              <option value="b">I'm tracking verbal, nonverbal, and somatic cues simultaneously</option>
+              <option value="c">My own emotional response is available — I let the client affect me</option>
+              <option value="d">I'm thinking two or three moves ahead while staying in the moment</option>
+              <option value="e">I'm calibrating constantly — noticing what's said and what's left out</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">93</div>
+          <div class="q-body">
+            <div class="q-label">How do you handle a rupture in the therapeutic alliance?</div>
+            <select id="q93" name="rupture_repair" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I name it directly and as soon as possible — rupture and repair is where the deepest work happens</option>
+              <option value="1.5">I address it carefully — I initiate the conversation but proceed slowly</option>
+              <option value="1">I wait to see if the client brings it up — I follow their lead</option>
+              <option value="0.5">I try to repair through my behavior rather than naming it explicitly</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">2 pts</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">94</div>
+          <div class="q-body">
+            <div class="q-label">How do you feel about silence in a session?</div>
+            <select id="q94" name="silence_comfort" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">Comfortable and strategic — silence is productive and I use it intentionally</option>
+              <option value="1.5">Mostly comfortable — I can tolerate it but usually move toward it being used</option>
+              <option value="1">Somewhat uncomfortable — I tend to fill it if it goes beyond 10–15 seconds</option>
+              <option value="0.5">I try to minimize it — I find silence creates anxiety that isn't always therapeutic</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">95</div>
+          <div class="q-body">
+            <div class="q-label">What do you do when you are personally triggered by a client's content?</div>
+            <select id="q95" name="triggered_response" data-domain="J">
+              <option value="">— select —</option>
+              <option value="2">I recognize it in real time, regulate internally, and bring it to supervision — it rarely derails the session</option>
+              <option value="1.5">I may not catch it in session — but I debrief it afterward and address it before next contact</option>
+              <option value="1">I'm still developing my awareness of when this is happening</option>
+              <option value="0.5">I try to avoid caseloads where I'm at risk of personal activation</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">96</div>
+          <div class="q-body">
+            <div class="q-label">How important is professional community to your practice?</div>
+            <div class="q-hint">1 = I work largely independently · 5 = peer relationships are central to how I do this work</div>
+            <div class="likert-wrap" id="q96" data-domain="J">
+              <label><input type="radio" name="q96" value="1"><div class="likert-btn">1</div></label>
+              <label><input type="radio" name="q96" value="2"><div class="likert-btn">2</div></label>
+              <label><input type="radio" name="q96" value="3"><div class="likert-btn">3</div></label>
+              <label><input type="radio" name="q96" value="4"><div class="likert-btn">4</div></label>
+              <label><input type="radio" name="q96" value="5"><div class="likert-btn">5</div></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">97</div>
+          <div class="q-body">
+            <div class="q-label">If you could change one thing about how behavioral health is delivered in this country, what would it be?</div>
+            <select id="q97" name="system_change" data-domain="J">
+              <option value="">— select —</option>
+              <option value="a">Eliminate insurance as the gatekeeper of care — payment should follow need</option>
+              <option value="b">Require cultural concordance matching as standard of care</option>
+              <option value="c">Make outcome-based accountability mandatory for all providers</option>
+              <option value="d">Integrate mental health into primary care and schools — remove the stigma of seeking</option>
+              <option value="e">Pay therapists as the specialists they are — raise the floor on compensation</option>
+              <option value="f">Fund community-based and peer support models at the same level as clinical care</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">98</div>
+          <div class="q-body">
+            <div class="q-label">How do you want to grow as a clinician over the next 5 years?</div>
+            <div class="multi-check" id="q98" data-domain="J">
+              <label><input type="checkbox" value="supervision_skills"><span>Provide clinical supervision</span></label>
+              <label><input type="checkbox" value="specialize"><span>Deepen a specialty area</span></label>
+              <label><input type="checkbox" value="research"><span>Engage in research or publication</span></label>
+              <label><input type="checkbox" value="leadership"><span>Move into clinical leadership</span></label>
+              <label><input type="checkbox" value="training"><span>Train other clinicians</span></label>
+              <label><input type="checkbox" value="policy"><span>Influence policy or advocacy</span></label>
+              <label><input type="checkbox" value="entrepreneurial"><span>Build my own practice or program</span></label>
+              <label><input type="checkbox" value="deepen_current"><span>Deepen current practice — no major changes</span></label>
+            </div>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">99</div>
+          <div class="q-body">
+            <div class="q-label">What motivates you to keep doing this work?</div>
+            <select id="q99" name="motivation" data-domain="J">
+              <option value="">— select —</option>
+              <option value="a">I was made for this — I can't imagine doing anything else</option>
+              <option value="b">The moments when someone shifts — I've seen too many of them to stop</option>
+              <option value="c">I owe it forward — someone helped me and I'm paying it back</option>
+              <option value="d">The clients who remind me why it matters — usually the hardest ones</option>
+              <option value="e">My community needs this — there aren't enough people doing it who look like them</option>
+              <option value="f">I'm still figuring that out — but I keep showing up</option>
+            </select>
+          </div>
+          <div class="q-weight-badge">Variable</div>
+        </div>
+
+        <div class="q-row">
+          <div class="q-num">100</div>
+          <div class="q-body">
+            <div class="q-label">Anything else about your inner life as a therapist that would help us understand who you are at your best? (optional)</div>
+            <textarea id="q100" name="inner_life_notes" placeholder="Open field — used for matching narrative, not scored…"></textarea>
+          </div>
+          <div class="q-weight-badge">Qualitative</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="page-controls">
+      <button class="btn-prev">← Back</button>
+      <span class="page-counter">Page 10 of 10</span>
+      <button class="btn-next" id="btnSubmit">Submit Profile</button>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- ── ADMIN SCORE PANEL (hidden unless admin mode) ── -->
+<div class="score-panel" id="scorePanel">
+  <div class="score-admin-tag">⚙ Admin View</div>
+  <div class="score-label">Live Score</div>
+  <div class="score-value" id="scoreVal">0.00</div>
+  <div class="score-sub">out of 100.00</div>
+  <div class="score-bar-wrap"><div class="score-bar" id="scoreBar" style="width:0%"></div></div>
+  <div class="score-breakdown">
+    <div class="sbd-row"><span>Clinical (B)</span><span class="sbd-val" id="sbB">0.00</span></div>
+    <div class="sbd-row"><span>Cultural (C)</span><span class="sbd-val" id="sbC">0.00</span></div>
+    <div class="sbd-row"><span>Lived Exp. (D)</span><span class="sbd-val" id="sbD">0.00</span></div>
+    <div class="sbd-row"><span>Style (E)</span><span class="sbd-val" id="sbE">0.00</span></div>
+    <div class="sbd-row"><span>Self-Assess (G)</span><span class="sbd-val" id="sbG">0.00</span></div>
+    <div class="sbd-row"><span>Mirror (H)</span><span class="sbd-val" id="sbH">0.00</span></div>
+    <div class="sbd-row"><span>Outcomes (I)</span><span class="sbd-val" id="sbI">0.00</span></div>
+    <div class="sbd-row"><span>Inner Life (J)</span><span class="sbd-val" id="sbJ">0.00</span></div>
+  </div>
+</div>
+
+<!-- ── PASSWORD MODAL ── -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <div class="pw-title">Admin Access</div>
+    <div class="pw-sub">Enter the admin password to view scoring data.</div>
+    <input class="pw-input" type="password" id="pwInput" placeholder="Password" autocomplete="off">
+    <div class="pw-err" id="pwErr"></div>
+    <div class="pw-actions">
+      <button class="pw-cancel" id="pwCancel">Cancel</button>
+      <button class="pw-submit" id="pwSubmit">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESULT MODAL ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalInner">
+    <!-- populated by JS based on admin mode -->
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ── CONFIG ────────────────────────────────────────────────────
+const ADMIN_PASSWORD = 'credify2026';
+
+// Domain max pts — total must equal 100
+const DOMAIN_MAX = { B: 15, C: 20, D: 15, E: 15, G: 10, H: 15, I: 10, J: 10 };
+// B+C+D+E+G+H+I+J = 15+20+15+15+10+15+10+10 = 110 → normalize to 100 in computeTotal
+
+const PAGE_COUNT = 10;
+// questions per page (required only — optionals excluded)
+const PAGE_Q_IDS = [
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'],                    // A
+  ['q11','q12','q13','q14','q15'],                                          // B
+  ['q16','q17','q18','q19','q20','q21'],                                    // C
+  ['q22','q23','q24','q25','q26','q27'],                                    // D
+  ['q28','q29','q30','q31','q32','q33','q34'],                              // E
+  ['q35','q36','q37','q38','q39','q40'],                                    // F
+  ['q41','q42','q43','q44','q45','q46','q47'],                              // G (q48 optional)
+  ['q49','q50','q51','q52','q53','q54','q55','q56','q57','q58',
+   'q59','q60','q61','q62','q63','q64','q65'],                              // H (q66 optional)
+  ['q67','q68','q69','q70','q71','q72','q73','q74','q75','q76',
+   'q77','q78','q79','q80','q81','q82'],                                    // I (q83 optional)
+  ['q84','q85','q86','q87','q88','q89','q90','q91','q92','q93',
+   'q94','q95','q96','q97','q98','q99']                                     // J (q100 optional)
+];
+const ALL_Q_IDS = PAGE_Q_IDS.flat(); // 83 required questions
+
+// ── STATE ─────────────────────────────────────────────────────
+let currentPage = 0;
+let adminMode = false;
+
+// ── HELPERS ───────────────────────────────────────────────────
+function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+
+function isAnswered(id) {
+  // radio group
+  const radio = document.querySelector(`input[type="radio"][name="${id}"]:checked`);
+  if (radio) return true;
+  // multi-check container
+  const mc = document.querySelector(`#${id} input[type="checkbox"]:checked`);
+  if (mc) return true;
+  // select / text / number
+  const el = document.getElementById(id);
+  if (!el) return false;
+  return el.value.trim() !== '';
+}
+
+// ── SCORING ───────────────────────────────────────────────────
+function getRadio(name) {
+  const el = document.querySelector(`input[type="radio"][name="${name}"]:checked`);
+  return el ? parseFloat(el.value) : null;
+}
+function getSelect(id) {
+  const el = document.getElementById(id);
+  if (!el || el.value === '') return null;
+  return parseFloat(el.value);
+}
+function hasCheck(id) {
+  return document.querySelectorAll(`#${id} input[type="checkbox"]:checked`).length > 0;
+}
+
+function computeB() {
+  let s = 0;
+  if (hasCheck('q11')) s += 5;
+  if (hasCheck('q12')) s += 5;
+  if (hasCheck('q13')) s += 5;
+  const q14 = getSelect('q14');
+  if (q14 !== null) s += (q14 / 2) * 5;
+  return clamp(s, 0, DOMAIN_MAX.B);
+}
+function computeC() {
+  let s = 0;
+  const q16 = getRadio('q16'); if (q16 !== null) s += (q16 / 5) * 5;
+  const q17 = getSelect('q17'); if (q17 !== null) s += (q17 / 2) * 5;
+  const q18 = getRadio('q18'); if (q18 !== null) s += (q18 / 5) * 5;
+  const q19 = getSelect('q19'); if (q19 !== null) s += (q19 / 2) * 5;
+  const q20 = getSelect('q20'); if (q20 !== null) s += (q20 / 2) * 5;
+  return clamp(s, 0, DOMAIN_MAX.C);
+}
+function computeD() {
+  let s = 0;
+  const q22 = getSelect('q22'); if (q22 !== null) s += (q22 / 2) * 4;
+  const q23 = getSelect('q23'); if (q23 !== null) s += (q23 / 2) * 4;
+  const q24 = getSelect('q24'); if (q24 !== null) s += (q24 / 2) * 4;
+  const q25 = getSelect('q25'); if (q25 !== null) s += (q25 / 2) * 4;
+  const q26 = getSelect('q26'); if (q26 !== null) s += (q26 / 2) * 4;
+  return clamp(s, 0, DOMAIN_MAX.D);
+}
+function computeE() {
+  let s = 0;
+  const q28 = getRadio('q28'); if (q28 !== null) s += (q28 / 5) * 5;
+  const q29 = getRadio('q29'); if (q29 !== null) s += (q29 / 5) * 5;
+  const q30 = getSelect('q30'); if (q30 !== null) s += (q30 / 2) * 5;
+  const q31 = document.getElementById('q31');
+  if (q31 && q31.value !== '') s += 5;
+  return clamp(s, 0, DOMAIN_MAX.E);
+}
+function computeG() {
+  let s = 0;
+  const q43 = getRadio('q43'); if (q43 !== null) s += (q43 / 5) * 5;
+  const q44 = getSelect('q44'); if (q44 !== null) s += (q44 / 2) * 5;
+  const q45 = getSelect('q45'); if (q45 !== null) s += (q45 / 2) * 5;
+  return clamp(s, 0, DOMAIN_MAX.G);
+}
+// ── DOMAIN H — Mirror Effect ──────────────────────────────────
+function computeH() {
+  let s = 0;
+  // q49 select 0/1/2 → max 2 → worth 3 pts
+  const q49 = getSelect('q49'); if (q49 !== null) s += (q49 / 2) * 3;
+  // q50 likert /5 → 2 pts
+  const q50 = getRadio('q50'); if (q50 !== null) s += (q50 / 5) * 2;
+  // q51 select 0/0.5/1/2 → max 2 → 2 pts
+  const q51 = getSelect('q51'); if (q51 !== null) s += (q51 / 2) * 2;
+  // q54 likert /5 → 2 pts
+  const q54 = getRadio('q54'); if (q54 !== null) s += (q54 / 5) * 2;
+  // q56 → 2 pts
+  const q56 = getSelect('q56'); if (q56 !== null) s += (q56 / 2) * 2;
+  // q57 likert /5 → 2 pts
+  const q57 = getRadio('q57'); if (q57 !== null) s += (q57 / 5) * 2;
+  // q58 → 2 pts (autonomy focus)
+  const q58 = getSelect('q58'); if (q58 !== null) s += (q58 / 2) * 2;
+  // q59 → 2 pts (own healing linked to capacity)
+  const q59 = getSelect('q59'); if (q59 !== null) s += (q59 / 2) * 2;
+  // q64 likert /5 → 2 pts
+  const q64 = getRadio('q64'); if (q64 !== null) s += (q64 / 5) * 2;
+  return clamp(s, 0, DOMAIN_MAX.H);
+}
+
+// ── DOMAIN I — Outcomes & Accountability ─────────────────────
+function computeI() {
+  let s = 0;
+  const q68 = getSelect('q68'); if (q68 !== null) s += (q68 / 2) * 2;
+  const q70 = getSelect('q70'); if (q70 !== null) s += (q70 / 2) * 2;
+  const q71 = getRadio('q71'); if (q71 !== null) s += (q71 / 5) * 2;
+  const q73 = getSelect('q73'); if (q73 !== null) s += (q73 / 2) * 2;
+  const q75 = getRadio('q75'); if (q75 !== null) s += (q75 / 5) * 2;
+  return clamp(s, 0, DOMAIN_MAX.I);
+}
+
+// ── DOMAIN J — Inner Life ─────────────────────────────────────
+function computeJ() {
+  let s = 0;
+  const q85 = getSelect('q85'); if (q85 !== null) s += (q85 / 2) * 2;
+  const q87 = getSelect('q87'); if (q87 !== null) s += (q87 / 2) * 2;
+  const q88 = getSelect('q88'); if (q88 !== null) s += (q88 / 2) * 2;
+  const q90 = getSelect('q90'); if (q90 !== null) s += (q90 / 2) * 2;
+  const q93 = getSelect('q93'); if (q93 !== null) s += (q93 / 2) * 2;
+  return clamp(s, 0, DOMAIN_MAX.J);
+}
+
+function computeTotal() {
+  const B = computeB(), C = computeC(), D = computeD(), E = computeE(), G = computeG();
+  const H = computeH(), I = computeI(), J = computeJ();
+  const raw = B + C + D + E + G + H + I + J;
+  // normalize: DOMAIN_MAX sum = 110, scale to 100
+  const DOMAIN_SUM = Object.values(DOMAIN_MAX).reduce((a,v)=>a+v,0);
+  const total = clamp((raw / DOMAIN_SUM) * 100, 0, 100);
+  return { total, B, C, D, E, G, H, I, J };
+}
+
+function tierLabel(score) {
+  if (score >= 85) return 'Excellent Match Candidate';
+  if (score >= 70) return 'Strong Match Candidate';
+  if (score >= 55) return 'Moderate Match — Review Gaps';
+  if (score >= 40) return 'Marginal — Significant Gaps Present';
+  return 'Low Compatibility — Not Recommended for This Profile';
+}
+
+// ── COMPLETION ────────────────────────────────────────────────
+function countAnswered() {
+  return ALL_Q_IDS.filter(isAnswered).length;
+}
+function pageAnswered(p) {
+  return PAGE_Q_IDS[p].filter(isAnswered).length;
+}
+
+function updateCompletion() {
+  const pct = Math.round((countAnswered() / ALL_Q_IDS.length) * 100);
+  document.getElementById('completionFill').style.width = pct + '%';
+  document.getElementById('completionPct').textContent = pct + '%';
+  // mark dots done
+  document.querySelectorAll('.page-dot').forEach((dot, i) => {
+    const total = PAGE_Q_IDS[i].length;
+    const done = pageAnswered(i);
+    dot.classList.toggle('done', done >= total && i !== currentPage);
+  });
+}
+
+// ── ADMIN SCORE PANEL ─────────────────────────────────────────
+function updateScorePanel() {
+  if (!adminMode) return;
+  const { total, B, C, D, E, G, H, I, J } = computeTotal();
+  document.getElementById('scoreVal').textContent = total.toFixed(2);
+  document.getElementById('scoreBar').style.width = total + '%';
+  document.getElementById('sbB').textContent = B.toFixed(2);
+  document.getElementById('sbC').textContent = C.toFixed(2);
+  document.getElementById('sbD').textContent = D.toFixed(2);
+  document.getElementById('sbE').textContent = E.toFixed(2);
+  document.getElementById('sbG').textContent = G.toFixed(2);
+  document.getElementById('sbH').textContent = H.toFixed(2);
+  document.getElementById('sbI').textContent  = I.toFixed(2);
+  document.getElementById('sbJ').textContent  = J.toFixed(2);
+}
+
+function updateAll() {
+  updateCompletion();
+  updateScorePanel();
+}
+
+// ── PAGINATION ────────────────────────────────────────────────
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${n}`).classList.add('active');
+  document.querySelectorAll('.page-dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  currentPage = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateAll();
+}
+
+// ── CUSTOM DROPDOWNS ──────────────────────────────────────────
+function initCustomDropdowns() {
+  // Only build custom chrome on pointer devices; touch gets native <select>
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('select').forEach(sel => {
+    // wrap
+    const wrap = document.createElement('div');
+    wrap.className = 'cdd-wrap';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+
+    // build trigger
+    const trigger = document.createElement('div');
+    trigger.className = 'cdd-trigger';
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('role', 'combobox');
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+
+    const triggerText = document.createElement('span');
+    triggerText.className = 'cdd-trigger-text';
+    triggerText.textContent = getPlaceholder(sel);
+
+    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    arrow.setAttribute('class', 'cdd-arrow');
+    arrow.setAttribute('viewBox', '0 0 14 14');
+    arrow.setAttribute('fill', 'none');
+    arrow.innerHTML = '<path d="M2 4.5L7 9.5L12 4.5" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>';
+
+    trigger.appendChild(triggerText);
+    trigger.appendChild(arrow);
+    wrap.appendChild(trigger);
+
+    // build panel
+    const panel = document.createElement('div');
+    panel.className = 'cdd-panel';
+    panel.setAttribute('role', 'listbox');
+
+    Array.from(sel.options).forEach(opt => {
+      const item = document.createElement('div');
+      item.className = 'cdd-option' + (opt.value === '' ? ' placeholder' : '');
+      item.textContent = opt.text;
+      item.dataset.value = opt.value;
+      item.setAttribute('role', 'option');
+      item.addEventListener('click', () => {
+        sel.value = opt.value;
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+        syncTrigger(wrap, sel, triggerText);
+        closeDropdown(wrap, trigger);
+      });
+      panel.appendChild(item);
+    });
+    wrap.appendChild(panel);
+
+    // open/close
+    trigger.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = wrap.classList.contains('open');
+      closeAllDropdowns();
+      if (!isOpen) openDropdown(wrap, trigger, panel, sel);
+    });
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
+      if (e.key === 'Escape') closeDropdown(wrap, trigger);
+    });
+
+    // sync if select already has a value (e.g. after reset/restore)
+    syncTrigger(wrap, sel, triggerText);
+  });
+
+  document.addEventListener('click', closeAllDropdowns);
+}
+
+function getPlaceholder(sel) {
+  const first = sel.options[0];
+  return (first && first.value === '') ? first.text : '— select —';
+}
+
+function openDropdown(wrap, trigger, panel, sel) {
+  wrap.classList.add('open');
+  trigger.setAttribute('aria-expanded', 'true');
+  // mark selected option
+  Array.from(panel.querySelectorAll('.cdd-option')).forEach(item => {
+    item.classList.toggle('selected', item.dataset.value === sel.value);
+  });
+  // scroll selected into view
+  const sel_item = panel.querySelector('.cdd-option.selected');
+  if (sel_item) sel_item.scrollIntoView({ block: 'nearest' });
+}
+
+function closeDropdown(wrap, trigger) {
+  wrap.classList.remove('open');
+  trigger.setAttribute('aria-expanded', 'false');
+}
+
+function closeAllDropdowns() {
+  document.querySelectorAll('.cdd-wrap.open').forEach(w => {
+    w.classList.remove('open');
+    const t = w.querySelector('.cdd-trigger');
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
+}
+
+function syncTrigger(wrap, sel, triggerText) {
+  const chosen = sel.options[sel.selectedIndex];
+  const isPlaceholder = !chosen || chosen.value === '';
+  triggerText.textContent = chosen ? chosen.text : getPlaceholder(sel);
+  wrap.querySelector('.cdd-trigger').classList.toggle('has-value', !isPlaceholder);
+}
+
+// ── MULTI-CHECK ───────────────────────────────────────────────
+function initMultiCheck() {
+  document.querySelectorAll('.multi-check label').forEach(lbl => {
+    lbl.addEventListener('click', () => {
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      if (!cb) return;
+      requestAnimationFrame(() => {
+        lbl.classList.toggle('checked', cb.checked);
+        updateAll();
+      });
+    });
+  });
+}
+
+// ── COLLECT PAYLOAD ───────────────────────────────────────────
+function collectProfile() {
+  const get = id => { const el = document.getElementById(id); return el ? el.value : null; };
+  const getChecked = id => Array.from(document.querySelectorAll(`#${id} input[type="checkbox"]:checked`)).map(c => c.value);
+  const getRadioVal = name => { const el = document.querySelector(`input[type="radio"][name="${name}"]:checked`); return el ? el.value : null; };
+  return {
+    age: get('q1'), gender: get('q2'), race: getChecked('q3'), lgbtq: get('q4'),
+    languages: getChecked('q5'), license_states: get('q6'), faith: get('q7'),
+    years_practice: get('q8'), license_type: getChecked('q9'), region: get('q10'),
+    specialties: getChecked('q11'), modalities: getChecked('q12'), populations: getChecked('q13'),
+    trauma_informed: get('q14'), cooccurring: getChecked('q15'),
+    cross_race_comfort: getRadioVal('q16'), cultural_training: get('q17'),
+    southern_black_familiarity: getRadioVal('q18'), bwmh_training: get('q19'),
+    antiracist_training: get('q20'), bias_supervision: get('q21'),
+    lived_poverty: get('q22'), lived_racism: get('q23'), large_family_exp: get('q24'),
+    rural_exp: get('q25'), single_parent_exp: get('q26'), other_lived: getChecked('q27'),
+    faith_integration: getRadioVal('q28'), distrust_comfort: getRadioVal('q29'),
+    family_involvement: get('q30'), style_primary: get('q31'),
+    nontraditional_comfort: getRadioVal('q32'), poverty_stress_confidence: get('q33'),
+    bw_confidence: get('q34'), accepting: get('q35'), delivery: getChecked('q36'),
+    insurance: getChecked('q37'), availability: getChecked('q38'),
+    interpreter: get('q39'), sliding: get('q40'), challenging: getChecked('q41'),
+    decline_treat: getChecked('q42'), blindspot_confidence: getRadioVal('q43'),
+    cross_cultural_consult: get('q44'), research_currency: get('q45'),
+    mismatch_exp: get('q46'), distrust_approach: get('q47'), additional_context: get('q48'),
+    // Section H
+    been_client: get('q49'), hardship_shaped: getRadioVal('q50'), mirror_recognition: get('q51'),
+    mirror_response: get('q52'), self_disclosure: get('q53'), story_informs: getRadioVal('q54'),
+    unique_gift: get('q55'), personal_distance: get('q56'), model_comfort: getRadioVal('q57'),
+    hand_up_meaning: get('q58'), own_healing_relation: get('q59'), client_aspiration: get('q60'),
+    aspiration_response: get('q61'), lowest_moment_relation: get('q62'),
+    differential_presence: get('q63'), believe_in_client: getRadioVal('q64'),
+    concordance_need: get('q65'), defining_experience: get('q66'),
+    // Section I
+    outcome_definition: get('q67'), progress_tracking: get('q68'), outcome_measures: getChecked('q69'),
+    non_improvement_response: get('q70'), outcomes_transparency: getRadioVal('q71'),
+    ended_for_fit: get('q72'), pct_meaningful_improvement: get('q73'), outcome_barrier: get('q74'),
+    dropout_accountability: getRadioVal('q75'), self_effectiveness_measure: get('q76'),
+    vbc_response: get('q77'), readiness_vs_fit: get('q78'), plateau_approach: get('q79'),
+    clinical_failure_learning: get('q80'), meet_vs_challenge: getRadioVal('q81'),
+    discharge_philosophy: get('q82'), outcomes_notes: get('q83'),
+    // Section J
+    change_factor: get('q84'), compassion_fatigue: get('q85'), self_care: getChecked('q86'),
+    hope_relationship: get('q87'), given_up_client: get('q88'), empathy_depth: getRadioVal('q89'),
+    hard_truth_delivery: get('q90'), systemic_view: get('q91'), full_presence: get('q92'),
+    rupture_repair: get('q93'), silence_comfort: get('q94'), triggered_response: get('q95'),
+    professional_community: getRadioVal('q96'), system_change: get('q97'),
+    growth_goals: getChecked('q98'), motivation: get('q99'), inner_life_notes: get('q100'),
+    score: computeTotal()
+  };
+}
+
+function submitProfile(payload) {
+  // Stub — swap for: fetch('/api/therapist-profile', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+  console.log('[Credify] therapist profile payload:', JSON.stringify(payload, null, 2));
+}
+
+function api(method, path, body) {
+  return fetch(path, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+}
+
+// ── MODAL ─────────────────────────────────────────────────────
+function showModal(scores) {
+  const inner = document.getElementById('modalInner');
+  if (adminMode) {
+    const { total, B, C, D, E, G, H, I, J } = scores;
+    const sections = [
+      { label: 'Clinical Specialties', score: B, max: DOMAIN_MAX.B },
+      { label: 'Cultural Competence',  score: C, max: DOMAIN_MAX.C },
+      { label: 'Lived Experience',     score: D, max: DOMAIN_MAX.D },
+      { label: 'Therapeutic Style',    score: E, max: DOMAIN_MAX.E },
+      { label: 'Self-Assessment',      score: G, max: DOMAIN_MAX.G },
+      { label: 'Mirror Effect',        score: H, max: DOMAIN_MAX.H },
+      { label: 'Outcomes & Accountability', score: I, max: DOMAIN_MAX.I },
+      { label: 'Inner Life',           score: J, max: DOMAIN_MAX.J }
+    ];
+    inner.innerHTML = `
+      <div class="modal-score-header">
+        <div class="modal-admin-tag">⚙ Admin View — Score Data</div>
+        <div class="modal-score-lbl">Therapist Match Score</div>
+        <div class="modal-score-val">${total.toFixed(2)}</div>
+        <div class="modal-score-name">${tierLabel(total)}</div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section-scores">
+          ${sections.map(s => {
+            const pct = (s.score / s.max) * 100;
+            return `<div class="mss-row">
+              <div class="mss-label">${s.label}</div>
+              <div class="mss-track"><div class="mss-fill" style="width:${pct}%"></div></div>
+              <div class="mss-val">${s.score.toFixed(2)}/${s.max}</div>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="modal-actions">
+          <button class="btn-export" id="btnExport">Export JSON</button>
+          <button class="btn-close" id="btnClose">Close</button>
+        </div>
+      </div>`;
+  } else {
+    inner.innerHTML = `
+      <div class="modal-confirm-header">
+        <div class="modal-confirm-icon">✓</div>
+        <div class="modal-confirm-title">Profile Submitted</div>
+        <div class="modal-confirm-sub">Thank you — your profile has been received. A Credify team member will follow up with next steps.</div>
+      </div>
+      <div class="modal-body" style="text-align:center">
+        <div class="modal-actions" style="justify-content:center;margin-top:0">
+          <button class="btn-close" id="btnClose">Done</button>
+        </div>
+      </div>`;
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('btnClose').addEventListener('click', closeModal);
+  const btnExp = document.getElementById('btnExport');
+  if (btnExp) btnExp.addEventListener('click', () => exportJSON(collectProfile()));
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function exportJSON(payload) {
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'therapist-profile.json';
+  a.click();
+}
+
+// ── ADMIN MODE ────────────────────────────────────────────────
+function enableAdmin() {
+  adminMode = true;
+  document.body.classList.add('admin-mode');
+  document.getElementById('btnAdminToggle').classList.add('active');
+  document.getElementById('btnAdminToggle').textContent = '⚙ Admin ON';
+  updateScorePanel();
+}
+function disableAdmin() {
+  adminMode = false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('btnAdminToggle').classList.remove('active');
+  document.getElementById('btnAdminToggle').textContent = '⚙ Admin';
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initCustomDropdowns();
+  initMultiCheck();
+
+  // input listeners
+  document.querySelectorAll('select, input[type="number"], input[type="text"], textarea').forEach(el => {
+    el.addEventListener('change', updateAll);
+    el.addEventListener('input', updateAll);
+  });
+  document.querySelectorAll('input[type="radio"]').forEach(el => {
+    el.addEventListener('change', updateAll);
+  });
+
+  // pagination — prev/next on each page
+  document.querySelectorAll('.btn-prev').forEach(btn => {
+    btn.addEventListener('click', () => { if (currentPage > 0) showPage(currentPage - 1); });
+  });
+  document.querySelectorAll('.btn-next').forEach(btn => {
+    if (btn.id === 'btnSubmit') return; // handled separately
+    btn.addEventListener('click', () => { if (currentPage < PAGE_COUNT - 1) showPage(currentPage + 1); });
+  });
+
+  // dot navigation
+  document.querySelectorAll('.page-dot').forEach(dot => {
+    dot.addEventListener('click', () => showPage(parseInt(dot.dataset.page, 10)));
+  });
+
+  // submit (last page Next button)
+  document.getElementById('btnSubmit').addEventListener('click', () => {
+    const payload = collectProfile();
+    submitProfile(payload);
+    showModal(payload.score);
+  });
+
+  // admin toggle
+  document.getElementById('btnAdminToggle').addEventListener('click', () => {
+    if (adminMode) { disableAdmin(); return; }
+    document.getElementById('pwOverlay').classList.add('open');
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwErr').textContent = '';
+    requestAnimationFrame(() => document.getElementById('pwInput').focus());
+  });
+
+  // password modal
+  document.getElementById('pwCancel').addEventListener('click', () => {
+    document.getElementById('pwOverlay').classList.remove('open');
+  });
+  document.getElementById('pwSubmit').addEventListener('click', () => {
+    if (document.getElementById('pwInput').value === ADMIN_PASSWORD) {
+      document.getElementById('pwOverlay').classList.remove('open');
+      enableAdmin();
+    } else {
+      document.getElementById('pwErr').textContent = 'Incorrect password.';
+      document.getElementById('pwInput').focus();
+    }
+  });
+  document.getElementById('pwInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('pwSubmit').click();
+  });
+
+  // close modal on overlay click
+  document.getElementById('modalOverlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+
+  updateAll();
+});
+</script>
+</body>
+</html>

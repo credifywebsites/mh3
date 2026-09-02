@@ -1,0 +1,431 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.phoneBar {
+  background: var(--brand800);
+  color: white;
+  font-size: 12px;
+  padding: 7px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.phoneBar a {
+  color: white;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.nav {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  border-bottom: 1px solid #e5ede9;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(8px);
+  font-family: var(--sans);
+}
+
+/* Taller nav only when a custom brand logo image is present */
+.navWithLogo {
+  height: 120px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.logoMark {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+/* Custom brand logo image (SVG 680×240 — keepyourehr only) */
+.logoImage {
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navLink {
+  color: var(--ink3);
+  font-size: 13.5px;
+  transition: color var(--t);
+}
+
+.navLink:hover {
+  color: var(--ink);
+}
+
+.navLink.active {
+  color: var(--brand600);
+  font-weight: 600;
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdownChevron {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--t);
+}
+
+.dropdown:hover .dropdownChevron {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 260;
+  min-width: 260px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: white;
+  box-shadow: 0 16px 38px rgba(10, 61, 43, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity var(--t),
+    visibility var(--t),
+    transform var(--t);
+  border-radius: 4px;
+}
+
+.dropdownMenu::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  right: 0;
+  left: 0;
+  height: 18px;
+}
+
+.dropdownOpen .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 0;
+  color: var(--ink3);
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background var(--t),
+    color var(--t);
+}
+
+.dropdownItem:hover,
+.dropdownItemActive {
+  background: var(--brand50);
+  color: var(--brand700);
+}
+
+/* Stacked variant: a bold label with a one-line summary underneath, used by the
+   Solutions dropdown. Items without a description keep the single-line style,
+   so the label span inherits and these rules stay scoped to the variant. */
+.dropdownItemStacked {
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 13px 22px;
+}
+
+.dropdownItemStacked .dropdownItemLabel {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dropdownItemStacked .dropdownItemDesc {
+  color: var(--ink3);
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.dropdownItemStacked:hover .dropdownItemLabel,
+.dropdownItemActive.dropdownItemStacked .dropdownItemLabel {
+  color: var(--brand700);
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navDemo {
+  color: var(--ink3);
+  font-size: 13px;
+  font-weight: 500;
+  transition: color var(--t);
+}
+
+.navDemo:hover {
+  color: var(--ink);
+}
+
+.navCta {
+  border-radius: 8px;
+  background: var(--brand600);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  transition: background var(--t), transform var(--t);
+}
+
+.navCta:hover {
+  background: var(--brand700);
+  transform: translateY(-1px);
+}
+
+.navSignIn {
+  border-radius: 8px;
+  background: var(--brand600);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  transition: background var(--t), transform var(--t);
+}
+
+.navSignIn:hover {
+  background: var(--brand700);
+  transform: translateY(-1px);
+}
+
+.mobileMenuBtn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 300;
+}
+
+.mobileMenuBtn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: all 0.22s ease;
+}
+
+.mobileMenuBtnOpen span:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobileMenuBtnOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuBtnOpen span:last-child {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobileNav {
+  position: fixed;
+  top: calc(70px + 25px);
+  right: 0;
+  left: 0;
+  z-index: 199;
+  display: none;
+  max-height: calc(100vh - 95px);
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mobileNavOpen {
+  display: flex;
+}
+
+.mobileNavGroup {
+  border-bottom: 1px solid var(--border);
+}
+
+.mobileNavLink {
+  display: block;
+  padding: 12px 8px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.mobileNavLink:hover,
+.mobileActive {
+  color: var(--brand600);
+}
+
+.mobileNavToggle {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileChevron {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.mobileChevronRotated {
+  transform: rotate(180deg);
+}
+
+.mobileSubNav {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0 10px 14px;
+}
+
+.mobileSubNavOpen {
+  display: flex;
+}
+
+.mobileSubNavLink {
+  display: block;
+  padding: 8px 8px;
+  color: var(--ink3);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.mobileSubNavLink:hover {
+  color: var(--brand600);
+}
+
+.navSignInMobile {
+  display: block;
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: var(--brand600);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.navCtaMobile {
+  display: block;
+  margin-top: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: var(--brand600);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .logoImage {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .phoneBar {
+    padding: 7px 20px;
+    font-size: 11px;
+  }
+
+  .nav {
+    height: 70px;
+    padding: 0 20px;
+  }
+
+  /* Reset the taller nav on mobile — hamburger menu takes over */
+  .navWithLogo {
+    height: 70px;
+  }
+
+  .logo {
+    font-size: 19px;
+  }
+
+  .logoMark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .logoImage {
+    width: 160px;
+  }
+
+  .navLinks,
+  .navDemo,
+  .navCta {
+    display: none;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileNavOpen {
+    display: none;
+  }
+}

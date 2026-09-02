@@ -1,0 +1,144 @@
+.container {
+  width: 100%;
+  background: #fdfdfd;
+  color: #0d1f18;
+  padding: 120px 24px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: rgba(34, 168, 126, 0.1);
+  color: #1a8a66;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #0a3d2b;
+  margin: 0 0 16px;
+}
+
+.lastUpdated {
+  font-size: 14px;
+  color: #527060;
+  font-weight: 500;
+}
+
+.section {
+  margin-bottom: 48px;
+}
+
+.section h2 {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #0a3d2b;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.sectionNum {
+  font-size: 18px;
+  color: #1a8a66;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.section p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2a4038;
+  margin-bottom: 16px;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.section li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2a4038;
+}
+
+.section li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a8a66;
+}
+
+.notice {
+  background: #f4f7f5;
+  border: 1px solid #dde8e3;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 40px 0;
+}
+
+.notice p {
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.notice p:last-child {
+  margin-bottom: 0;
+}
+
+.contactInfo {
+  background: white;
+  border: 1px solid #dde8e3;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.contactInfo p {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contactInfo strong {
+  color: #0a3d2b;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 80px 20px;
+  }
+  .title {
+    font-size: 3.5rem;
+  }
+}

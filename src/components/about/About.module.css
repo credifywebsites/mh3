@@ -1,0 +1,719 @@
+.aboutPage {
+  --brand800: #0a3d2b;
+  --brand700: #0f5540;
+  --brand600: #1a8a66;
+  --brand500: #22a87e;
+  --brand400: #3dbd94;
+  --brand200: #a8e6cf;
+  --brand100: #d4f4e8;
+  --brand50: #edfaf4;
+  --ink: #0d1f18;
+  --ink2: #2a4038;
+  --ink3: #527060;
+  --ink4: #8aaa9a;
+  --smoke: #f4f7f5;
+  --border: #dde8e3;
+  --white: #ffffff;
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  --sans: var(--font-sora), system-ui, sans-serif;
+  --t: 0.18s ease;
+}
+
+/* --- UTILS --- */
+.sectionTag {
+  display: inline-block;
+  background: var(--brand50);
+  color: var(--brand700);
+  border: 1px solid var(--brand100);
+  padding: 4px 13px;
+  border-radius: 100px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.sectionH2 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.sectionH2 em {
+  color: var(--brand600);
+  font-style: italic;
+}
+
+.sectionSub {
+  font-size: 15px;
+  color: var(--ink3);
+  line-height: 1.65;
+  max-width: 600px;
+}
+
+/* --- HERO --- */
+.hero {
+  background: var(--brand800);
+  padding: 80px 48px 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(61,189,148,0.16) 0%, transparent 60%);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--brand400);
+  padding: 5px 13px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 54px;
+  font-weight: 400;
+  color: white;
+  line-height: 1.08;
+  margin-bottom: 20px;
+}
+
+.hero h1 em {
+  color: var(--brand400);
+  font-style: italic;
+}
+
+.heroSubText {
+  font-size: 16px;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 44px;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.heroStat {
+  background: rgba(255,255,255,0.04);
+  padding: 24px 20px;
+}
+
+.heroStatNum {
+  font-family: var(--serif);
+  font-size: 36px;
+  color: var(--brand400);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.heroStatDesc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.5;
+}
+
+/* --- TEAM --- */
+.team {
+  padding: 88px 48px;
+  background: var(--white);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.teamCard {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color var(--t), transform var(--t);
+  display: flex;
+  flex-direction: column;
+}
+
+.teamCard:hover {
+  border-color: var(--brand400);
+  transform: translateY(-3px);
+}
+
+.teamCardTop {
+  background: var(--brand800);
+  padding: 28px 24px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.teamCardTop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(61,189,148,0.12) 0%, transparent 60%);
+}
+
+.teamAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgba(61,189,148,0.35);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: rgba(10,30,22,0.6);
+}
+
+.teamCardNameWrap {
+  position: relative;
+  z-index: 1;
+}
+
+.teamCardName {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.teamCardRole {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand400);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.teamCardBody {
+  padding: 22px 24px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.teamCardBio {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.bioPreview {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bioFull {
+  display: block;
+}
+
+.readMoreBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--brand600);
+  font-family: var(--sans);
+  padding: 0;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color var(--t);
+}
+
+.readMoreBtn:hover {
+  color: var(--brand700);
+}
+
+.readMoreBtn svg {
+  transition: transform var(--t);
+}
+
+.expanded .readMoreBtn svg {
+  transform: rotate(180deg);
+}
+
+.teamCardAccomplishments {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: auto;
+}
+
+.teamCardAccLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 8px;
+}
+
+.teamCardAccText {
+  font-size: 12.5px;
+  color: var(--ink3);
+  line-height: 1.65;
+}
+
+.accPreview {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.accFull {
+  display: block;
+}
+
+/* Team cards now use unified header colors */
+
+/* --- WHO WE SERVE --- */
+.serve {
+  background: var(--smoke);
+  padding: 72px 48px;
+}
+
+.serveGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 44px;
+}
+
+.serveCard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 26px;
+}
+
+.serveCardDo {
+  border-top: 3px solid var(--brand500);
+}
+
+.serveCardDont {
+  border-top: 3px solid var(--ink4);
+}
+
+.serveCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.serveCardIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.serveCardIconGreen {
+  background: var(--brand50);
+  border: 1px solid var(--brand100);
+}
+
+.serveCardIconGray {
+  background: var(--smoke);
+  border: 1px solid var(--border);
+}
+
+.serveCardTitle {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.serveCardTitleGreen {
+  color: var(--brand700);
+}
+
+.serveCardTitleGray {
+  color: var(--ink3);
+}
+
+.serveItems {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.serveItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.serveDotGreen {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.serveDotGray {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--smoke);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px;
+  color: var(--ink4);
+  font-weight: 700;
+}
+
+/* --- INDIA OFFICE --- */
+.india {
+  background: var(--brand800);
+  padding: 72px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.india::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(61,189,148,0.14) 0%, transparent 55%);
+}
+
+.indiaInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.india .sectionTag {
+  background: rgba(61,189,148,0.15);
+  color: var(--brand400);
+  border-color: rgba(61,189,148,0.25);
+}
+
+.india .sectionH2 {
+  color: white;
+}
+
+.indiaSub {
+  color: rgba(255,255,255,0.52);
+  margin-bottom: 28px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.indiaStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.indiaStat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.indiaStatNum {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--brand400);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.indiaStatDesc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.5;
+}
+
+.indiaFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.indiaFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.indiaFeatureIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(61,189,148,0.12);
+  border: 1px solid rgba(61,189,148,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.indiaFeatureTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.indiaFeatureDesc {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.5;
+}
+
+/* --- FAQ --- */
+.faq {
+  padding: 88px 48px;
+  background: var(--smoke);
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 44px;
+}
+
+.faqItem {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 22px;
+}
+
+.faqQ {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 9px;
+}
+
+.faqA {
+  font-size: 13.5px;
+  color: var(--ink3);
+  line-height: 1.65;
+}
+
+.faqA strong {
+  color: var(--ink2);
+  font-weight: 600;
+}
+
+/* --- FINAL CTA --- */
+.finalCta {
+  background: var(--brand700);
+  padding: 88px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.finalCta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(61,189,148,0.2) 0%, transparent 60%);
+}
+
+.finalCtaTag {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  padding: 4px 13px;
+  border-radius: 100px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.finalCta h2 {
+  font-family: var(--serif);
+  font-size: 44px;
+  color: white;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.finalCta p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.65;
+  position: relative;
+}
+
+.finalBtns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.btnWhite {
+  background: white;
+  color: var(--brand700);
+  padding: 13px 28px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform var(--t), box-shadow var(--t);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnWhite:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+.btnGhost {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  padding: 13px 28px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: border-color var(--t);
+}
+
+.btnGhost:hover {
+  border-color: rgba(255,255,255,0.75);
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+  .hero {
+    padding: 48px 20px 56px;
+  }
+  .hero h1 {
+    font-size: 34px;
+  }
+  .heroStats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .team {
+    padding: 56px 20px;
+  }
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+  .serve {
+    padding: 56px 20px;
+  }
+  .serveGrid {
+    grid-template-columns: 1fr;
+  }
+  .india {
+    padding: 56px 20px;
+  }
+  .indiaInner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .indiaStats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .faq {
+    padding: 56px 20px;
+  }
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+  .finalCta {
+    padding: 56px 20px;
+  }
+  .finalCta h2 {
+    font-size: 30px;
+  }
+  .finalBtns {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sectionH2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+  .heroStats {
+    grid-template-columns: 1fr;
+  }
+  .indiaStats {
+    grid-template-columns: 1fr;
+  }
+  .sectionH2 {
+    font-size: 24px;
+  }
+}
