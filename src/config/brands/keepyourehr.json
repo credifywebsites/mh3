@@ -27,8 +27,8 @@
   ],
   "iconPath": "/images/icon.png",
   "logoPath": "",
-  "navLogoPath": "/images/keepyourehr/logo/logo-navbar.svg",
-  "footerLogoPath": "/images/keepyourehr/logo/logo-footer.svg",
+  "navLogoPath": "/images/credify/logo/logo-navbar.svg",
+  "footerLogoPath": "/images/credify/logo/logo-footer.svg",
   "navLinks": [
     {
       "label": "Home",
