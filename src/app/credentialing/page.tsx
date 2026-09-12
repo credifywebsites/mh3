@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CredentialingOffer79 } from "@/components/solutions/CredentialingOffer79";
+import { Credentialing } from "@/components/solutions/Credentialing";
 
 export const metadata: Metadata = {
   title: "Credentialing at $79 per application, 48 hours only | Credify",
@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function CredentialingPage() {
-  return <CredentialingOffer79 />;
+  return <Credentialing />;
 }

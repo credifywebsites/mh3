@@ -1,4 +1,4 @@
-import { CredentialingPricing } from "@/components/pricing/CredentialingPricing";
+import { CredentialingOffer79 } from "@/components/solutions/CredentialingOffer79";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function CredentialingPricingPage() {
   return (
     <main>
-      <CredentialingPricing />
+      <CredentialingOffer79 />
     </main>
   );
 }
