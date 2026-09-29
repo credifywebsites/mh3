@@ -119,7 +119,13 @@
       "activePaths": ["/collective"]
     },
     { "label": "About", "href": "/about", "activePaths": ["/about"] },
-    { "label": "Contact", "href": "/contact", "activePaths": ["/contact"] }
+    { "label": "Contact", "href": "/contact", "activePaths": ["/contact"] },
+    {
+      "label": "BetterMind",
+      "href": "https://www.bettermindmh.com",
+      "activePaths": [],
+      "target": "_blank"
+    }
   ],
   "footerColumns": [
     {
@@ -131,6 +137,12 @@
         {
           "label": "Contact",
           "href": "/contact#contact-form",
+          "target": "_blank",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "label": "BetterMind",
+          "href": "https://www.bettermindmh.com",
           "target": "_blank",
           "rel": "noopener noreferrer"
         }
