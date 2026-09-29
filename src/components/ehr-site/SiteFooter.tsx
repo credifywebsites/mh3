@@ -10,6 +10,7 @@ const companyLinks = [
   { label: "Pricing", href: "/pricing" },
   { label: "The Collective", href: "/collective" },
   { label: "Contact", href: "/contact" },
+  { label: "BetterMind", href: "https://www.bettermindmh.com", target: "_blank" },
 ];
 
 const legalLinks = [
@@ -43,7 +44,12 @@ export function SiteFooter() {
           <div>
             <h4>Company</h4>
             {companyLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
+              <Link
+                key={link.href}
+                href={link.href}
+                target={link.target}
+                rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+              >
                 {link.label}
               </Link>
             ))}

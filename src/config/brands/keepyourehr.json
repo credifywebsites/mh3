@@ -149,6 +149,12 @@
       "activePaths": [
         "/contact"
       ]
+    },
+    {
+      "label": "BetterMind",
+      "href": "https://www.bettermindmh.com",
+      "activePaths": [],
+      "target": "_blank"
     }
   ],
   "footerColumns": [
@@ -170,6 +176,12 @@
         {
           "label": "Contact",
           "href": "/contact#contact-form",
+          "rel": "noopener noreferrer"
+        },
+        {
+          "label": "BetterMind",
+          "href": "https://www.bettermindmh.com",
+          "target": "_blank",
           "rel": "noopener noreferrer"
         }
       ]

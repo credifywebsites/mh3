@@ -63,12 +63,16 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 28px;
+  justify-content: center;
+  gap: clamp(16px, 1.35vw, 28px);
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .navLink {
   color: var(--ink3);
   font-size: 13.5px;
+  white-space: nowrap;
   transition: color var(--t);
 }
 
@@ -194,6 +198,38 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1600px) and (min-width: 769px) {
+  .nav {
+    padding-right: 28px;
+    padding-left: 28px;
+    gap: 18px;
+  }
+
+  .logoImage {
+    width: 230px;
+  }
+
+  .navLinks {
+    gap: 14px;
+  }
+
+  .navLink {
+    font-size: 12px;
+  }
+
+  .navRight {
+    gap: 8px;
+  }
+
+  .navSignIn,
+  .navCta {
+    padding-right: 14px;
+    padding-left: 14px;
+    font-size: 12px;
+  }
 }
 
 .navDemo {
