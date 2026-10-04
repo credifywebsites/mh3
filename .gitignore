@@ -42,3 +42,5 @@ next-env.d.ts
 
 # brand config
 brands/site.json
+
+.claude*
