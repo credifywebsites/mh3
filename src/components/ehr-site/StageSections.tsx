@@ -70,6 +70,7 @@ export function StageSections() {
                         src={src}
                         alt={alt}
                         fill
+                        unoptimized
                         sizes="(max-width: 900px) 100vw, 1170px"
                       />
                     </div>

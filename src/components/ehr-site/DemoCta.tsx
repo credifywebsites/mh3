@@ -26,9 +26,9 @@ export function DemoCta() {
         <p className={c("tel")} style={{ marginTop: "18px" }}>
           {/* Brands with one shared inbox (Keep Your EHR) get one mention, not
               the same address printed twice. */}
-          {brand.salesEmail === brand.supportEmail
+          {/* {brand.salesEmail === brand.supportEmail
             ? `${brand.salesEmail} for sales and support`
-            : `${brand.salesEmail} for sales, ${brand.supportEmail} for support`}
+            : `${brand.salesEmail} for sales, ${brand.supportEmail} for support`} */}
         </p>
       </div>
     </section>

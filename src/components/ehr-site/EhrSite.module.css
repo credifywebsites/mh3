@@ -509,7 +509,7 @@
 .cf-site .mi-chip.mi-chip--focus{background:var(--mint);border-color:var(--green-500);color:var(--green-500);box-shadow:0 0 0 3px rgba(26,138,102,.18);transform:none}
 /* Floating jump-to-section control. */
 .cf-site .modindex{scroll-margin-top:calc(var(--cf-nav-h) + 18px)}
-.cf-site .cf-jump{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+.cf-site .cf-jump{position:fixed;right:12px;bottom:88px;z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
 .cf-site .cf-jump.cf-jump--show{opacity:1;visibility:visible;transform:none}
 .cf-site .cf-jump-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13.5px;font-weight:600;color:#fff;background:var(--green-500);border:1px solid var(--green-500);border-radius:12px;padding:11px 15px;cursor:pointer;box-shadow:var(--shadow-lift);transition:background .14s ease,transform .14s ease}
 .cf-site .cf-jump-btn:hover{background:var(--green-700);transform:translateY(-1px)}
@@ -530,7 +530,7 @@
   .cf-site .cf-jump-jiggle{animation:none}
 }
 @media (max-width:640px){
-  .cf-site .cf-jump{right:14px;bottom:14px}
+  .cf-site .cf-jump{right:15px;bottom:80px}
   .cf-site .cf-jump-menu{min-width:0;width:58vw;max-width:240px}
   .cf-site .cf-jump-btn .cf-jump-btn-txt{display:none}
   .cf-site .cf-jump-btn{padding:12px;border-radius:12px}
