@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { Lightbox, type Zoomed } from "./Lightbox";
 import { brand } from "./brand";
 import { c } from "./cx";
+import { SampleWebsitesButton, SampleWebsitesCards } from "./SampleWebsites";
 import { stages } from "./solutionsData";
 
 function ZoomCue() {
@@ -29,6 +30,15 @@ function ZoomCue() {
 export function StageSections() {
   const [zoomed, setZoomed] = useState<Zoomed | null>(null);
   const closeZoom = useCallback(() => setZoomed(null), []);
+  const [samplesOpen, setSamplesOpen] = useState(false);
+  const toggleSamples = useCallback(() => {
+    if (!samplesOpen) {
+      requestAnimationFrame(() =>
+        document.getElementById("sample-websites")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      );
+    }
+    setSamplesOpen(!samplesOpen);
+  }, [samplesOpen]);
 
   return (
     <>
@@ -59,6 +69,7 @@ export function StageSections() {
                       <a className={c("mod-link")} href="#demo">
                         See it in a demo &rarr;
                       </a>
+                      {module.id === "website" && <SampleWebsitesButton open={samplesOpen} onToggle={toggleSamples} />}
                       {module.illus && <p className={c("illus")}>{module.illus}</p>}
                     </div>
                     <div
@@ -75,6 +86,7 @@ export function StageSections() {
                       />
                     </div>
                     <ZoomCue />
+                    {module.id === "website" && <SampleWebsitesCards open={samplesOpen} />}
                   </article>
                 );
               })}

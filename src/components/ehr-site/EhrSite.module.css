@@ -535,3 +535,24 @@
   .cf-site .cf-jump-btn .cf-jump-btn-txt{display:none}
   .cf-site .cf-jump-btn{padding:12px;border-radius:12px}
 }
+
+/* Sample websites button + cards (Website and lead gen module). */
+.cf-site .sample-btn{margin-top:4px;margin-left:14px;padding:9px 18px;font-size:13.5px}
+.cf-site .samples{grid-column:1/-1;margin-top:26px;scroll-margin-top:92px}
+.cf-site .samples-track{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cf-site .sample{display:flex;flex-direction:column;gap:4px;padding:14px 14px 18px;border:1px solid var(--border);
+  border-radius:var(--r);background:var(--white);transition:transform .2s,box-shadow .2s,border-color .2s}
+.cf-site .sample:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);border-color:var(--green-300)}
+.cf-site .sample-frame{display:block;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;background:var(--mint)}
+.cf-site .sample-bar{display:flex;gap:5px;padding:7px 9px;background:var(--white);border-bottom:1px solid var(--border)}
+.cf-site .sample-bar i{width:7px;height:7px;border-radius:50%;background:var(--border)}
+.cf-site .sample-frame img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform .4s}
+.cf-site .sample:hover .sample-frame img{transform:scale(1.03)}
+.cf-site .sample strong,.cf-site .sample-url,.cf-site .sample-visit{padding:0 4px}
+.cf-site .sample strong{font-size:17px;font-weight:600}
+.cf-site .sample-url{font-size:13px;color:var(--muted)}
+.cf-site .sample-visit{margin-top:12px;font-size:13.5px;font-weight:600;color:var(--green-500)}
+@media(max-width:1000px){ .cf-site .samples-track{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:600px){ .cf-site .sample-btn{margin-left:0;margin-top:12px;display:flex} .cf-site .samples-track{grid-template-columns:1fr} }
+.cf-site .samples{animation:samples-in .35s ease-out}
+@keyframes samples-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
