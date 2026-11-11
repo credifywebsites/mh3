@@ -75,6 +75,8 @@ export type SiteConfig = {
   googleTagId: string;
   adrollAdvId: string;
   adrollPixId: string;
+  /** RB2B visitor identification key; the tag is skipped when absent. */
+  reb2bKey?: string;
   zohoWidgetCode: string;
 };
 
