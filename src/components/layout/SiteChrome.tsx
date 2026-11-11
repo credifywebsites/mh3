@@ -119,6 +119,17 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           />
         </>
       )}
+      {/* RB2B visitor identification */}
+      {/* Not id="reb2b": an element id becomes window.reb2b, which the snippet reads as "already loaded". */}
+      {siteConfig.reb2bKey && (
+        <Script
+          id="reb2b-tag"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("${siteConfig.reb2bKey}");`,
+          }}
+        />
+      )}
       {/* AdRoll Tag */}
       {siteConfig.adrollAdvId && siteConfig.adrollPixId && (
         <Script
