@@ -18,7 +18,7 @@ export function PricingModels() {
           <div className={styles.modelName}>Percentage<br />of Collections</div>
           <div className={styles.modelOneLiner}>You grow, we earn — tied directly to what we collect</div>
           <div className={styles.modelPriceBox}>
-            <div className={styles.modelPriceVal}>3.49% – 3.99%</div>
+            <div className={styles.modelPriceVal}>4.99%</div>
             <div className={styles.modelPriceDesc}>of net collections · eligibility + credentialing included</div>
           </div>
           <p className={styles.modelDesc}>Our fee is a percentage of the revenue we recover for you. If collections don&apos;t improve, our effective fee goes down. Zero collections growth means zero fee growth.</p>

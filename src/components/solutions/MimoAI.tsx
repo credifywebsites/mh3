@@ -21,7 +21,7 @@ export function MimoAI() {
               Documentation that <em>writes itself.</em> Notes that pass.
             </h1>
             <p className={styles.heroSub}>
-              Mimo's Agentic AI turns your clinical sessions into audit-ready progress notes — with automated Medicare, Medicaid, and commercial payer compliance built in.
+              Mimo's Agentic AI turns your clinical sessions into audit-ready progress notes — with automated Medicare, Medicaid, and commercial payor compliance built in.
             </p>
             <div className={styles.heroActions}>
               <Link href="https://mimonote.com/contact" className={styles.btnPrimary} target="_blank" rel="noopener noreferrer">Start 15-day free trial</Link>
@@ -98,7 +98,7 @@ export function MimoAI() {
           {/* Card 3: compliance */}
           <div className={styles.dashCard}>
             <div className={styles.dashHeader}>
-              <span className={styles.dashTitle}>Payer Compliance</span>
+              <span className={styles.dashTitle}>Payor Compliance</span>
               <span className={styles.dashPill}>3 of 4 passed</span>
             </div>
             <div className={styles.payerMiniRow}>
@@ -120,9 +120,9 @@ export function MimoAI() {
           <div className={styles.statsGrid}>
             {[
               { val: "70%", lbl: "Less time spent on documentation per session" },
-              { val: "98%", lbl: "First-pass payer approval rate across all claims" },
+              { val: "98%", lbl: "First-pass payor approval rate across all claims" },
               { val: "4.8★", lbl: "Average rating from 500+ behavioral health clinicians" },
-              { val: "60+", lbl: "Commercial and government payers supported" }
+              { val: "60+", lbl: "Commercial and government payors supported" }
             ].map((stat, i) => (
               <div className={styles.statCol} key={i}>
                 <div className={styles.statNum}>{stat.val}</div>
@@ -144,7 +144,7 @@ export function MimoAI() {
               </div>
               <div className={styles.payerTable}>
                 <div className={styles.payerTableHead}>
-                  <span>Payer</span><span>Type</span><span>Status</span>
+                  <span>Payor</span><span>Type</span><span>Status</span>
                 </div>
                 {[
                   { name: "Medicare", type: "Federal", status: "Passed", cls: styles.badgeOk },
@@ -167,12 +167,12 @@ export function MimoAI() {
 
             <div className={styles.splitContent}>
               <div className={styles.sectionLabel}><span className={`${styles.pill} ${styles.pillGreen}`}>Compliance engine</span></div>
-              <h2 className={styles.sectionHeading}>Payer rules run before you ever sign</h2>
-              <p className={styles.sectionSub}>Mimo maintains a live database of documentation requirements across Medicare, Medicaid, and 60+ commercial payers — updated continuously as policies change.</p>
+              <h2 className={styles.sectionHeading}>Payor rules run before you ever sign</h2>
+              <p className={styles.sectionSub}>Mimo maintains a live database of documentation requirements across Medicare, Medicaid, and 60+ commercial payors — updated continuously as policies change.</p>
               <ul className={styles.checkList}>
                 <li>Automated LCD/NCD criteria matching for Medicare</li>
                 <li>State-level Medicaid rule sets across all 50 states</li>
-                <li>Commercial payer templates for BCBS, Aetna, UHC, Cigna and more</li>
+                <li>Commercial payor templates for BCBS, Aetna, UHC, Cigna and more</li>
                 <li>Claim denial risk scoring with remediation guidance</li>
                 <li>Audit trail separating AI edits from clinician edits</li>
               </ul>
@@ -250,7 +250,7 @@ export function MimoAI() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
               </div>
               <h3>Compliance check & sign</h3>
-              <p>Payer rules run automatically. Gaps are flagged with exact remediation guidance. Review and push.</p>
+              <p>Payor rules run automatically. Gaps are flagged with exact remediation guidance. Review and push.</p>
               <div className={styles.hiwPreviewBox}>
                 {[
                   { lbl: "Medicare — criteria met", icon: "ok" },
@@ -338,13 +338,13 @@ export function MimoAI() {
         </div>
       </section>
 
-      {/* PAYER COVERAGE */}
+      {/* PAYOR COVERAGE */}
       <section className={styles.payers}>
         <div className={styles.container}>
           <div className={styles.payersHeader}>
-            <span className={`${styles.pill} ${styles.pillWhite}`}>Payer coverage</span>
-            <h2 className={styles.sectionHeading}>Every major payer. Every state.</h2>
-            <p className={styles.sectionSub}>Real-time rule checking for Medicare, Medicaid, and 60+ commercial payers — updated as policies change.</p>
+            <span className={`${styles.pill} ${styles.pillWhite}`}>Payor coverage</span>
+            <h2 className={styles.sectionHeading}>Every major payor. Every state.</h2>
+            <p className={styles.sectionSub}>Real-time rule checking for Medicare, Medicaid, and 60+ commercial payors — updated as policies change.</p>
           </div>
 
           <div className={styles.payersGrid}>
@@ -352,13 +352,13 @@ export function MimoAI() {
               { name: "Medicare", type: "Federal — CMS", checks: ["LCD/NCD criteria matching", "Medical necessity language", "Behavioral health CPT codes"], icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
               { name: "Medicaid", type: "State plans — all 50 states", checks: ["State-specific rule sets", "Prior authorization docs", "EPSDT criteria"], icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
               { name: "BCBS", type: "Commercial — all plans", checks: ["Session duration requirements", "Outpatient BH guidelines", "Mental health parity rules"], icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> }
-            ].map((payer, i) => (
+            ].map((payor, i) => (
               <div className={styles.payerCard} key={i}>
-                <div className={styles.payerCardIcon}>{payer.icon}</div>
-                <div className={styles.payerCardName}>{payer.name}</div>
-                <div className={styles.payerCardType}>{payer.type}</div>
+                <div className={styles.payerCardIcon}>{payor.icon}</div>
+                <div className={styles.payerCardName}>{payor.name}</div>
+                <div className={styles.payerCardType}>{payor.type}</div>
                 <div className={styles.payerCardChecks}>
-                  {payer.checks.map((check, j) => (
+                  {payor.checks.map((check, j) => (
                     <div className={styles.pcheck} key={j}><span className={styles.pcheckDot}></span>{check}</div>
                   ))}
                 </div>

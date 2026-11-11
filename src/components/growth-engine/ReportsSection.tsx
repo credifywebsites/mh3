@@ -248,7 +248,7 @@ export function ReportsSection() {
         <div>
           <div className={styles.sectionTag}>Executive Report Suite</div>
           <h2 className={styles.sectionH2}>16 reports built for<br />behavioral health leadership.</h2>
-          <p className={styles.sectionSub}>Built around decisions EDs, CFOs, and clinical directors actually make — filtered by provider, location, payer, or date range.</p>
+          <p className={styles.sectionSub}>Built around decisions EDs, CFOs, and clinical directors actually make — filtered by provider, location, payor, or date range.</p>
         </div>
         <button className={styles.viewLiveBtn} onClick={() => window.open('https://app.powerbi.com/view?r=eyJrIjoiYWRmZmU0OGQtYzE2ZS00NjIzLWI0ODAtMzM0YzJlZmFlYjgyIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9&pageName=1c73891c337a4de00445', '_blank')}>
           <div className={styles.liveDotG}></div>View live sample reports

@@ -49,13 +49,13 @@ export function Credentialing() {
       <section className={styles.hero}>
         <div className={cx(styles.wrap, styles.heroGrid)}>
           <div className={styles.rv}>
-            <span className={cx(styles.pill, styles.onDark)}>Credentialing &amp; Payer Enrollment</span>
+            <span className={cx(styles.pill, styles.onDark)}>Credentialing &amp; Payor Enrollment</span>
             <h1>
               Done right, <em>from start to finish.</em>
             </h1>
             <p className={styles.lead}>
               We manage the entire credentialing lifecycle — initial applications through re-credentialing — so providers
-              enroll faster, stay eligible across every payer, and start billing sooner.
+              enroll faster, stay eligible across every payor, and start billing sooner.
             </p>
             <div className={styles.ctaRow}>
               <Link
@@ -158,7 +158,7 @@ export function Credentialing() {
               <div>
                 <h3>CAQH Setup &amp; Refresh</h3>
                 <p>
-                  We build, maintain, and re-attest CAQH profiles every 120 days so nothing lapses and payers always see
+                  We build, maintain, and re-attest CAQH profiles every 120 days so nothing lapses and payors always see
                   current data.
                 </p>
               </div>
@@ -172,7 +172,7 @@ export function Credentialing() {
                 </svg>
               </div>
               <div>
-                <h3>Payer Enrollment</h3>
+                <h3>Payor Enrollment</h3>
                 <p>
                   Commercial and government enrollments — including Medicaid, Medicare, and their managed care
                   organizations — tracked to approval.
@@ -219,7 +219,7 @@ export function Credentialing() {
               <div>
                 <h3>Problem Resolution</h3>
                 <p>
-                  Missing NPI? Expired license? Payer ghosting you? We actively track down missing info and reach out to
+                  Missing NPI? Expired license? Payor ghosting you? We actively track down missing info and reach out to
                   providers directly.
                 </p>
               </div>
@@ -289,13 +289,13 @@ export function Credentialing() {
             <div className={cx(styles.step, styles.rv)}>
               <div className={styles.n}>STEP 02</div>
               <h3>Build &amp; attest CAQH</h3>
-              <p>Profiles completed, verified through primary sources, and attested so payers never reject on stale data.</p>
+              <p>Profiles completed, verified through primary sources, and attested so payors never reject on stale data.</p>
             </div>
             <div className={cx(styles.step, styles.rv)}>
               <div className={styles.n}>STEP 03</div>
               <h3>Enroll &amp; follow up</h3>
               <p>
-                Submit to every required payer and pursue each application with aggressive follow-up until panels approve.
+                Submit to every required payor and pursue each application with aggressive follow-up until panels approve.
               </p>
             </div>
             <div className={cx(styles.step, styles.rv)}>
@@ -317,7 +317,7 @@ export function Credentialing() {
           <div className={styles.stats}>
             <div className={cx(styles.stat, styles.rv)}>
               <div className={styles.v}>45–90</div>
-              <div className={styles.l}>Days to enroll most payers</div>
+              <div className={styles.l}>Days to enroll most payors</div>
             </div>
             <div className={cx(styles.stat, styles.rv)}>
               <div className={styles.v}>30+</div>
@@ -440,7 +440,7 @@ export function Credentialing() {
             <div className={cx(styles.quote, styles.rv)}>
               <div className={styles.stars}>★★★★★</div>
               <p>
-                &quot;They handle every detail with care. I never have to wonder where we&apos;re at with payer enrollments.
+                &quot;They handle every detail with care. I never have to wonder where we&apos;re at with payor enrollments.
                 They just get it done.&quot;
               </p>
               <div className={styles.who}>
@@ -499,13 +499,13 @@ export function Credentialing() {
                 How long does enrollment take?<span className={styles.x}>+</span>
               </summary>
               <p>
-                It depends on the payer, but most take 45–90 days. Our team works to shorten that window with aggressive
-                payer follow-up at every stage.
+                It depends on the payor, but most take 45–90 days. Our team works to shorten that window with aggressive
+                payor follow-up at every stage.
               </p>
             </details>
             <details className={styles.rv}>
               <summary>
-                Do you handle both commercial and government payers?<span className={styles.x}>+</span>
+                Do you handle both commercial and government payors?<span className={styles.x}>+</span>
               </summary>
               <p>Yes — including Medicaid, Medicare, and their managed care organizations.</p>
             </details>

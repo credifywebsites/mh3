@@ -6,6 +6,7 @@ import Script from "next/script";
 import { ZohoChatTrigger } from "@/components/utils/ZohoChatTrigger";
 import { EHR_SITE_ROUTES, usesEhrSite } from "@/config/ehrSite";
 import siteConfig from "@/config/site";
+import { HomeFooter, usesHomeFooter } from "@/components/credify-home/HomeFooter";
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
@@ -42,7 +43,8 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     return <>{children}</>;
   }
 
-  const ownFooter = hasOwnFooter(pathname);
+  // On Credify the homepage footer is the only footer, on every route.
+  const ownFooter = !usesHomeFooter && hasOwnFooter(pathname);
 
   return (
     <>
@@ -157,7 +159,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       )}
       <Navbar />
       <main>{children}</main>
-      {!ownFooter && <Footer />}
+      {usesHomeFooter ? <HomeFooter /> : !ownFooter && <Footer />}
     </>
   );
 }

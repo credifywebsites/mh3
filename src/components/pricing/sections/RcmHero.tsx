@@ -20,7 +20,7 @@ export function RcmHero() {
 
           <div className={styles.heroPriceCallout}>
             <span className={styles.heroPriceFrom}>From</span>
-            <span className={styles.heroPriceVal}>3.49%</span>
+            <span className={styles.heroPriceVal}>4.99%</span>
             <span className={styles.heroPriceDesc}>of collections — eligibility & credentialing included</span>
           </div>
 
@@ -70,9 +70,9 @@ export function RcmHero() {
             <p className={styles.reportsDesc}>Every plan includes full access to 20 behavioral health executive reports in Power BI. No extra cost, no add-on tier.</p>
             <div className={styles.reportsList}>
               {[
-                "Provider profitability by payer & location",
+                "Provider profitability by payor & location",
                 "No-show rate & revenue impact",
-                "Payer mix & collection rate analysis",
+                "Payor mix & collection rate analysis",
                 "Utilization, off-hours, & staff compensation",
                 "Paid & non-paid referral ROI"
               ].map((item, i) => (

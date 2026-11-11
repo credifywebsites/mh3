@@ -10,7 +10,7 @@ export function CredentialingSection() {
       <div className={styles.credInner}>
         <div className={styles.sectionTag}>Credentialing & Enrollment Pricing</div>
         <h2 className={styles.sectionH2}>Credentialing that actually<br />gets providers enrolled.</h2>
-        <p className={styles.sectionSub}>Per-application pricing with volume discounts. CAQH setup, payer enrollment, and panel management — all handled. Your first provider credentialing is free, no strings attached.</p>
+        <p className={styles.sectionSub}>Per-application pricing with volume discounts. CAQH setup, payor enrollment, and panel management — all handled. Your first provider credentialing is free, no strings attached.</p>
 
         <div className={styles.freeBanner}>
           <span className={styles.freeBannerIcon}>★</span>
@@ -76,9 +76,9 @@ export function CredentialingSection() {
         <div className={styles.credIncludesGrid}>
           {[
             { t: "CAQH Setup & Refresh", d: "Full CAQH profile creation, attestation, and ongoing maintenance." },
-            { t: "Payer Enrollment", d: "Submitted to all relevant payers — commercial, Medicaid, Medicare, and government." },
+            { t: "Payor Enrollment", d: "Submitted to all relevant payors — commercial, Medicaid, Medicare, and government." },
             { t: "Panel Management", d: "Ongoing tracking of panel status and re-credentialing deadlines for every provider." },
-            { t: "Status Tracking", d: "Real-time updates on every application — no chasing payers yourself." },
+            { t: "Status Tracking", d: "Real-time updates on every application — no chasing payors yourself." },
             { t: "BH Specialization Only", d: "We credential behavioral health providers exclusively — faster approvals, fewer errors." },
             { t: "First Provider Free", d: "Zero cost, zero risk. See our work quality before any commitment." }
           ].map((inc, i) => (

@@ -1,6 +1,7 @@
 "use server";
 
 import siteConfig from "@/config/site";
+import { CONTACT_SERVICES } from "@/config/contact-services";
 import nodemailer from "nodemailer";
 
 export async function sendContactEmail(formData: FormData) {
@@ -9,8 +10,13 @@ export async function sendContactEmail(formData: FormData) {
   const business = formData.get("business") as string;
   const email = formData.get("email") as string;
   const phone = formData.get("phone") as string;
-  const service = formData.get("service") as string;
   const message = formData.get("message") as string;
+
+  const services = formData.getAll("service").flatMap((value) => {
+    const match = CONTACT_SERVICES.find((s) => s.value === value);
+    return match ? [match.label] : [];
+  });
+  const service = services.length > 0 ? services.join(", ") : "None selected";
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,

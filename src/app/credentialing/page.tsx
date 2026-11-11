@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Credentialing } from "@/components/solutions/Credentialing";
 
 export const metadata: Metadata = {
-  title: "Credentialing at $79 per application, 48 hours only | Credify",
+  title: "Credentialing at $99 per application | Credify",
   description:
-    "Behavioral health credentialing and payer enrollment at $79 per application for the next 48 hours. CAQH setup, payer enrollment, and panel management, all handled.",
+    "Behavioral health credentialing and payor enrollment at $99 per application on our Volume rate. CAQH setup, payor enrollment, and panel management, all handled.",
   robots: {
     index: false,
     follow: false,

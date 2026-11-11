@@ -75,7 +75,7 @@ export const problemStats = [
   },
   {
     stat: "Outcomes Hidden",
-    body: "Accreditation reporting and payer audits are assembled from spreadsheets — not live systems.",
+    body: "Accreditation reporting and payor audits are assembled from spreadsheets — not live systems.",
   },
 ];
 
@@ -168,8 +168,8 @@ export const stages: PartnerStage[] = [
           },
           {
             n: "02",
-            title: "Learned Payer Patterns",
-            body: "Denial risk scored from your own history with that payer, code, and diagnosis",
+            title: "Learned Payor Patterns",
+            body: "Denial risk scored from your own history with that payor, code, and diagnosis",
           },
           {
             n: "03",
@@ -503,7 +503,7 @@ export const stages: PartnerStage[] = [
           {
             n: "03",
             title: "Audit-Ready",
-            body: "Version history, clinician signoff, and export that satisfies payer review",
+            body: "Version history, clinician signoff, and export that satisfies payor review",
           },
         ],
       },
@@ -528,7 +528,7 @@ export const stages: PartnerStage[] = [
           {
             n: "01",
             title: "Denial Management",
-            body: "Underpayments and rejections surfaced before write-off, with payer and reason code",
+            body: "Underpayments and rejections surfaced before write-off, with payor and reason code",
           },
           {
             n: "02",
@@ -555,12 +555,12 @@ export const stages: PartnerStage[] = [
           {
             n: "01",
             title: "Super Chargemaster",
-            body: "100+ CPT codes with contracted payer rates, modifiers, and locality fee schedules",
+            body: "100+ CPT codes with contracted payor rates, modifiers, and locality fee schedules",
           },
           {
             n: "02",
             title: "Live Claims Board",
-            body: "Real-time payer status, billed amount, and unposted balance per claim",
+            body: "Real-time payor status, billed amount, and unposted balance per claim",
           },
           {
             n: "03",
@@ -609,7 +609,7 @@ export const stages: PartnerStage[] = [
         badge: "6",
         eyebrow: "Stage 6 · Operate",
         title: "Reports",
-        sub: "Reporting that satisfies payers, leadership, and accreditation.",
+        sub: "Reporting that satisfies payors, leadership, and accreditation.",
         slide: 27,
         thumbAlt: "Reports",
         liveSlug: "reports",
@@ -622,7 +622,7 @@ export const stages: PartnerStage[] = [
           {
             n: "02",
             title: "Configurable Templates",
-            body: "Monthly leadership reviews, payer reports, and accreditation docs",
+            body: "Monthly leadership reviews, payor reports, and accreditation docs",
           },
           {
             n: "03",
@@ -654,7 +654,7 @@ export const stages: PartnerStage[] = [
           {
             n: "03",
             title: "Comparative Analysis",
-            body: "Cohort comparison, provider benchmarks, and payer performance",
+            body: "Cohort comparison, provider benchmarks, and payor performance",
           },
         ],
       },
@@ -684,7 +684,7 @@ export const stages: PartnerStage[] = [
         {
           n: "04",
           title: "Cohort Analysis",
-          body: "Compare client groups by diagnosis, payer, provider, or program",
+          body: "Compare client groups by diagnosis, payor, provider, or program",
         },
         {
           n: "05",
@@ -693,8 +693,8 @@ export const stages: PartnerStage[] = [
         },
         {
           n: "06",
-          title: "Payer Comparison",
-          body: "Reimbursement rates, denial patterns, and collection performance by payer",
+          title: "Payor Comparison",
+          body: "Reimbursement rates, denial patterns, and collection performance by payor",
         },
         {
           n: "07",

@@ -13,7 +13,7 @@ export function HowItWorks() {
 
         <div className={styles.hiwSteps}>
           {[
-            { num: "01", title: "Discovery Call", desc: "We audit your current billing, payer mix, and denial patterns to show exactly where revenue is leaking before you commit to anything." },
+            { num: "01", title: "Discovery Call", desc: "We audit your current billing, payor mix, and denial patterns to show exactly where revenue is leaking before you commit to anything." },
             { num: "02", title: "Custom Quote", desc: "Your rate is based on volume, specialty mix, and the services you need. No surprises — your full fee schedule is agreed before we start." },
             { num: "03", title: "Onboarding & BAA", desc: "We connect to your EHR, sign your BAA, complete credentialing setup, and have clean claims submitting within 5–7 business days." },
             { num: "04", title: "Collections Grow", desc: "Daily reporting, proactive denial management, and eligibility verification run continuously. You see results within the first billing cycle." }

@@ -308,8 +308,8 @@ export function NoShowCalculator() {
               <Slider id="days" min={15} max={26} step={1} value={days} onChange={setDays} />
             </div>
 
-            {/* Payer Mix */}
-            <div className={styles.sectionDivider}><span>Payer Mix</span></div>
+            {/* Payor Mix */}
+            <div className={styles.sectionDivider}><span>Payor Mix</span></div>
 
             <div className={styles.field}>
               <label className={styles.label} htmlFor="commercial-pct">
@@ -318,7 +318,7 @@ export function NoShowCalculator() {
               <Slider id="commercial-pct" min={0} max={100} step={5} value={commercialPct} onChange={setCommercialPct} />
             </div>
 
-            {/* Payer mix bar */}
+            {/* Payor mix bar */}
             <div className={styles.payerMixBar}>
               <div
                 className={`${styles.barSegment} ${styles.commercial}`}
@@ -415,7 +415,7 @@ export function NoShowCalculator() {
                 <path d="M12 8h.01"/>
               </svg>
               <div>
-                <strong>How it works:</strong> No-show rates are applied to each payer
+                <strong>How it works:</strong> No-show rates are applied to each payor
                 group separately, so commercial and government sessions are valued at
                 your actual contracted rates. Credify charges <strong>20%</strong> of
                 the recovered revenue — you keep <strong>80%</strong>.
@@ -479,7 +479,7 @@ export function NoShowCalculator() {
               </div>
             </div>
 
-            {/* Payer breakdown */}
+            {/* Payor breakdown */}
             <div className={styles.payerBreakdown}>
               <div className={`${styles.payerCard} ${styles.payerCommercial}`}>
                 <div className={styles.payerCardHead}>

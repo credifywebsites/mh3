@@ -17,7 +17,7 @@ export const reportModalData = [
     catClass: styles["cat-provider"],
     badgeClass: styles["badge-provider"],
     title: "Provider Financial Analysis",
-    desc: "Profitability %, overtime cost, incentives, and collections by commercial vs government payer.",
+    desc: "Profitability %, overtime cost, incentives, and collections by commercial vs government payor.",
     metrics: ["Profitability", "Collections"],
     link: "https://app.powerbi.com/view?r=eyJrIjoiYWRmZmU0OGQtYzE2ZS00NjIzLWI0ODAtMzM0YzJlZmFlYjgyIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9&pageName=ec8241d73701c16dc571"
   },
@@ -47,7 +47,7 @@ export const reportModalData = [
     catClass: styles["cat-location"],
     badgeClass: styles["badge-location"],
     title: "Location Revenue Overview",
-    desc: "Revenue per location ranked by collections, patient vs payer breakdown, total billed vs collected.",
+    desc: "Revenue per location ranked by collections, patient vs payor breakdown, total billed vs collected.",
     metrics: ["Revenue", "Collections"],
     link: "https://app.powerbi.com/view?r=eyJrIjoiYWRmZmU0OGQtYzE2ZS00NjIzLWI0ODAtMzM0YzJlZmFlYjgyIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9&pageName=791de67c8b6e88a22300"
   },
@@ -77,8 +77,8 @@ export const reportModalData = [
     catClass: styles["cat-financial"],
     badgeClass: styles["badge-financial"],
     title: "Payor Mix by Location",
-    desc: "Collections by payer type across all locations — commercial, Medicaid, Medicare, government.",
-    metrics: ["Payer mix", "Collections"],
+    desc: "Collections by payor type across all locations — commercial, Medicaid, Medicare, government.",
+    metrics: ["Payor mix", "Collections"],
     link: "https://app.powerbi.com/view?r=eyJrIjoiYWRmZmU0OGQtYzE2ZS00NjIzLWI0ODAtMzM0YzJlZmFlYjgyIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9&pageName=aa4fd1d47d4781762629"
   },
   {
@@ -147,7 +147,7 @@ export const reportModalData = [
     catClass: styles["cat-financial"],
     badgeClass: styles["badge-financial"],
     title: "Off-Hours Financial Analysis",
-    desc: "Revenue and profit from sessions delivered outside 8-5 business hours by payer.",
+    desc: "Revenue and profit from sessions delivered outside 8-5 business hours by payor.",
     metrics: ["Off-hours", "Profit"],
     link: "https://app.powerbi.com/view?r=eyJrIjoiYWRmZmU0OGQtYzE2ZS00NjIzLWI0ODAtMzM0YzJlZmFlYjgyIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9&pageName=67871d245babe653c556"
   },
@@ -157,7 +157,7 @@ export const reportModalData = [
     catClass: styles["cat-financial"],
     badgeClass: styles["badge-financial"],
     title: "Intern Financial Analysis",
-    desc: "ROI, acquisition cost, cumulative hours, and profit/loss by intern type and payer mix.",
+    desc: "ROI, acquisition cost, cumulative hours, and profit/loss by intern type and payor mix.",
     metrics: ["ROI %", "Costs"],
     link: "https://app.powerbi.com/view?r=eyJrIjoiZWJlZjk2NDgtYTdjZi00ZjczLWEwNzEtMjA4ODVjNDZlMjFkIiwidCI6IjIyNjQ0ZTMwLTA5ZTgtNDg2OC1iZTRjLTFkOGFhOTljOTdkZCIsImMiOjZ9"
   },

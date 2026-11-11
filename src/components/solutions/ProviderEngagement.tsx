@@ -439,7 +439,7 @@ export function ProviderEngagement() {
                   <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>No-show rate</span>
                   <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Treatment plan compliance</span>
                   <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Client retention</span>
-                  <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Payer mix profitability</span>
+                  <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Payor mix profitability</span>
                   <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Cost per session</span>
                   <span className={`${styles.perfOpt} ${styles.perfOptGreen}`}>Documentation timeliness</span>
                 </div>
