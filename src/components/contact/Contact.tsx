@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./Contact.module.css";
 import { sendContactEmail } from "@/app/actions/contact";
 import siteConfig from "@/config/site";
+import { CONTACT_SERVICES } from "@/config/contact-services";
+import { MultiSelect } from "./MultiSelect";
 
 const cx = (...classes: (string | boolean | undefined | null)[]) => 
   classes.filter(Boolean).join(" ");
@@ -162,7 +164,7 @@ export function Contact() {
           { icon: <path d="M15.5 8.2c0-.5-.1-1-.2-1.5H8v2.8h4.1c-.2.9-.7 1.7-1.5 2.2v1.8h2.4c1.4-1.3 2.2-3.2 2.2-5.3h-.7z" fill="#4285F4"/>, label: "Google Reviews", val: "5 Stars ★★★★★", isGoogle: true },
           { icon: <><rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#1a8a66" strokeWidth="1.3"/><path d="M5.5 7V5.5a2.5 2.5 0 015 0V7" stroke="#1a8a66" strokeWidth="1.3" strokeLinecap="round"/></>, label: "Compliance", val: "HIPAA + BAA Signed" },
           { icon: <><rect x="2" y="2" width="12" height="12" rx="2" stroke="#1a8a66" strokeWidth="1.3"/><path d="M5 8h6M8 5v6" stroke="#1a8a66" strokeWidth="1.3" strokeLinecap="round"/></>, label: "Collection Rate", val: "97%+ Avg. Collection" },
-          { icon: <><circle cx="8" cy="8" r="6.5" stroke="#1a8a66" strokeWidth="1.3"/><path d="M5 8l2.5 2.5 4-4" stroke="#1a8a66" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></>, label: "Payer Coverage", val: "1,126 Payers · All 50 States" }
+          { icon: <><circle cx="8" cy="8" r="6.5" stroke="#1a8a66" strokeWidth="1.3"/><path d="M5 8l2.5 2.5 4-4" stroke="#1a8a66" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></>, label: "Payor Coverage", val: "1,126 Payors · All 50 States" }
         ].map((item, i, arr) => (
           <React.Fragment key={i}>
             <div className={styles.trustItem}>
@@ -201,41 +203,37 @@ export function Contact() {
               <form className={styles.contactForm} onSubmit={handleSubmit}>
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="fname">First Name *</label>
+                    <label htmlFor="fname">First Name <span className={styles.requiredMark}>*</span></label>
                     <input type="text" id="fname" name="fname" placeholder="Jane" required />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="lname">Last Name *</label>
+                    <label htmlFor="lname">Last Name <span className={styles.requiredMark}>*</span></label>
                     <input type="text" id="lname" name="lname" placeholder="Smith" required />
                   </div>
                 </div>
                 <div className={styles.formGroup}>
-                  <label htmlFor="business">Business / Agency Name *</label>
+                  <label htmlFor="business">Business / Agency Name <span className={styles.requiredMark}>*</span></label>
                   <input type="text" id="business" name="business" placeholder="Your behavioral health agency" required />
                 </div>
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="email">Email Address *</label>
+                    <label htmlFor="email">Email Address <span className={styles.requiredMark}>*</span></label>
                     <input type="email" id="email" name="email" placeholder="jane@yourpractice.com" required />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="phone">Phone Number *</label>
+                    <label htmlFor="phone">Phone Number <span className={styles.requiredMark}>*</span></label>
                     <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required />
                   </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="service">What can we help with?</label>
-                  <select id="service" name="service" defaultValue="all">
-                    <option value="">Select a service…</option>
-                    <option value="all" style={{ fontWeight: 700 }}>⭐ Full Practice Operations — We Run Everything</option>
-                    <option value="rcm">RCM / Billing</option>
-                    <option value="credentialing">Credentialing & Enrollment</option>
-                    <option value="both">Both RCM & Credentialing</option>
-                    <option value="ai">AI Services (Scheduling / Reminders)</option>
-                    <option value="ehr">EHR Enhancement</option>
-                    <option value="other">Something else</option>
-                  </select>
-                </div>
+                <fieldset className={styles.formGroup}>
+                  <legend>What can we help with? <span className={styles.formHint}>(select all that apply)</span></legend>
+                  <MultiSelect
+                    name="service"
+                    label="What can we help with?"
+                    options={CONTACT_SERVICES}
+                    placeholder="Select services…"
+                  />
+                </fieldset>
                 <div className={styles.formGroup}>
                   <label htmlFor="message">Anything else you&apos;d like us to know?</label>
                   <textarea id="message" name="message" placeholder="Monthly collections, number of providers, current challenges…"></textarea>
@@ -370,7 +368,7 @@ export function Contact() {
             <div className={cx(styles.valuePropCard, styles.valuePropCardFeatured)}>
               <div className={styles.valuePropCardTag}>We do</div>
               <div className={styles.valuePropCardTitle}>Run everything else.</div>
-              <div className={styles.valuePropCardDesc}>Practice management, CFO reporting & analytics, billing, credentialing, scheduling, payer follow-up, and operational infrastructure.</div>
+              <div className={styles.valuePropCardDesc}>Practice management, CFO reporting & analytics, billing, credentialing, scheduling, payor follow-up, and operational infrastructure.</div>
             </div>
             <div className={styles.valuePropCard}>
               <div className={styles.valuePropCardTag}>Our deal</div>
@@ -392,9 +390,9 @@ export function Contact() {
               { q: "Why are your rates so inexpensive compared to other vendors?", a: "We leverage AI and advanced automation to significantly reduce labor costs — and pass those savings directly to you without compromising on collection rates." },
               { q: "How many health insurance plans do you support?", a: "We support over 1,126 plans, including Medicaid, Medicare, and their MCOs and ACOs across all 50 states." },
               { q: "What states do you serve?", a: "We serve all 50 states and do not provide services outside of the United States." },
-              { q: "How long does the credentialing process take?", a: "Most payers take 45–90 days. Our team works to shorten that window with aggressive follow-up at every stage." },
+              { q: "How long does the credentialing process take?", a: "Most payors take 45–90 days. Our team works to shorten that window with aggressive follow-up at every stage." },
               { q: "Can you help if I've already started the credentialing process?", a: "Absolutely. We can pick up exactly where you left off, or restart if needed — whichever gets your providers enrolled faster." },
-              { q: "Do you work with Medicaid and Medicare?", a: "Yes. We handle both commercial and government payer enrollments, including Medicaid, Medicare, and their managed care organizations." },
+              { q: "Do you work with Medicaid and Medicare?", a: "Yes. We handle both commercial and government payor enrollments, including Medicaid, Medicare, and their managed care organizations." },
               { q: "What if my provider is missing documents?", a: "We'll identify exactly what's needed and reach out directly to your providers to gather the information — you don't have to chase it yourself." },
               { q: "Is your platform HIPAA-compliant?", a: "Yes. We use HIPAA-compliant data security with triple-redundant backups. A BAA is signed with every client." },
               { q: "Do you perform primary source verification?", a: "Yes. We verify licenses, certifications, education, DEA registration, malpractice coverage, and more — so you always know what's current." },
@@ -404,7 +402,7 @@ export function Contact() {
             ].map((faq, i) => (
               <div key={i} className={styles.faqItem}>
                 <div className={styles.faqQ}>{faq.q}</div>
-                <div className={styles.faqA} dangerouslySetInnerHTML={{ __html: faq.a.replace(/(\d+[^ ]*|all 50 states| commercial and government payer enrollments| Medicaid, Medicare| HIPAA-compliant data security| 97%\+ collection rates)/gi, "<strong>$1</strong>") }} />
+                <div className={styles.faqA} dangerouslySetInnerHTML={{ __html: faq.a.replace(/(\d+[^ ]*|all 50 states| commercial and government payor enrollments| Medicaid, Medicare| HIPAA-compliant data security| 97%\+ collection rates)/gi, "<strong>$1</strong>") }} />
               </div>
             ))}
           </div>

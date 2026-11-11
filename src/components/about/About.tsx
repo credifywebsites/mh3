@@ -31,7 +31,7 @@ export function About() {
             {[
               { num: "97%+", desc: "average collection rate achieved consistently across our client base" },
               { num: "300", desc: "years of combined experience across our billing & credentialing team" },
-              { num: "1,126", desc: "payers we submit to across all 50 states" },
+              { num: "1,126", desc: "payors we submit to across all 50 states" },
               { num: "100s", desc: `of providers trust ${siteConfig.name} for billing, credentialing, and growth` }
             ].map((stat, i) => (
               <div key={i} className={styles.heroStat}>
@@ -51,7 +51,7 @@ export function About() {
           Built by people who have lived every side of this industry.<br /><br />
           Our founders bring decades of business leadership and multiple successful exits. 
           Our AI team includes professors and engineers with deep, real-world experience spanning decades. 
-          And our billing leadership is made up of directors who have navigated every payer scenario 
+          And our billing leadership is made up of directors who have navigated every payor scenario 
           behavioral health can throw at them — year after year, across countless organizations.<br /><br />
           Together, we combine strategy, technology, and operational expertise to solve problems others simply work around.
         </p>
@@ -80,8 +80,8 @@ export function About() {
             role="Co-Founder"
             type="featured"
             avatar="/images/team/jay.png"
-            bioPreview="Jay leads innovation and strategy at Credify, leveraging AI to streamline billing, credentialing, and payer interactions."
-            bioFull="Jay leads innovation and strategy at Credify, leveraging AI to streamline billing, credentialing, and payer interactions. With over a decade in healthcare, he drives automation that lowers costs, improves efficiency, and strengthens margins for continued investment in advanced AI technologies."
+            bioPreview="Jay leads innovation and strategy at Credify, leveraging AI to streamline billing, credentialing, and payor interactions."
+            bioFull="Jay leads innovation and strategy at Credify, leveraging AI to streamline billing, credentialing, and payor interactions. With over a decade in healthcare, he drives automation that lowers costs, improves efficiency, and strengthens margins for continued investment in advanced AI technologies."
             backgroundLabel="Background"
             accPreview="Jay and SL co-founded multiple companies, beginning with an Internet service provider sold in a multi-million-dollar transaction."
             accFull="Jay and SL co-founded multiple companies, beginning with an Internet service provider sold in a multi-million-dollar transaction. They later founded SimplyStocks — a financial data firm serving Michael Dell, JP Morgan, and Banc of America Securities — growing to 400 employees before acquisition by McGraw Hill, which expanded it to more than 4,000."
@@ -264,7 +264,7 @@ export function About() {
             {[
               { icon: <path d="M2 9l4 4 9-9" stroke="#3dbd94" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>, title: "Faster onboarding", desc: "Additional capacity means new clients go live faster — no backlog, no delays in claim submission." },
               { icon: <><rect x="2" y="3" width="13" height="11" rx="2" stroke="#3dbd94" strokeWidth="1.4"/><path d="M5 7h7M5 10h4" stroke="#3dbd94" strokeWidth="1.4" strokeLinecap="round"/></>, title: "Cleaner claims", desc: "More specialists, better QA coverage, and AI-assisted review mean fewer denials on first submission." },
-              { icon: <><circle cx="8.5" cy="8.5" r="6.5" stroke="#3dbd94" strokeWidth="1.4"/><path d="M8.5 5v3.5l2.5 2" stroke="#3dbd94" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></>, title: "Round-the-clock support", desc: "Time zone coverage means your payer issues, credentialing questions, and AR follow-ups don&apos;t wait until Monday." },
+              { icon: <><circle cx="8.5" cy="8.5" r="6.5" stroke="#3dbd94" strokeWidth="1.4"/><path d="M8.5 5v3.5l2.5 2" stroke="#3dbd94" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></>, title: "Round-the-clock support", desc: "Time zone coverage means your payor issues, credentialing questions, and AR follow-ups don&apos;t wait until Monday." },
               { icon: <path d="M8.5 2l1.5 3.5H14l-3.5 2.5 1.5 3.5-3.5-2.5-3.5 2.5 1.5-3.5L3 5.5h4L8.5 2z" stroke="#3dbd94" strokeWidth="1.4" strokeLinejoin="round"/>, title: "Triple-redundant backups", desc: "HIPAA-compliant data security with triple redundancy — your data is protected at every layer, always." }
             ].map((f, i) => (
               <div key={i} className={styles.indiaFeature}>
@@ -293,7 +293,7 @@ export function About() {
             { q: "How many health insurance plans do you support?", a: "We support <strong>over 1,126 plans</strong>, including Medicaid, Medicare, and their MCOs and ACOs across all 50 states." },
             { q: "What states do you serve?", a: "We serve <strong>all 50 states</strong> and do not provide services outside of the United States." },
             { q: "Do you credential medical specialties, CCBHCs, and FQHCs?", a: "Except primary care physicians, we do not. <strong>We focus exclusively on behavioral health agencies</strong> — which allows us to be a highly efficient credentialing and enrollment operation." },
-            { q: "How long does the credentialing process take?", a: "It depends on the payer, but most take <strong>45–90 days</strong>. Our team works to shorten that window with aggressive payer follow-up at every stage." },
+            { q: "How long does the credentialing process take?", a: "It depends on the payor, but most take <strong>45–90 days</strong>. Our team works to shorten that window with aggressive payor follow-up at every stage." },
             { q: "Can you help if I&apos;ve already started the process?", a: "Absolutely. We can pick up exactly where you left off, or restart from the beginning if needed — whichever gets your providers enrolled faster." }
           ].map((f, i) => (
             <div key={i} className={styles.faqItem}>

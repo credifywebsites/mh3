@@ -219,7 +219,7 @@ export function CredifyCollective() {
                           "Credentialing delays blocking revenue",
                           "Staff burnout from admin overload",
                           "No bandwidth to plan for growth",
-                          "Negotiating alone against payers",
+                          "Negotiating alone against payors",
                           "Equity stuck at solo multiples",
                         ].map((txt, i) => (
                           <div className={`${styles.svItem} ${styles.bad}`} key={i}>
@@ -237,7 +237,7 @@ export function CredifyCollective() {
                           "Providers credentialed and billing",
                           "Clinicians focused on clients",
                           "Leadership free for strategy",
-                          "Collective leverage with payers",
+                          "Collective leverage with payors",
                           "Equity growing in the portfolio",
                         ].map((txt, i) => (
                           <div className={`${styles.svItem} ${styles.good}`} key={i}>
@@ -349,7 +349,7 @@ export function CredifyCollective() {
                 {
                   num: "02",
                   title: "Collective Collections",
-                  desc: "Grouped AR volume gives the Collective real negotiating leverage with payers. Better reimbursement rates and faster payment timelines.",
+                  desc: "Grouped AR volume gives the Collective real negotiating leverage with payors. Better reimbursement rates and faster payment timelines.",
                   tag: "Revenue Advantage",
                   icon: <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />,
                 },
@@ -426,7 +426,7 @@ export function CredifyCollective() {
                     <span className={styles.eqFootVal}>$8.4–12M+</span>
                   </div>
                 </div>
-                <p className={styles.eqDisclaimer}>Illustrative figures only. Actual results depend on agency size and payer mix. Not a guarantee of financial performance.</p>
+                <p className={styles.eqDisclaimer}>Illustrative figures only. Actual results depend on agency size and payor mix. Not a guarantee of financial performance.</p>
               </div>
             </div>
           </div>
@@ -448,7 +448,7 @@ export function CredifyCollective() {
               {[
                 { num: "1", title: "Apply", desc: "Tell us about your agency. We assess fit — clinical standing and revenue baseline." },
                 { num: "2", title: "Operations Transfer", desc: "If not already on Credify, we onboard your front and back office within 30 days." },
-                { num: "3", title: "Enter the Cohort", desc: "Resources are pooled. Collections are grouped. You access collective payer leverage." },
+                { num: "3", title: "Enter the Cohort", desc: "Resources are pooled. Collections are grouped. You access collective payor leverage." },
                 { num: "4", title: "Build Equity", desc: "Your stake in the holding corporation grows as the portfolio's profitability compounds." },
               ].map((step, i) => (
                 <div className={styles.howStep} key={i}>

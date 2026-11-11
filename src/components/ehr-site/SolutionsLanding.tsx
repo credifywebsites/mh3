@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { DemoCta } from "./DemoCta";
 import { ModuleIndex, ModuleIndexFromQuery } from "./ModuleIndex";
 import { SectionsJump } from "./SectionsJump";
+import { usesHomeFooter } from "@/components/credify-home/HomeFooter";
 import { SiteFooter } from "./SiteFooter";
 import { StageSections } from "./StageSections";
 import { c } from "./cx";
@@ -48,7 +49,8 @@ export function SolutionsLanding() {
       <StageSections />
 
       <DemoCta />
-      <SiteFooter />
+      {/* On Credify the shared homepage footer comes from SiteChrome instead. */}
+      {!usesHomeFooter && <SiteFooter />}
       <SectionsJump />
     </div>
   );

@@ -21,7 +21,7 @@ export function MissionBanner() {
         </div>
         <div className={styles.missionReportsTitle}>See everything. Decide faster.</div>
         <p className={styles.missionReportsDesc}>
-          Provider profitability, payer mix, utilization, off-hours, no-show impact, and more — updated daily in 
+          Provider profitability, payor mix, utilization, off-hours, no-show impact, and more — updated daily in 
           Power BI so leadership always knows where the practice stands.
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>

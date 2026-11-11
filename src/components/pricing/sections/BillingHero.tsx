@@ -18,7 +18,7 @@ export function BillingHero() {
           </p>
 
           <div className={styles.billingPriceBox}>
-            <div className={styles.billingPriceVal}>From 3.49%</div>
+            <div className={styles.billingPriceVal}>From 4.99%</div>
             <div className={styles.billingPriceLbl}>of collections — billing, eligibility & credentialing included in every plan</div>
           </div>
 
@@ -43,7 +43,7 @@ export function BillingHero() {
             },
             { 
               title: "Credentialing Included", 
-              desc: "CAQH refresh, payer enrollment, and panel management — handled for every provider.",
+              desc: "CAQH refresh, payor enrollment, and panel management — handled for every provider.",
               icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="7" r="3.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 16c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
             },
             { 

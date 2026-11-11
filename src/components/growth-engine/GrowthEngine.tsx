@@ -110,7 +110,7 @@ export function GrowthEngine() {
                 </div>
               </div>
               <div className={styles.dashBody}>
-                <div className={styles.dashSectionLbl}>Provider profitability by payer</div>
+                <div className={styles.dashSectionLbl}>Provider profitability by payor</div>
                 {[
                   { name: "Aetna", val: 82, color: "" },
                   { name: "BCBS", val: 74, color: "" },
@@ -200,7 +200,7 @@ export function GrowthEngine() {
           </div>
           <div className={styles.rcmLeftBottom}>
             <div className={styles.rcmPriceBox}>
-              <div className={styles.rcmPriceVal}>From 3.49%</div>
+              <div className={styles.rcmPriceVal}>From 4.99%</div>
               <div className={styles.rcmPriceLbl}>of collections — billing, eligibility & credentialing included in every plan</div>
             </div>
             <div className={styles.rcmTrialBadge}>✓ Free trial</div>
@@ -214,7 +214,7 @@ export function GrowthEngine() {
         <div className={styles.rcmRight}>
           {[
             { title: "AI-Assisted Billing", desc: "Automated claim scrubs, code validation, and denial pattern detection to submit clean claims the first time." },
-            { title: "Credentialing Included", desc: "CAQH refresh, payer enrollment, and panel management — handled for every provider." },
+            { title: "Credentialing Included", desc: "CAQH refresh, payor enrollment, and panel management — handled for every provider." },
             { title: "Eligibility Verification", desc: "Real-time checks and batch runs to prevent front-end denials before they happen." },
             { title: "Works With Every EHR", desc: "Bill from your EHR or let us handle it in our platform. No migration, no disruption." },
             { title: "Transparent Reporting", desc: "Daily claim status, ERA/EFT posting, and month-end summaries you can actually act on." },
@@ -242,7 +242,7 @@ export function GrowthEngine() {
             "Cut no-shows with AI outreach",
             "Reactivate inactive clients",
             "Recruit providers in lower-cost markets",
-            "Know profit by provider, location, and payer"
+            "Know profit by provider, location, and payor"
           ].map((title, i) => (
             <div key={i} className={styles.gainCard}>
               <div className={styles.gainNum}>0{i + 1}</div>
@@ -400,7 +400,7 @@ export function GrowthEngine() {
           <div className={styles.ctaBullet}><span className={styles.ctaCheck}>✓</span> Revenue leakage analysis</div>
           <div className={styles.ctaBullet}><span className={styles.ctaCheck}>✓</span> Utilization gap review</div>
           <div className={styles.ctaBullet}><span className={styles.ctaCheck}>✓</span> No-show recovery opportunities</div>
-          <div className={styles.ctaBullet}><span className={styles.ctaCheck}>✓</span> Profitability visibility by payer & provider</div>
+          <div className={styles.ctaBullet}><span className={styles.ctaCheck}>✓</span> Profitability visibility by payor & provider</div>
         </div>
         <div className={styles.finalBtns}>
           <Link href="/contact#contact-form" className={styles.btnWhite} target="_blank" rel="noopener noreferrer">Book a demo</Link>

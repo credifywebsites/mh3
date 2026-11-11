@@ -33,7 +33,7 @@ export function ComparisonTable() {
               { f: "Dedicated Account Manager", c1: "—", c2: "✓", c3: "For large plans" },
               { f: "Performance Milestone Bonuses", c1: "—", c2: "✓", c3: "—" },
               { f: "Flat Monthly Rate Option", c1: "—", c2: "—", c3: "✓" },
-              { f: "Pricing Structure", c1: "3.49%–3.99% of collections", c2: "Base rate + milestones", c3: "Custom / modular" },
+              { f: "Pricing Structure", c1: "4.99% of collections", c2: "Base rate + milestones", c3: "Custom / modular" },
               { f: "Best for", c1: "Practices wanting pure % alignment", c2: "Practices ready to grow fast", c3: "Practices with specific gaps" }
             ].map((row, i) => (
               <tr key={i}>

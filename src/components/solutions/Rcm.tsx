@@ -64,7 +64,7 @@ export function Rcm() {
               with every EHR, so your team never has to think about it.
             </p>
             <p className={styles.pricetag}>
-              <b>From 3.49% of collections</b> — billing, eligibility &amp; credentialing included. ✓ Free trial
+              <b>From 4.99% of collections</b> — billing, eligibility &amp; credentialing included. ✓ Free trial
             </p>
             <div className={styles.ctaRow}>
               <Link className={cx(styles.btn, styles.btnOnDark)} href="/rcm-pricing">
@@ -105,7 +105,7 @@ export function Rcm() {
                 </div>
               </div>
               <div className={styles.bars}>
-                <div className={styles.bt}>Provider profitability by payer</div>
+                <div className={styles.bt}>Provider profitability by payor</div>
                 <div className={styles.bar}>
                   <span className={styles.n}>Aetna</span>
                   <span className={styles.track}>
@@ -234,7 +234,7 @@ export function Rcm() {
               <div>
                 <h3>Credentialing Included</h3>
                 <p>
-                  CAQH refresh, payer enrollment, and panel management — handled for every provider, in every plan.
+                  CAQH refresh, payor enrollment, and panel management — handled for every provider, in every plan.
                 </p>
               </div>
             </div>
@@ -250,7 +250,7 @@ export function Rcm() {
                 <h3>Transparent Reporting</h3>
                 <p>
                   Daily claim status, ERA/EFT posting, and month-end summaries — plus profit by provider, location &amp;
-                  payer.
+                  payor.
                 </p>
               </div>
             </div>
@@ -349,12 +349,12 @@ export function Rcm() {
             <span className={styles.pill}>Reporting</span>
             <h2 style={{ marginTop: "16px" }}>Visibility you can act on.</h2>
             <p style={{ color: "var(--muted)", fontSize: "16px", marginTop: "12px" }}>
-              16+ executive reports built for behavioral-health leadership — filtered by provider, location, payer, or date
+              16+ executive reports built for behavioral-health leadership — filtered by provider, location, payor, or date
               range, inside a full Power BI dashboard.
             </p>
             <ul className={styles.gains}>
               <li>
-                <span className={styles.ck}>{gainCheck}</span>Know true profit by provider, location, and payer
+                <span className={styles.ck}>{gainCheck}</span>Know true profit by provider, location, and payor
               </li>
               <li>
                 <span className={styles.ck}>{gainCheck}</span>Daily claim status and ERA/EFT posting
@@ -374,7 +374,7 @@ export function Rcm() {
                 <div className={styles.rrow}>
                   <div>
                     <div className={styles.rt}>Provider Financial Analysis</div>
-                    <div className={styles.rm}>Profitability, collections by payer</div>
+                    <div className={styles.rm}>Profitability, collections by payor</div>
                   </div>
                   <span className={styles.tagn}>Provider</span>
                 </div>
@@ -516,7 +516,7 @@ export function Rcm() {
               <span className={styles.tag}>Most popular</span>
               <div className={styles.k}>Pay from results</div>
               <h3>Percentage of collections</h3>
-              <p>A share of the revenue we recover. Zero collections growth means zero fee. From 3.49%, all-inclusive.</p>
+              <p>A share of the revenue we recover. Zero collections growth means zero fee. From 4.99%, all-inclusive.</p>
             </div>
             <div className={cx(styles.ptier, styles.rv)}>
               <div className={styles.k}>Pay for progress</div>
@@ -564,7 +564,7 @@ export function Rcm() {
                 Is credentialing really included?<span className={styles.x}>+</span>
               </summary>
               <p>
-                Yes. CAQH refresh, payer enrollment, and panel management are handled for every provider and included in
+                Yes. CAQH refresh, payor enrollment, and panel management are handled for every provider and included in
                 every plan.
               </p>
             </details>
@@ -579,7 +579,7 @@ export function Rcm() {
                 What does it cost?<span className={styles.x}>+</span>
               </summary>
               <p>
-                Plans start from 3.49% of collections with billing, eligibility, and credentialing included, plus a free
+                Plans start from 4.99% of collections with billing, eligibility, and credentialing included, plus a free
                 trial. Performance-based and à-la-carte models are also available.
               </p>
             </details>
@@ -592,7 +592,7 @@ export function Rcm() {
         <div className={cx(styles.wrap, styles.rv)}>
           <h2>See exactly where your practice is losing revenue.</h2>
           <p>
-            We&apos;ll show you where revenue is leaking and what your true profitability looks like — by payer and
+            We&apos;ll show you where revenue is leaking and what your true profitability looks like — by payor and
             provider.
           </p>
           <div className={styles.ctaRow}>

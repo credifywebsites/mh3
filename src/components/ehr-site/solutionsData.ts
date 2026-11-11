@@ -195,7 +195,7 @@ export const stages: SolutionStage[] = [
       {
         id: "credentialing",
         title: "Credentialing",
-        body: "Payer enrollment, re-credentialing, and every expirable on one clock, run by our team against the same provider records your schedule and your claims already use. You get a scheduled update report showing every provider, every payer, and exactly where each application stands.",
+        body: "Payor enrollment, re-credentialing, and every expirable on one clock, run by our team against the same provider records your schedule and your claims already use. You get a scheduled update report showing every provider, every payor, and exactly where each application stands.",
         managed: true,
         illus: null,
         aspect: 1.0816,
@@ -268,7 +268,7 @@ export const stages: SolutionStage[] = [
       {
         id: "recruiting",
         title: "Recruiting",
-        body: "Provider and supervisor recruiting, sourced and screened against your caseload needs and your payer panels rather than against a job board.",
+        body: "Provider and supervisor recruiting, sourced and screened against your caseload needs and your payor panels rather than against a job board.",
         managed: true,
         illus: null,
         aspect: 2.8333,
