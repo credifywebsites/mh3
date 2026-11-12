@@ -57,27 +57,11 @@ export function About() {
         </p>
 
         <div className={styles.teamGrid}>
-          {/* SL Lacny */}
-          <TeamCard 
-            id="card-sl"
-            name="Sherilynne Lacny"
-            role="Co-Founder"
-            type="featured"
-            avatar="/images/team/sl.png"
-            bioPreview="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership."
-            bioFull="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership. She leads managers who oversee more than 80 credentialing and RCM experts who leverage AI technology and team accountability to consistently achieve collection rates in the mid to high 90% range at below-market pricing."
-            backgroundLabel="Background"
-            accPreview="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments."
-            accFull="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments — the Lacnys' privately held corporation responsible for multi-million-dollar estates and condo conversions. For nearly 40 years, she has managed all financial aspects of their business and investment ventures."
-            isExpanded={expandedCards["card-sl"]}
-            onToggle={() => toggleCard("card-sl")}
-          />
-
           {/* Jay Lacny */}
           <TeamCard 
             id="card-jl"
             name="Jay Lacny"
-            role="Co-Founder"
+            role="Co-Founder / CEO"
             type="featured"
             avatar="/images/team/jay.png"
             bioPreview="Jay leads innovation and strategy at Credify, leveraging AI to streamline billing, credentialing, and payor interactions."
@@ -87,6 +71,21 @@ export function About() {
             accFull="Jay and SL co-founded multiple companies, beginning with an Internet service provider sold in a multi-million-dollar transaction. They later founded SimplyStocks — a financial data firm serving Michael Dell, JP Morgan, and Banc of America Securities — growing to 400 employees before acquisition by McGraw Hill, which expanded it to more than 4,000."
             isExpanded={expandedCards["card-jl"]}
             onToggle={() => toggleCard("card-jl")}
+          />
+
+          {/* Taras Pavlyk */}
+          <TeamCard 
+            id="card-tp"
+            name="Taras Pavlyk"
+            role="Co-Founder / CTO"
+            isAiAvatar
+            bioPreview="Taras owns the systems that fill schedules and reduce revenue leakage across SMS, email, and automated workflows."
+            bioFull="Taras owns the systems that fill schedules and reduce revenue leakage. He leads SEO, lead generation, and automated patient communication — including appointment reminders, follow-ups, and engagement workflows across SMS, email, and pop-ups."
+            backgroundLabel="Focus"
+            accPreview="One outcome: every available session filled, every lead followed up."
+            accFull="One outcome: ensuring every available session is filled, every lead is followed up, and no opportunity is lost due to operational gaps."
+            isExpanded={expandedCards["card-tp"]}
+            onToggle={() => toggleCard("card-tp")}
           />
 
           {/* Prof. Milan */}
@@ -115,31 +114,20 @@ export function About() {
             onToggle={() => toggleCard("card-gs")}
           />
 
-          {/* Janet Dobson */}
+          {/* SL Lacny */}
           <TeamCard 
-            id="card-jd"
-            name="Janet Dobson"
-            role="Manager of QA Operations"
-            avatar="/images/team/janet.png"
-            bioPreview="Janet has over 14 years of experience in revenue cycle management and medical coding."
-            bioFull="Janet has over 14 years of experience in revenue cycle management and medical coding. She oversees quality assurance for Credify&apos;s offshore teams, ensuring accuracy, compliance, and efficiency across all billing and coding operations."
-            isExpanded={expandedCards["card-jd"]}
-            onToggle={() => toggleCard("card-jd")}
-          />
-
-          {/* Taras Pavlyk */}
-          <TeamCard 
-            id="card-tp"
-            name="Taras Pavlyk"
-            role="Director of Growth Automation"
-            isAiAvatar
-            bioPreview="Taras owns the systems that fill schedules and reduce revenue leakage across SMS, email, and automated workflows."
-            bioFull="Taras owns the systems that fill schedules and reduce revenue leakage. He leads SEO, lead generation, and automated patient communication — including appointment reminders, follow-ups, and engagement workflows across SMS, email, and pop-ups."
-            backgroundLabel="Focus"
-            accPreview="One outcome: every available session filled, every lead followed up."
-            accFull="One outcome: ensuring every available session is filled, every lead is followed up, and no opportunity is lost due to operational gaps."
-            isExpanded={expandedCards["card-tp"]}
-            onToggle={() => toggleCard("card-tp")}
+            id="card-sl"
+            name="Sherilynne Lacny"
+            role="Chief Client Officer"
+            type="featured"
+            avatar="/images/team/sl.png"
+            bioPreview="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership."
+            bioFull="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership. She leads managers who oversee more than 80 credentialing and RCM experts who leverage AI technology and team accountability to consistently achieve collection rates in the mid to high 90% range at below-market pricing."
+            backgroundLabel="Background"
+            accPreview="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments."
+            accFull="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments — the Lacnys' privately held corporation responsible for multi-million-dollar estates and condo conversions. For nearly 40 years, she has managed all financial aspects of their business and investment ventures."
+            isExpanded={expandedCards["card-sl"]}
+            onToggle={() => toggleCard("card-sl")}
           />
 
           {/* Pranav Patel - UPDATED NAME */}
@@ -167,6 +155,18 @@ export function About() {
             bioFull="As Director of Offshore RCM Operations, Balaji focuses on process optimization, measurable productivity, and maintaining seamless collaboration between onshore and offshore teams to deliver consistent, high-quality results."
             isExpanded={expandedCards["card-bm"]}
             onToggle={() => toggleCard("card-bm")}
+          />
+
+          {/* Janet Dobson */}
+          <TeamCard 
+            id="card-jd"
+            name="Janet Dobson"
+            role="Manager of QA Operations"
+            avatar="/images/team/janet.png"
+            bioPreview="Janet has over 14 years of experience in revenue cycle management and medical coding."
+            bioFull="Janet has over 14 years of experience in revenue cycle management and medical coding. She oversees quality assurance for Credify&apos;s offshore teams, ensuring accuracy, compliance, and efficiency across all billing and coding operations."
+            isExpanded={expandedCards["card-jd"]}
+            onToggle={() => toggleCard("card-jd")}
           />
         </div>
       </section>
