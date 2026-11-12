@@ -501,7 +501,7 @@ table.cmp:where(#view-home *,[data-shared],[data-shared] *){width:100%;border-co
 }
 #credify-tip:where(#view-home *,[data-shared],[data-shared] *){position:fixed;z-index:200;left:0;top:0;max-width:300px;white-space:pre-line;background:var(--ink);color:#fff;border:1px solid var(--ink);font-size:13px;line-height:1.55;font-weight:400;padding:11px 14px;border-radius:12px;box-shadow:0 1px 2px #0d1f181f,0 12px 32px -8px #0d1f1859;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s ease,transform .15s ease}
 #credify-tip.on:where(#view-home *,[data-shared],[data-shared] *){opacity:1;transform:none}
-@media(hover:hover) and (pointer:fine){.cmp td[data-tip]:where(#view-home *,[data-shared],[data-shared] *){cursor:help}.cmp td[data-tip]:where(#view-home *,[data-shared],[data-shared] *)::after{content:"i";display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border:1px solid #b8d6c9;border-radius:50%;font-size:9.5px;font-weight:700;font-style:normal;color:var(--muted);vertical-align:1px;line-height:1}.cmp td[data-tip]:hover:where(#view-home *,[data-shared],[data-shared] *)::after{border-color:var(--g500);color:var(--g500)}}
+@media(hover:hover) and (pointer:fine){.cmp td[data-tip]:where(#view-home *,[data-shared],[data-shared] *){cursor:default}.cmp td[data-tip]:where(#view-home *,[data-shared],[data-shared] *)::after{content:"i";display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border:1px solid #b8d6c9;border-radius:50%;font-size:9.5px;font-weight:700;font-style:normal;color:var(--muted);vertical-align:1px;line-height:1}.cmp td[data-tip]:hover:where(#view-home *,[data-shared],[data-shared] *)::after{border-color:var(--g500);color:var(--g500)}}
 @media not all and (hover:hover){#credify-tip:where(#view-home *,[data-shared],[data-shared] *){display:none}}
 .cmp .cfn:where(#view-home *,[data-shared],[data-shared] *){font-size:12px;vertical-align:super;margin-left:1px;color:var(--g500);cursor:pointer}
 #consent-terms:where(#view-home *,[data-shared],[data-shared] *){margin-top:6px;padding-top:0;border-top:0}
@@ -627,7 +627,7 @@ table.cmp:where(#view-home *,[data-shared],[data-shared] *){width:100%;border-co
 :where(.credify-home) #credify-tip.wide{max-width:480px}
 
 /* V124 ** monthly minimum: hover note on desktop, tap to open under the text on phones (all pages) */
-:where(.credify-home) button.fnt{background:none;border:0;padding:6px 0;margin:-6px 0;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1;color:inherit;cursor:help;vertical-align:baseline;-webkit-tap-highlight-color:transparent}
+:where(.credify-home) button.fnt{background:none;border:0;padding:6px 0;margin:-6px 0;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1;color:inherit;cursor:default;vertical-align:baseline;-webkit-tap-highlight-color:transparent}
 :where(.credify-home) button.fnt:focus-visible{outline:2px solid #1a8a66;outline-offset:2px;border-radius:4px}
 :where(.credify-home) .fnn{display:block;margin-top:8px;font-family:var(--font-sora),system-ui,sans-serif;font-size:13px;font-weight:400;font-style:normal;line-height:1.55;letter-spacing:0;text-transform:none;text-align:inherit;color:inherit;opacity:.85}
 :where(.credify-home) .fnn{white-space:pre-line}
