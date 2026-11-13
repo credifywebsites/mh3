@@ -87,7 +87,9 @@ function initCalculator(signal: AbortSignal) {
     const colK = attK * rate * (1 - dnK);
     const feeK = colK * 0.0499;
     const hrs = (attK * mins) / 60;
-    const netK = colK - feeK;
+    /* timeValue = CredifySessions × (MinutesSaved ÷ 60) × AveragePaidPerSession */
+    const timeValue = attK * (mins / 60) * rate;
+    const netK = colK - feeK + timeValue;
     const netSP = colC - spFee - bsC;
     const netTN = colC - tnFee - bsC;
     const dSP = netK - netSP;
@@ -96,8 +98,8 @@ function initCalculator(signal: AbortSignal) {
     text("w_sp_m", money(dSP));
     text("w_tn_y", money(dTN * 12));
     text("w_tn_m", money(dTN));
-    /* More collected + fees and billing saved = the monthly total. Time back is hours only, not money. */
-    const tv = `${count(hrs)} hrs`;
+    /* More collected + fees and billing saved + the value of time back = the monthly total. */
+    const tv = `${money(timeValue)} (${count(hrs)} hrs)`;
     const dc = money(colK - colC);
     text("s_sp_col", dc);
     text("s_sp_fee", money(spFee + bsC - feeK));
@@ -123,7 +125,7 @@ function initCalculator(signal: AbortSignal) {
         "",
         "",
       ],
-      ["Time saved", `${count(hrs)} hrs`, "", ""],
+      ["Time saved", `${money(timeValue)} (${count(hrs)} hrs)`, "", ""],
       ["Total value each month", money(netK), money(netSP), money(netTN), "tot"],
       ["Per provider each month", money(netK / pv), money(netSP / pv), money(netTN / pv), "tot"],
       ["More with Credify each month", "", money(dSP), money(dTN), "more"],
