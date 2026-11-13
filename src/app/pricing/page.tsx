@@ -1,4 +1,6 @@
 import { Pricing } from "@/components/pricing/Pricing";
+import { CredifyPricing } from "@/components/credify-home/CredifyPricing";
+import { usesHomeFooter } from "@/components/credify-home/HomeFooter";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +11,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <main>
-      <Pricing />
+      {usesHomeFooter ? <CredifyPricing /> : <Pricing />}
     </main>
   );
 }

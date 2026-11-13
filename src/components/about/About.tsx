@@ -81,9 +81,6 @@ export function About() {
             isAiAvatar
             bioPreview="Taras owns the systems that fill schedules and reduce revenue leakage across SMS, email, and automated workflows."
             bioFull="Taras owns the systems that fill schedules and reduce revenue leakage. He leads SEO, lead generation, and automated patient communication — including appointment reminders, follow-ups, and engagement workflows across SMS, email, and pop-ups."
-            backgroundLabel="Focus"
-            accPreview="One outcome: every available session filled, every lead followed up."
-            accFull="One outcome: ensuring every available session is filled, every lead is followed up, and no opportunity is lost due to operational gaps."
             isExpanded={expandedCards["card-tp"]}
             onToggle={() => toggleCard("card-tp")}
           />
@@ -138,9 +135,6 @@ export function About() {
             avatar="/images/team/pranav.png"
             bioPreview="Pranav brings 12+ years of RCM leadership built on one principle: results are earned, not inherited. He runs high-performance teams where contribution drives everything."
             bioFull="Pranav brings 12+ years of RCM leadership built on one principle: results are earned, not inherited. He oversees large-scale revenue cycle operations at Credify, managing teams of specialists through clearly defined policies, measurable performance standards, and a culture of strict accountability. His teams know exactly what&apos;s expected — and exactly what exceptional performance means for their career."
-            backgroundLabel="Leadership philosophy"
-            accPreview="Pranav doesn&apos;t believe in tenure as a shield or title as a safety net."
-            accFull="Pranav doesn&apos;t believe in tenure as a shield or title as a safety net. He&apos;s built and rebuilt RCM operations across dozens of organizations — promoting early when performance demands it, and making hard calls when it doesn&apos;t. In his teams, every specialist knows their contribution is seen, measured, and rewarded accordingly. He holds the same standard for himself as he does for the people he leads."
             isExpanded={expandedCards["card-pp"]}
             onToggle={() => toggleCard("card-pp")}
           />

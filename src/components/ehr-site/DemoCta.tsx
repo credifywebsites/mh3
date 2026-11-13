@@ -1,4 +1,4 @@
-import { brand, demoMailto, telHref } from "./brand";
+import { brand, telHref } from "./brand";
 import { c } from "./cx";
 
 /**
@@ -16,7 +16,7 @@ export function DemoCta() {
           the paid claim, using the modules above.
         </p>
         <div className={c("cta-row")}>
-          <a className={c("btn btn-primary")} href={demoMailto}>
+          <a className={c("btn btn-primary")} href="/contact#contact-form">
             Book a demo
           </a>
           <a className={c("btn btn-ghost")} href={telHref}>
