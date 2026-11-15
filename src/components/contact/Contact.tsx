@@ -48,6 +48,10 @@ export function Contact() {
       
       if (result.success) {
         setIsSubmitted(true);
+        // Microsoft UET: contact form conversion
+        const uetWindow = window as unknown as { uetq?: unknown[] };
+        uetWindow.uetq = uetWindow.uetq || [];
+        uetWindow.uetq.push("event", "contact_form_submit", {});
         // Smooth scroll to form section top
         const element = document.getElementById("contact-form");
         if (element) {

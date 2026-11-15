@@ -98,6 +98,45 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           }}
         />
       )}
+      {siteConfig.msTagId && (
+        <Script
+          id="ms-uet-events"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Phone and email link clicks
+              document.addEventListener('click', function (e) {
+                var a = e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+                if (!a) return;
+                window.uetq = window.uetq || [];
+                window.uetq.push('event', a.href.indexOf('tel:') === 0 ? 'phone_click' : 'email_click', {});
+              });
+
+              // Zoho chat: chain onto $zoho.salesiq.ready if it already exists, otherwise wait for it
+              (function () {
+                function attachZohoChat() {
+                  if (!window.$zoho || !window.$zoho.salesiq) return false;
+                  var prevReady = window.$zoho.salesiq.ready;
+                  window.$zoho.salesiq.ready = function () {
+                    if (typeof prevReady === 'function') prevReady();
+                    window.$zoho.salesiq.chat.complete(function () {
+                      window.uetq = window.uetq || [];
+                      window.uetq.push('event', 'chat_completed', {});
+                    });
+                  };
+                  return true;
+                }
+                if (attachZohoChat()) return;
+                var tries = 0;
+                var timer = setInterval(function () {
+                  tries++;
+                  if (attachZohoChat() || tries > 60) clearInterval(timer);
+                }, 500);
+              })();
+            `,
+          }}
+        />
+      )}
       {/* Google Tag (gtag.js) */}
       {siteConfig.googleTagId && (
         <>
