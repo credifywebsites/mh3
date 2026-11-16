@@ -88,6 +88,8 @@ export function ZohoChatTrigger() {
   useZohoTaglineOverride();
 
   useEffect(() => {
+    // The promo pop-up owns the first impression on this page; don't stack the chat on it.
+    if (pathname === '/credentialing-pricing') return;
     let cancelled = false;
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
     const root = document.documentElement;
