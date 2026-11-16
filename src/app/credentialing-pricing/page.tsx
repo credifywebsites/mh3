@@ -1,4 +1,5 @@
 import { CredentialingOffer79 } from "@/components/solutions/CredentialingOffer79";
+import { CredentialingPromoPopup } from "@/components/solutions/CredentialingPromoPopup";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export default function CredentialingPricingPage() {
   return (
     <main>
       <CredentialingOffer79 />
+      <CredentialingPromoPopup />
     </main>
   );
 }
