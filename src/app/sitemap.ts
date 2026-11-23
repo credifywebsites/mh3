@@ -37,6 +37,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.push({ url: `${base}/solutions`, changeFrequency: "monthly", priority: 0.9 });
   }
 
+  if (isCredify) {
+    routes.push(
+      { url: `${base}/affiliates`, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${base}/consultants`, changeFrequency: "monthly", priority: 0.6 },
+    );
+  }
+
   if (!isCredify) {
     routes.push({ url: `${base}/keep-your-ehr`, changeFrequency: "monthly", priority: 0.8 });
   }

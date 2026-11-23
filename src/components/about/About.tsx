@@ -78,7 +78,7 @@ export function About() {
             id="card-tp"
             name="Taras Pavlyk"
             role="Co-Founder / CTO"
-            isAiAvatar
+            avatar="/images/team/taras.jpg"
             bioPreview="Taras owns the systems that fill schedules and reduce revenue leakage across SMS, email, and automated workflows."
             bioFull="Taras owns the systems that fill schedules and reduce revenue leakage. He leads SEO, lead generation, and automated patient communication — including appointment reminders, follow-ups, and engagement workflows across SMS, email, and pop-ups."
             isExpanded={expandedCards["card-tp"]}
