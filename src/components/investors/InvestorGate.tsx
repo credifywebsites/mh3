@@ -9,6 +9,7 @@ export function InvestorGate() {
   const router = useRouter();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -42,7 +43,16 @@ export function InvestorGate() {
           <label className={styles.label} htmlFor="investor-login">Login</label>
           <input className={styles.input} id="investor-login" name="login" value={login} onChange={(event) => setLogin(event.target.value)} autoComplete="username" autoFocus required />
           <label className={styles.label} htmlFor="investor-password">Password</label>
-          <input className={styles.input} id="investor-password" name="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" required />
+          <div className={styles.passwordField}>
+            <input className={styles.input} id="investor-password" name="password" type={isPasswordVisible ? "text" : "password"} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete="current-password" required />
+            <button className={styles.passwordToggle} type="button" onClick={() => setIsPasswordVisible((visible) => !visible)} aria-label={isPasswordVisible ? "Hide password" : "Show password"} aria-pressed={isPasswordVisible}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                <circle cx="12" cy="12" r="2.75" />
+                {isPasswordVisible && <path d="m4 4 16 16" />}
+              </svg>
+            </button>
+          </div>
           <button className={styles.submit} type="submit" disabled={isSubmitting}>{isSubmitting ? "Checking…" : "View pro forma"}</button>
           <p className={styles.error} role="alert">{error}</p>
         </form>
