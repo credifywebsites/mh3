@@ -120,9 +120,6 @@ export function About() {
             avatar="/images/team/sl.png"
             bioPreview="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership."
             bioFull="SL oversees the billing and credentialing management teams at Credify, bringing decades of experience in financial management and operational leadership. She leads managers who oversee more than 80 credentialing and RCM experts who leverage AI technology and team accountability to consistently achieve collection rates in the mid to high 90% range at below-market pricing."
-            backgroundLabel="Background"
-            accPreview="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments."
-            accFull="Before healthcare, SL led design, construction, and development for Rancho Santa Fe Investments — the Lacnys' privately held corporation responsible for multi-million-dollar estates and condo conversions. For nearly 40 years, she has managed all financial aspects of their business and investment ventures."
             isExpanded={expandedCards["card-sl"]}
             onToggle={() => toggleCard("card-sl")}
           />

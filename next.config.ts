@@ -29,11 +29,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  /** The investor pro forma is read from disk at request time; make sure it ships. */
+  outputFileTracingIncludes: {
+    "/investors/pro-forma": ["./src/components/investors/source.html"],
+  },
   /** Partner-facing surfaces stay out of search results. */
   async headers() {
     return [
       { source: "/live/:path*", headers: NOINDEX },
       { source: "/partners", headers: NOINDEX },
+      { source: "/investors/:path*", headers: NOINDEX },
     ];
   },
 };
