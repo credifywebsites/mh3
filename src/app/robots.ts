@@ -14,6 +14,7 @@ export default function robots(): MetadataRoute.Robots {
             "/no-show-calculator",
             "/credify-no-show-calculator",
             "/partners",
+            "/investors",
             "/live/",
           ]
         : ["/no-show-calculator", "/credify-no-show-calculator"],
