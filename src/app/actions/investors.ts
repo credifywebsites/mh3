@@ -9,14 +9,13 @@ import {
 } from "@/app/investors/access";
 
 export async function unlockInvestors(login: string, password: string): Promise<{ success: boolean }> {
-  const token = accessToken();
-  if (!token || !areCredentialsCorrect(login, password)) {
+  if (!areCredentialsCorrect(login, password)) {
     await new Promise((resolve) => setTimeout(resolve, 400));
     return { success: false };
   }
 
   const cookieStore = await cookies();
-  cookieStore.set(INVESTOR_COOKIE, token, {
+  cookieStore.set(INVESTOR_COOKIE, accessToken(), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
